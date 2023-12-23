@@ -1,8 +1,21 @@
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
+  background: #ececec;
+}
+.box{
+  padding: 40px 30px 40px 40px;
 }
 
-a {
-  color: #00B7FF;
+.box-area{
+  width:930px;
+}
+::placeholder{
+  font-size: 16px;
+}
+
+@media only screen and (max-width: 760px){
+  .box-area{
+    margin: 0 10px
+  }
 }
