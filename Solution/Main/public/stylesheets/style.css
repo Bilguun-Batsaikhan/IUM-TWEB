@@ -1,7 +1,8 @@
-
 body {
   font-family: 'Poppins', sans-serif;
-  background: #ececec;
+  background-color: #ececec;
+  background-image: url("../img/home.jpg");
+  background-size: cover;
 }
 .box{
   padding: 40px 30px 40px 40px;
@@ -18,4 +19,59 @@ body {
   .box-area{
     margin: 0 10px
   }
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #ececec;
+  color: black;
+  text-align: center;
+}
+
+.login {
+  background-color: #ececec;
+  color: white !important;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 100px;
+}
+
+.signup {
+  background-color: #ececec;
+  border-color: #3f474f !important;
+  color: black;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 100px;
+}
+
+.btn.rounded-pill.me-2 {
+  background-color: #3f474f !important;
+}
+
+.welcome {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+}
+
+.containerWelcome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
