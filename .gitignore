@@ -1,3 +1,5 @@
+/Solution/csv/*.csv
+
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -31,7 +33,7 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 /Solution/CSV
-*.csv
+/csv/*.csv
 
 ### VS Code ###
 .vscode/
