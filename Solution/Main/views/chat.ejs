@@ -3,20 +3,23 @@
 <head>
     <title><%= title %></title>
     <script src="/socket.io/socket.io.js"></script>
+    <link rel='stylesheet' href='/stylesheets/chat.css'/>
+    <script>
+        var nickname = '<%= nickname %>'
+        var clubs = <%- JSON.stringify(clubs) %>;
+    </script>
     <script src="/javascripts/chat.js"></script>
 </head>
 <body onload="init()">
-<h1><%= title %></h1>
+<h1>Welcome <%= nickname %></h1>
 <div id="initial_form" style="display: block">
-    <p>Please insert the id of the Room you want to Join, if you do not have a room id, click Generate Room</p>
+    <p>Please select the Room you want to Join</p>
     <form onsubmit="return false;">
-        <p><label for="name"> Your name </label>
-            <input type="text" id="name" name="name">
-        </p>
         <p>
             <label for="roomNo"> Your room </label>
-            <input type="text" id="roomNo" name="roomNo">
-            <button id="roomNoGenerator" onclick="generateRoom()">Generate Room</button>
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="roomNo" name="roomNo">
+                <option value="null">Please wait for the connection to the database</option>
+            </select>
         </p>
         <button id="connect" onclick="connectToRoom()">Connect</button>
     </form>
@@ -40,19 +43,7 @@
             </form>
         </div>
     </div>
-    <div id="news_container" class="split right">
-        <h1>News</h1>
-        <div id="news_history" class="boxed"></div>
-        <div id="news_box" class="bottom boxed">
-            <form onsubmit="return false;" style="width: 100%">
-                <p>
-                    <label for="name"> news: </label>
-                    <input type="text" id="news_input" name="news_input" style="width: 80%">
-                    <button id="news_send" onclick="sendNewsText()">Send</button>
-                </p>
-            </form>
-        </div>
-    </div>
+
 </div>
 </body>
 </html>
