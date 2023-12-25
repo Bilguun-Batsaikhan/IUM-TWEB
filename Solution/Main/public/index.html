@@ -10,60 +10,87 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body class="body">
-
-<header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <div class="row w-100">
-                <div class="col-lg-2 d-flex justify-content-start">
-                    <a class="navbar-brand" href="#">Logo</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                </div>
-                <div class="col-lg-8">
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav justify-content-around w-100">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">About</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Services</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Contact</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">More items</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">More items</a>
-                            </li>
-                        </ul>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <div class="row w-100">
+                    <div class="col-lg-2 d-flex justify-content-start">
+                        <a class="navbar-brand" href="#">Logo</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
                     </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="d-flex justify-content-end">
-                        <button class="btn rounded-pill me-2 login" href="login.html">Login</button>
-                        <button class="btn rounded-pill signup">Signup</button>
+                    <div class="col-lg-8">
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav justify-content-around w-100">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Services</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Contact</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Competitions
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li class="dropdown-submenu">
+                                            <a class="dropdown-item dropdown-toggle" href="#">Competition Name</a>
+                                            <ul class="dropdown-menu">
+                                                <!-- These are placeholders add these data from other servers by querying -->
+                                                <li><a class="dropdown-item" href="#">Item 1</a></li>
+                                                <li><a class="dropdown-item" href="#">Item 2</a></li>
+                                                <li><a class="dropdown-item" href="#">Item 3</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <a class="dropdown-item dropdown-toggle" href="#">Competition Country</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">Item 1</a></li>
+                                                <li><a class="dropdown-item" href="#">Item 2</a></li>
+                                                <li><a class="dropdown-item" href="#">Item 3</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a class="dropdown-item" href="#">Something else...</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="d-flex justify-content-end">
+                            <button class="btn rounded-pill me-2 login" href="login.html">Login</button>
+                            <button class="btn rounded-pill signup">Signup</button>
+                        </div>
                     </div>
                 </div>
             </div>
+        </nav>
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-4 sideContent">
+           <h1>Sidebar contents goes here</h1>
+          </div>
+          <div class="col-8">
+            <img src="img/football-1.jpg" class="img-fluid" alt="football">
+            <div class="row welcome containerWelcome">
+              <div class="col text-center">
+                <h1>Welcome to our website</h1>
+              </div>
+            </div>
+          </div>
         </div>
-    </nav>
-</header>
+      </div>
+    
 
-<div class="container welcome containerWelcome">
-    <div class="row">
-        <div class="col text-center">
-            <h1>Welcome to our website</h1>
-        </div>
-    </div>
-</div>
 
 <footer class="footer bg-dark text-white py-3">
     <div class="container">
