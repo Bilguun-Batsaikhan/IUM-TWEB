@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel='stylesheet' href='/stylesheets/chat.css'/>
+    <script>
+        var nickname = '<%= nickname %>'
+        var clubs = <%- JSON.stringify(clubs) %>;
+    </script>
+    <script src="/javascripts/chat.js"></script>
+</head>
+<body onload="init()">
+<h1>Welcome <%= nickname %></h1>
+<div id="initial_form" style="display: block">
+    <p>Please select the Room you want to Join</p>
+    <form onsubmit="return false;">
+        <p>
+            <label for="roomNo"> Your room </label>
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="roomNo" name="roomNo">
+                <option value="null">Please wait for the connection to the database</option>
+            </select>
+        </p>
+        <button id="connect" onclick="connectToRoom()">Connect</button>
+    </form>
+</div>
+<div id="chat_interface" style="display: none">
+    <div id="chat_container" class="split left">
+        <h1>Chat</h1>
+        <div>
+            <div id="who_you_are" style="display: inline"></div>
+            , you are chatting in room:
+            <div id="in_room" style="display: inline"></div>
+        </div>
+        <div id="chat_history" class="boxed"></div>
+        <div id="chat_box" class="bottom boxed">
+            <form onsubmit="return false;" style="width: 100%">
+                <p>
+                    <label for="name"> chat: </label>
+                    <input type="text" id="chat_input" name="chat_input" style="width: 80%">
+                    <button id="chat_send" onclick="sendChatText()">Send</button>
+                </p>
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

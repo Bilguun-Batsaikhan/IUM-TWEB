@@ -1,0 +1,44 @@
+body {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+    color: #00B7FF;
+}
+
+.boxed {
+    width: 100%;
+    padding:10px;
+}
+.bottom {
+    position: absolute;
+    bottom: 10px;
+    width: 90%;
+}
+
+/* Split the screen in half */
+.split {
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* Control the left side */
+.left {
+    left: 0;
+    background-color: #ffffff;
+}
+
+/* Control the right side */
+.right {
+    right: 0;
+    background-color: #228B22;
+    color: white;
+}
