@@ -18,14 +18,14 @@ function init() {
    var select = document.getElementById('roomNo');
    select.innerHTML = '';
 
-   clubs.forEach(function (club) {
+   for(var i = 0; i < clubNames.length; i++) {
       var option = document.createElement('option');
-      option.value = club.name;
-      option.textContent = club.name;
+      option.value = clubNames[i];
+      option.textContent = clubNames[i];
       select.appendChild(option);
-   });
+   }
 
-   //console.log(clubs);
+   console.log(clubNames);
    //console.log(nickname);
    initChatSocket();
 }
