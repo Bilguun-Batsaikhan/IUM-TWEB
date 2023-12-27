@@ -16,7 +16,7 @@ router.get('/chat-static', function(req, res, next) {
 
 /* The nickname should be retrieved from the login page. */
 var nickname = 'Admin';
-
+/*
 router.get('/chat', async (req, res) => {
   if (nickname !== null && typeof nickname !== 'undefined') {
     try {
@@ -27,6 +27,27 @@ router.get('/chat', async (req, res) => {
     }
   } else {
     res.render('error', { error: 'login required', message: 'To use the chat, it is necessary to be logged in.' });
+  }
+});*/
+router.get('/chat', async (req, res) => {
+  if (nickname !== null && typeof nickname !== 'undefined') {
+    try {
+      res.render('chat', { title: 'Chat', nickname });
+    } catch (error) {
+      res.render('error', { error: 'Error rendering chat', message: error.message });
+    }
+  } else {
+    res.render('error', { error: 'login required', message: 'To use the chat, it is necessary to be logged in.' });
+  }
+});
+
+router.post('/chat', async (req, res) => {
+  try {
+    const clubNames = await clubsController.getClubNames();
+    res.json({ clubNames });
+  } catch (error) {
+    res.setHeader('Content-Type', 'application/json');
+    res.status(500).json({ error: 'Error retrieving club names', message: error.message });
   }
 });
 
