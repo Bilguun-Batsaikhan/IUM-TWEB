@@ -6,6 +6,6 @@ import java.util.List;
 
 @Repository
 public interface CompetitionRepository extends JpaRepository<Competition, Long> {
-    @Query("SELECT DISTINCT c.country_name FROM Competition c")
+    @Query("SELECT DISTINCT countryName FROM Competition WHERE countryName IS NOT NULL")
     List<String> findAllDistinctCountries();
 }

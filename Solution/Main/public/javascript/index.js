@@ -7,18 +7,23 @@ function init() {
     const buttonForm = document.getElementById("submitForm")
     
 }
-/*
+
 function fetchCountries() {
-    axios.get('/competitions/countries')
+    axios.get('http://localhost:8082/competitions/countries')
         .then(function (response) {
             const countries = response.data;
-            const select = document.getElementById("country");
+            const dropDownCountry = document.getElementById("country");
             countries.forEach(country => {
-                const option = document.createElement("option");
-                option.value = country.id;
-                option.text = country.name;
-                select.appendChild(option);
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.textContent = country;
+                a.className = 'dropdown-item';
+                a.href = '#';
+                li.appendChild(a);
+                dropDownCountry.appendChild(li);
             });
-        }
+        })
+        .catch(function (error) {
+            console.log('Error fetching countries ' + error);
+        });
 }
-*/
