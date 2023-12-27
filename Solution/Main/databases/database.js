@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 //The URL which will be queried. Run "mongod.exe" for this to connect
 //var url = 'mongodb://localhost:27017/test';
-const mongoDB = 'mongodb://localhost:27017/characters';
+const mongoDB = 'mongodb://localhost:27017/dynamic_data';
 mongoose.Promise = global.Promise;
 connection = mongoose.connect(mongoDB, {
     useNewUrlParser: true,
