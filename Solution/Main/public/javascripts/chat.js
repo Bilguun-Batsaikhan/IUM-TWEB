@@ -14,19 +14,7 @@ function init() {
    document.getElementById('initial_form').style.display = 'block';
    document.getElementById('chat_interface').style.display = 'none';
 
-   // it updates the select with the list of rooms
-   var select = document.getElementById('roomNo');
-   select.innerHTML = '';
-
-   for(var i = 0; i < clubNames.length; i++) {
-      var option = document.createElement('option');
-      option.value = clubNames[i];
-      option.textContent = clubNames[i];
-      select.appendChild(option);
-   }
-
-   console.log(clubNames);
-   //console.log(nickname);
+   sendAxiosQuery('/chat');
    initChatSocket();
 }
 
@@ -112,4 +100,25 @@ function hideLoginInterface(room, userId) {
    document.getElementById('who_you_are').innerHTML= userId;
    document.getElementById('in_room').innerHTML= ' '+room;
 }
+
+function sendAxiosQuery(url){
+   axios.post(url)
+       .then(function (dataR) {
+          // it updates the select with the list of rooms
+          var clubNames = dataR.data.clubNames;
+          //console.log(clubNames);
+          var select = document.getElementById('roomNo');
+          select.innerHTML = '';
+          for(var i = 0; i < clubNames.length; i++) {
+             var option = document.createElement('option');
+             option.value = clubNames[i];
+             option.textContent = clubNames[i];
+             select.appendChild(option);
+          }
+       })
+       .catch(function (error) {
+          alert(JSON.stringify(error));
+       });
+}
+
 
