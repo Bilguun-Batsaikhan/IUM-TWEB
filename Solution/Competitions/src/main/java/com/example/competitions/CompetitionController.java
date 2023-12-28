@@ -15,9 +15,10 @@ public class CompetitionController {
         this.competitionService = competitionService;
     }
 
-    @GetMapping
+    @GetMapping("/countries")
     public ResponseEntity<List<String>> getAllCompetitions() {
         List<String> countries = competitionService.getAllCountries();
+        System.out.println(countries);
         return ResponseEntity.ok(countries);
     }
 }
