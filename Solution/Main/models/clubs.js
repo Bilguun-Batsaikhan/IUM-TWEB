@@ -1,21 +1,20 @@
 const mongoose = require('mongoose');
 
 const ClubsSchema = new mongoose.Schema({
-    _id: {type: mongoose.Schema.Types.ObjectId, auto: true},
-    clubId: {type: String, required: true, unique: true},
-    clubCode: {type: String, required: true, unique: true},
+    club_id: {type: Number, required: true, unique: true},
+    club_code: {type: String, required: true},
     name: {type: String, required: true},
-    domesticCompetitionId: {type: String, required: true},
-    squadSize: {type: Number, required: true},
-    averageAge: {type: Number, required: true},
-    foreignersNumber: {type: Number, required: true},
-    foreignersPercentage: {type: Number, required: true},
-    nationalTeamPlayers: {type: Number, required: true},
-    stadiumName: {type: String, required: true},
-    stadiumSeats: {type: Number, required: true},
-    netTransferRecord: {type: Number, required: true},
-    lastSeason: {type: String, required: true},
-    url: {type: String, required: true},
+    domestic_competition_id: {type: String, required: true},
+    squad_size: {type: Number},
+    average_age: {type: Number},
+    foreigners_number: {type: Number},
+    foreigners_percentage: {type: Number},
+    national_team_players: {type: Number},
+    stadium_name: {type: String},
+    stadium_seats: {type: Number},
+    net_transfer_record: {type: String},
+    last_season: {type: String},
+    url: {type: String},
 });
 
 
