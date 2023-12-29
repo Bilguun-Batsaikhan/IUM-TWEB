@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrazione</title>
+    <link href="stylesheets/signUp.css" rel="stylesheet">
+    <script src="javascripts/signUp.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body onload="init()">
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center">Registrazione</h1>
+                 <div class="segment active">
+                    <div class="circle">1</div>
+                    <div class="label">PERSONAL</div>
+                     <div class="line"></div>
+                </div>
+                <div class="segment active ">
+                     <div class="circle">2</div>
+                     <div class="label">CREDENTIALS</div>
+                </div>
+
+            <form action="/register" method="post" class="pt-10">
+                <div class="container first" id="first">
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="nome" name="nome" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cognome" class="form-label">Cognome</label>
+                        <input type="text" class="form-control" id="cognome" name="cognome" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="firstButton" onclick="change()">Second Part</button>
+                </div>
+                <div class="container second" id="second">
+                    <div class="mb-3">
+                        <label for="nickname" class="form-label">Nickname</label>
+                        <input type="text" class="form-control" id="nickname" name="nickname" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="indirizzo_civico" class="form-label">Indirizzo civico</label>
+                        <input type="text" class="form-control" id="indirizzo_civico" name="indirizzo_civico" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="citta" class="form-label">Città</label>
+                        <input type="text" class="form-control" id="citta" name="citta" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Telefono</label>
+                        <input type="tel" class="form-control" id="telefono" name="telefono" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="secondButton">Registrati</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
