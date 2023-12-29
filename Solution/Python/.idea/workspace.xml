@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e3544ea4-c7cc-4104-bb8a-af706aa628fd" name="Changes" comment="">
+
       <change afterPath="$PROJECT_DIR$/../Main/public/signUp.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Main/public/waitingPage.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Main/public/waitingPage.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/preliminary_investigation.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/preliminary_investigation.ipynb" afterDir="false" />
     </list>
@@ -28,6 +30,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
@@ -41,8 +44,9 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
+
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Python" />
@@ -85,7 +89,11 @@
       <updated>1703600670619</updated>
       <workItem from="1703600680105" duration="88000" />
       <workItem from="1703600770145" duration="622000" />
-      <workItem from="1703855558715" duration="580000" />
+
+      <workItem from="1703602704679" duration="657000" />
+      <workItem from="1703606877041" duration="989000" />
+      <workItem from="1703774271767" duration="1420000" />
+
     </task>
     <servers />
   </component>
