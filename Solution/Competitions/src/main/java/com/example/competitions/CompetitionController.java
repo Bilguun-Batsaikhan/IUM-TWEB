@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/competitions")
@@ -20,5 +21,12 @@ public class CompetitionController {
         List<String> countries = competitionService.getAllCountries();
         System.out.println(countries);
         return ResponseEntity.ok(countries);
+    }
+
+    @PostMapping("/countriesData")
+    public ResponseEntity<List<String>> getCompetitionsByCountry(@RequestBody Map<String, String> body) {
+        String country = body.get("country");
+        List<String> competitions = competitionService.getCompetitionsByCountry(country);
+        return ResponseEntity.ok(competitions);
     }
 }

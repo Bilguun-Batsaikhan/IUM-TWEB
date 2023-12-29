@@ -2,20 +2,37 @@
   background-color: #843636;
 }
 
+.navbar .dropdown-submenu .dropdown-toggle::after {
+  display: none;
+}
+
 .dropdown-submenu {
   position: relative;
 }
 
 .dropdown-submenu .dropdown-menu {
   display: none;
+  position: absolute; /* Change position to absolute */
   top: 0;
   left: 100%;
   margin-top: -1px;
 }
 
+/* Show second level dropdown when hovering over parent list item */
 .dropdown-submenu:hover .dropdown-menu {
   display: block;
 }
+
+/* Show second level dropdown when hovering over the link */
+.dropdown-submenu > a:hover + .dropdown-menu {
+  display: block;
+}
+
+/* Hide second level dropdown when not hovering over the parent or link */
+.dropdown-submenu:not(:hover) .dropdown-menu {
+  display: none;
+}
+
 
 .navbar-nav .nav-link {
   border-radius: 5px;
