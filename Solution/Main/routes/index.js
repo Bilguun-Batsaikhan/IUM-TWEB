@@ -67,11 +67,16 @@ router.route('/chat')
         res.status(505).json(err);
       });
 });
-
-router.get('/signUp', function(req, res, next) {
-    res.sendFile(path.join(__dirname, '../public/signUp.html'));
+router.post('/login', function(req, res, next) {
+    res.sendFile(path.join(__dirname, '../public/login.html'));
+});
+router.post('/loginComplete', function(req, res, next) {
+    res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 router.post('/signUp', function(req, res, next) {
-    res.render('index', { title: 'Express' });
+    res.sendFile(path.join(__dirname, '../public/signUp.html'));
+});
+router.post('/signUpComplete', function(req, res, next) {
+    res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 module.exports = router;

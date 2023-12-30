@@ -5,7 +5,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function init() {
     const buttonForm = document.getElementById("submitForm")
-    
+    const buttonSignUp = document.getElementById("signUp")
+    buttonSignUp.addEventListener('click', function (){
+        window.location.href =
+    })
 }
 
 function fetchCountries() {

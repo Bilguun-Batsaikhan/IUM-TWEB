@@ -6,7 +6,6 @@ function init(){
    firstButton.addEventListener('click', changeFirst);
    const secondButton = document.getElementById("secondButton");
    secondButton.addEventListener('click', changeSecond)
-
 }
 
 function changeFirst(event) {

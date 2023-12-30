@@ -66,8 +66,13 @@
                     </div>
                     <div class="col-lg-2">
                         <div class="d-flex justify-content-end">
-                            <button class="btn rounded-pill me-2 login" href="login.html">Login</button>
-                            <button class="btn rounded-pill signup">Signup</button>
+                            <form action="/login" method="post">
+                                 <button class="btn rounded-pill me-2 login" href="login.html">Login</button>
+                            </form>
+                            <form action = "/signUp" method="post">
+                                <button class="btn rounded-pill signup" value="submit" id="signUp">Signup</button>
+                            </form>
+                            <p id="username"></p>
                         </div>
                     </div>
                 </div>
