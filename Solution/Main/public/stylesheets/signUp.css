@@ -1,5 +1,10 @@
 body {
-    background-color: #555048;
+    background-color: #FFFFFF;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    font-size: 20px; /* Aumentato il font-size per maggiore leggibilità */
 }
 
 .segment {
@@ -7,8 +12,9 @@ body {
     display: inline-block;
     margin-right: -10px;
     margin-top: 30px;
-    left: 35px;
+
 }
+
 .circle {
     display: inline-block;
     background-color: #A8A9AD;
@@ -21,26 +27,29 @@ body {
     text-align: center;
     font-size: 14px;
 }
+
 .line {
     display: inline-block;
-    width: 80px;
+    width: 180px;
     height: 3px;
     margin: 12px 0;
     background-color: #A8A9AD;
     position: relative;
     left: -5px;
 }
+
 .label {
     position: absolute;
-    left: 10px;
-    top: 35px;
-    transform: translate(-50%, 0);
-    font-size: 12px;
+    left: 13px;
+    transform: translate(-50%, 0); /* Move to left */
+    font-size: 11px;
     color: #A8A9AD;
 }
+
 .container {
     margin: 50px;
 }
+
 .segment.active .circle, .segment.active .line {
     background-color: #007bff;
 }
@@ -48,7 +57,12 @@ body {
     color: #007bff;
 }
 
-#divCircle{
+#divCircle {
     margin-top: 10px !important;
     left: 50px !important;
 }
+
+#first{
+    margin-left: 30px;
+}
+

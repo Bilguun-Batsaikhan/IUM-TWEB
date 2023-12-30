@@ -68,5 +68,10 @@ router.route('/chat')
       });
 });
 
-
+router.get('/signUp', function(req, res, next) {
+    res.sendFile(path.join(__dirname, '../public/signUp.html'));
+});
+router.post('/signUp', function(req, res, next) {
+    res.render('index', { title: 'Express' });
+});
 module.exports = router;
