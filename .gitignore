@@ -1,5 +1,7 @@
 /Solution/csv/*.csv
 
+#Exclude node modules
+/Solution/Main/node_modules/
 ###VS Code###
 .vscode/
 
