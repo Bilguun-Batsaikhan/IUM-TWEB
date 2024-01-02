@@ -37,6 +37,21 @@ router.route('/chat')
             });
     });
 
+router.route('/competition')
+    .post(function (req, res) {
+        axios.get('http://localhost:8082/competitions/countries')
+            .then(json => {
+                const countries = json.data;
+                console.log(countries)
+                res.json({countries});
+            })
+            .catch(err => {
+                console.error('Errore nella chiamata Axios:', err);
+                res.setHeader('Content-Type', 'application/json');
+                res.status(505).json(err);
+            });
+    });
+
 router.route('/valutation/club')
     .get(function (req, res) {
         res.render('club_valutation');
