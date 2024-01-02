@@ -9,19 +9,22 @@ function init() {
         window.location.href = '/error';
     } else {
         console.log('club_id:', parseInt(clubId));
-        //sendAxiosQuery('/valutation/club');
+        sendAxiosQuery('/valutation/club', clubId);
     }
 }
 
-function sendAxiosQuery(url) {
-    axios.post(url)
+function sendAxiosQuery(url, clubId) {
+    axios.post(url, {club_id: clubId
+    })
         .then(function (dataR) {
-            var clubData = dataR.data.clubData;
+            var clubData = dataR.data.clubValutation;
+            if(!clubData)
+                window.location.href = '/error';
             console.log(clubData);
+            document.getElementById('results').innerHTML= "The result is: "+JSON.stringify(clubData);
         })
         .catch(function (error) {
             alert(JSON.stringify(error));
         });
 }
-
 
