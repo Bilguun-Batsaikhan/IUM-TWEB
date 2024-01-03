@@ -52,6 +52,23 @@ router.route('/competition')
             });
     });
 
+//fetch competition ID from SpringBoot then return it
+router.route('/retrieveCompetitionID')
+    .post((req, res) => {
+        const competitionName = req.body.name;
+        const country_name = req.body.country_name;
+        axios.post('http://localhost:8082/competitions/competitionID', {country: country_name, name: competitionName})
+            .then(json => {
+                const competitionID = json.data;
+                res.json({competitionID});
+            })
+            .catch(err => {
+                console.error('Error while retrieving competition ID in index router', err);
+                res.setHeader('Content-Type', 'application/json');
+                res.status(505).json(err);
+            })
+    }) 
+
 router.route('/valutation/club')
     .get(function (req, res) {
         res.render('club_valutation');

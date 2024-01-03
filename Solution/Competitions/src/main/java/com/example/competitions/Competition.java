@@ -9,7 +9,7 @@ public class Competition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "competition_id")
-    private Long competitionId;
+    private String competitionId;
 
     @Column(name = "competition_code")
     private String competitionCode;
@@ -39,11 +39,11 @@ public class Competition {
     private String url;
     
     // Getters and setters for the fields
-    public Long getCompetitionId() {
+    public String getCompetitionId() {
         return competitionId;
     }
 
-    public void setCompetitionId(Long competitionId) {
+    public void setCompetitionId(String competitionId) {
         this.competitionId = competitionId;
     }
 
@@ -120,7 +120,7 @@ public class Competition {
     }
     
     // Constructor with all fields
-    public Competition(Long competitionId, String competitionCode, String name, String subType, String type, Long countryId, String countryName, String domesticLeagueCode, String confederation, String url) {
+    public Competition(String competitionId, String competitionCode, String name, String subType, String type, Long countryId, String countryName, String domesticLeagueCode, String confederation, String url) {
         this.competitionId = competitionId;
         this.competitionCode = competitionCode;
         this.name = name;

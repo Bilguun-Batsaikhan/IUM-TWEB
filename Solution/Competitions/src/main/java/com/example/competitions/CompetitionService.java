@@ -2,6 +2,7 @@ package com.example.competitions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CompetitionService {
@@ -18,5 +19,9 @@ public class CompetitionService {
     // returns a list of all competition names in a given country
     public List<String> getCompetitionsByCountry(String country) {
         return competitionRepository.findAllByCountry(country);
+    }
+
+    public Optional<String> findCompetitionIdByCountryAndName(String country, String name) {
+        return competitionRepository.findCompetitionIdByCountryAndName(country, name);
     }
 }
