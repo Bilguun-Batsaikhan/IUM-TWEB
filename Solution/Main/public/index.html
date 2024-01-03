@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- connect to styles.css -->
     <link rel="stylesheet" href="stylesheets/style.css">
     <!-- connect to Bootstrap CSS -->
@@ -67,8 +68,12 @@
                     </div>
                     <div class="col-lg-2">
                         <div class="d-flex justify-content-end">
-                            <button class="btn rounded-pill me-2 login" href="login.html">Login</button>
-                            <button class="btn rounded-pill signup">Signup</button>
+                            <form action="/login" method="POST">
+                              <button class="btn rounded-pill me-2 login" id="loginButton">Login</button>
+                            </form>
+                            <form action="/signUp" method="POST">
+                                <button class="btn rounded-pill signup" id="signupButton">Signup</button>
+                            </form>
                         </div>
                     </div>
                 </div>
