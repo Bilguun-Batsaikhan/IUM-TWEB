@@ -2,67 +2,101 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Registrazione</title>
+    <title>SignUp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="stylesheets/signUp.css" rel="stylesheet">
     <script src="javascripts/signUp.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body onload="init()">
-<div class="container">
+<div class="container d-flex justify-content-center">
     <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <h1 class="text-center">Registrazione</h1>
-                 <div class="segment active">
-                    <div class="circle">1</div>
-                    <div class="label">PERSONAL</div>
-                     <div class="line"></div>
+        <h1 class="text-center"><i>SignUp</i></h1>
+        <div class = "text-center">
+            <div class="segment active" id="firstStep">
+                <div class="circle">1</div>
+                <div class="label">PERSONAL DATA</div>
+                <div class="line"></div>
+            </div>
+            <div class="segment second">
+                <div class="circle">2</div>
+                <div class="label ">CREDENTIALS</div>
+                <div class="line"></div>
+            </div>
+            <div class="segment third">
+                <div class="circle">3</div>
+                <div class="label">NICKNAME</div>
+            </div>
+        </div>
+        <form action="/signUpComplete" method="post" class="pt-10">
+            <div class="container first" id="first">
+                <div class="col-md-6 mb-3">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
                 </div>
-                <div class="segment active ">
-                     <div class="circle">2</div>
-                     <div class="label">CREDENTIALS</div>
+                <div class="col-md-6 mb-3">
+                    <label for="surname" class="form-label">Surname:</label>
+                    <input type="text" class="form-control" id="surname" name="surname" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="telephone_number" class="form-label">Telephone number</label>
+                    <input type="tel" class="form-control" id="telephone_number" name="telephone_number" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="nation" class="form-label">Nation:</label>
+                    <input type="text" class="form-control" id="nation" name="nation" required>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="city" class="form-label">City:</label>
+                        <input type="text" class="form-control" id="city" name="city" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="provincia" class="form-label">Provincia</label>
+                        <input type="text" class="form-control" id="provincia" name="provincia" required >
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="indirizzo_di_Residenza" class="form-label">Indirizzo di Residenza</label>
+                        <input type="text" class="form-control" id="indirizzo_di_Residenza" name="indirizzo_di_Residenza" required placeholder="Es Via Vittorio Amedeo II">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="civico" class="form-label">Civico</label>
+                        <input type="text" class="form-control" id="civico" name="civico" required placeholder="Numero">
+                    </div>
+                </div>
+                <hr>
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary" id="firstButton" >Next</button>
+                </div>
+            </div>
+            <div class="container second " id="second">
+                <div class="col-md-8 mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <hr>
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary" id="secondButton">Next</button>
                 </div>
 
-            <form action="/register" method="post" class="pt-10">
-                <div class="container first" id="first">
-                    <div class="mb-3">
-                        <label for="nome" class="form-label">Nome</label>
-                        <input type="text" class="form-control" id="nome" name="nome" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="cognome" class="form-label">Cognome</label>
-                        <input type="text" class="form-control" id="cognome" name="cognome" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary" id="firstButton" onclick="change()">Second Part</button>
+            </div>
+            <div class="container third " id="third">
+                <div class="col-md-5 mb-3">
+                    <label for="nickname" class="form-label">Nickname</label>
+                    <input type="text" class="form-control" id="nickname" name="nickname" required>
                 </div>
-                <div class="container second" id="second">
-                    <div class="mb-3">
-                        <label for="nickname" class="form-label">Nickname</label>
-                        <input type="text" class="form-control" id="nickname" name="nickname" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="indirizzo_civico" class="form-label">Indirizzo civico</label>
-                        <input type="text" class="form-control" id="indirizzo_civico" name="indirizzo_civico" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="citta" class="form-label">Città</label>
-                        <input type="text" class="form-control" id="citta" name="citta" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="telefono" class="form-label">Telefono</label>
-                        <input type="tel" class="form-control" id="telefono" name="telefono" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary" id="secondButton">Registrati</button>
+                <hr>
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary" value="submit">Registrati</button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </div>
 </body>

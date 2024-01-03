@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', async function () {
     try {
         const countries = await sendAxiosQuery('/competition');

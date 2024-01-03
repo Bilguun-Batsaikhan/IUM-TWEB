@@ -1,5 +1,10 @@
 body {
-    background-color: #555048;
+    background-color: #FFFFFF;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    font-size: 20px;
 }
 
 .segment {
@@ -7,8 +12,9 @@ body {
     display: inline-block;
     margin-right: -10px;
     margin-top: 30px;
-    left: 35px;
+
 }
+
 .circle {
     display: inline-block;
     background-color: #A8A9AD;
@@ -21,26 +27,29 @@ body {
     text-align: center;
     font-size: 14px;
 }
+
 .line {
     display: inline-block;
-    width: 80px;
+    width: 100px;
     height: 3px;
     margin: 12px 0;
     background-color: #A8A9AD;
     position: relative;
     left: -5px;
 }
+
 .label {
     position: absolute;
-    left: 10px;
-    top: 35px;
-    transform: translate(-50%, 0);
-    font-size: 12px;
+    left: 13px;
+    transform: translate(-50%, 0); /* Move to left */
+    font-size: 11px;
     color: #A8A9AD;
 }
+
 .container {
     margin: 50px;
 }
+
 .segment.active .circle, .segment.active .line {
     background-color: #007bff;
 }
@@ -48,7 +57,49 @@ body {
     color: #007bff;
 }
 
-#divCircle{
-    margin-top: 10px !important;
-    left: 50px !important;
+#first{
+    margin-left: 10px;
+}
+
+#second{
+    margin-left: 10px;
+}
+#third{
+    margin-left: 10px;
+}
+
+@media screen and (max-width: 350px) {
+    h1{
+        font-size: 15px;
+    }
+    .segment {
+        margin-top: 15px; /* Riduci il margine superiore per schermi più piccoli */
+    }
+
+    .circle {
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        font-size: 10px;
+    }
+
+    .line {
+        width: 50px;
+        height: 2px;
+        margin: 8px 0;
+    }
+
+    .label {
+        font-size: 10px;
+    }
+    #first{
+        margin-left: 0px;
+    }
+
+    #second{
+        margin-left: 0px;
+    }
+    #third{
+        margin-left: 0px;
+    }
 }
