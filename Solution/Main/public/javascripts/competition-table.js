@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
     // Get the competition name from the query parameters
     const urlParams = new URLSearchParams(window.location.search);
     const competitionName = urlParams.get('competition');
@@ -9,14 +9,21 @@ document.addEventListener('DOMContentLoaded', function () {
     // Fetch the competition data and display it in a table
     //fetchCompetitionData(competitionName).then(displayCompetitionData);
 
-    // Fetch countries at the time of page loads
-    fetchCountries().then(init);
+    try {
+        const countries = await sendAxiosQuery('/competition');
+        console.log("countries", countries);
+        // Further processing or function calls can be done here
+        await createCountryMenu(countries);
+    } catch (error) {
+        console.error("Error fetching countries:", error);
+        // Handle the error appropriately
+    }
 
     if (!country || !competitionName) {
         window.location.href = '/error';
     } else {
         // I'll add this part later
-        // sendAxiosQuery('/retrieveCompetitionID', country, competitionName);
+        const ID = fetchCompetitionID('/retrieveCompetitionID', country, competitionName);
     };
 });
 
@@ -24,60 +31,71 @@ function init() {
     console.log('init()');
     const competitionNames = document.getElementsByClassName('competition-name');
     
-    Array.from(competitionNames).forEach(competitionName => {
-        competitionName.addEventListener('click', function (event) {
-            event.preventDefault();
-            console.log('Clicked on ' + competitionName.textContent);
-
-            // Navigate to competition-table.html with the competition name as a query parameter
-            window.location.href = '/competition-table.html?competition=' + encodeURIComponent(competitionName.textContent);
-        });
-    });
+    // Array.from(competitionNames).forEach(competitionName => {
+    //     competitionName.addEventListener('click', function (event) {
+    //         event.preventDefault();
+    //         console.log('Clicked on ' + competitionName.textContent);
+    //
+    //         // Navigate to competition-table.html with the competition name as a query parameter
+    //         window.location.href = '/competition-table.html?competition=' + encodeURIComponent(competitionName.textContent);
+    //     });
+    // });
 }
 
 //fetch competition ID for given country and competition name
-function sendAxiosQuery(url, country, competitionName) {
+function fetchCompetitionID(url, country, competitionName) {
     axios.post(url, {country_name: country, name: competitionName})
         .then(function (dataR) {
             var competitionID = dataR.data;
             console.log(competitionID)
-            if(!competitionID)
+            if(!competitionID) {
                 window.location.href = '/error';
                 console.log(competitionID);
+            } else {
+                return competitionID;
+            }
         })
         .catch(function (error) {
             alert(JSON.stringify(error));
         });
 }
 
-//fetches countries from SpringBoot then populates the dropdown menu 'country'
-function fetchCountries() {
-    return axios.get('http://localhost:8082/competitions/countries')
-        .then(function (response) {
-            const countries = response.data;
-            const dropDownCountry = document.getElementById("country");
-            const promises = countries.map(country => {
-                const li = document.createElement('li');
-                li.className = 'dropdown-submenu';
-                const a = document.createElement('a');
-                a.textContent = country;
-                a.className = 'dropdown-item dropdown-toggle';
-                a.href = '#';
-                li.appendChild(a);
-                const ul = document.createElement('ul');
-                ul.className = 'dropdown-menu';
-                li.appendChild(ul);
-                dropDownCountry.appendChild(li);
-                console.log('Doing the second request to SpringBoot')
-                // Fetch second level data for this country
-                return fetchCompetitionNames(country, ul, li);
-            });
-            return Promise.all(promises);
-        })
-        .catch(function (error) {
-            console.log('Error fetching countries ' + error);
-        });
+async function sendAxiosQuery(url) {
+    try {
+        const response = await axios.post(url);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
 }
+
+//creates the dropdown menu 'country' and populates it with countries
+async function createCountryMenu(countries) {
+    const countriesArray = countries.countries;
+    const dropDownCountry = document.getElementById("country");
+    const promises = countriesArray.map(async country => {
+        const li = document.createElement('li');
+        li.className = 'dropdown-submenu';
+        const a = document.createElement('a');
+        a.textContent = country;
+        a.className = 'dropdown-item dropdown-toggle';
+        a.href = '#';
+        li.appendChild(a);
+        const ul = document.createElement('ul');
+        ul.className = 'dropdown-menu';
+        li.appendChild(ul);
+        dropDownCountry.appendChild(li);
+
+        console.log('Doing the second request to SpringBoot');
+        // Fetch second level data for this country
+        await fetchCompetitionNames(country, ul, li);
+    });
+
+    // Wait for all promises to resolve
+    await Promise.all(promises);
+}
+
+
 
 //fetches competition names from SpringBoot then populates the dropdown menu 'competition'
 function fetchCompetitionNames(country, ul, li) {
@@ -89,7 +107,7 @@ function fetchCompetitionNames(country, ul, li) {
                             const a2 = document.createElement('a');
                             a2.textContent = data;
                             a2.className = 'dropdown-item competition-name';
-                            a2.href = '#';
+                            a2.href = '/competition-table.html?competition=' + encodeURIComponent(data) + '&country=' + encodeURIComponent(country);
                             li2.appendChild(a2);
                             ul.appendChild(li2);
                         });
