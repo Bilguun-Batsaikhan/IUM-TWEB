@@ -26,6 +26,7 @@ public class Player {
     private Integer lastSeason;
 
     @Column(name = "current_club_id")
+
     private Integer currentClubId;
 
     @Column(name = "player_code")
