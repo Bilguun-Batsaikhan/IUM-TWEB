@@ -12,7 +12,7 @@ public class PlayerService {
         this.playerRepository = playerRepository;
     }
 
-    public List<Player> getPlayersByClubId(Long club_id) {
+    public List<Player> getPlayersByClubId(int club_id) {
         return playerRepository.findAllByClubId(club_id);
     }
 }
