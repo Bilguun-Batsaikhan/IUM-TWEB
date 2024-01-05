@@ -1,5 +1,6 @@
 package com.example.players;
 import jakarta.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "players")
@@ -8,271 +9,287 @@ public class Player {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(name = "player_id")
     private Long playerId;
 
     @Column(name = "first_name")
-    private String playerFirstName;
+    private String firstName;
 
     @Column(name = "last_name")
-    private String playerLastName;
+    private String lastName;
 
     @Column(name = "name")
-    private String playerName;
+    private String name;
 
     @Column(name = "last_season")
-    private Integer playerLastSeason;
+    private Integer lastSeason;
 
     @Column(name = "current_club_id")
-    private int playerCurrentClubId;
+
+    private Integer currentClubId;
 
     @Column(name = "player_code")
     private String playerCode;
 
     @Column(name = "country_of_birth")
-    private String playerBirthCountry;
+    private String countryOfBirth;
 
     @Column(name = "city_of_birth")
-    private String playerBirthCity;
+    private String cityOfBirth;
 
     @Column(name = "country_of_citizenship")
-    private String playerCitizenshipCountry;
+    private String countryOfCitizenship;
 
     @Column(name = "date_of_birth")
-    private String playerBirthDate;
+    @Temporal(TemporalType.DATE)
+    private Date dateOfBirth;
 
     @Column(name = "sub_position")
-    private String playerSubPosition;
+    private String subPosition;
 
     @Column(name = "position")
-    private String playerPosition;
+    private String position;
+
+    @Column(name = "foot")
+    private String foot;
 
     @Column(name = "height_in_cm")
-    private Integer playerHeight;
+    private Float heightInCm;
 
     @Column(name = "market_value_in_eur")
-    private Integer playerMarketValue;
+    private Float marketValueInEur;
 
     @Column(name = "highest_market_value_in_eur")
-    private Integer playerHighestMarketValue;
+    private Float highestMarketValueInEur;
 
     @Column(name = "contract_expiration_date")
-    private Integer playerContractExpiration;
+    @Temporal(TemporalType.DATE)
+    private Date contractExpirationDate;
 
     @Column(name = "agent_name")
-    private String playerAgentName;
+    private String agentName;
 
     @Column(name = "image_url")
-    private String playerImageUrl;
+    private String imageUrl;
 
     @Column(name = "url")
-    private String playerUrl;
+    private String url;
 
     @Column(name = "current_club_domestic_competition_id")
-    private Integer playerCurrentDomesticClubId;
+    private String currentClubDomesticCompetitionId;
 
     @Column(name = "current_club_name")
-    private String playerCurrentClubName;
+    private String currentClubName;
 
     public Long getPlayerId() {
         return playerId;
     }
 
-    public String getPlayerFirstName() {
-        return playerFirstName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getPlayerLastName() {
-        return playerLastName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String getPlayerName() {
-        return playerName;
+    public String getName() {
+        return name;
     }
 
-    public Integer getPlayerLastSeason() {
-        return playerLastSeason;
+    public Integer getLastSeason() {
+        return lastSeason;
     }
 
-    public int getPlayerCurrentClubId() {
-        return playerCurrentClubId;
+    public Integer getCurrentClubId() {
+        return currentClubId;
     }
 
     public String getPlayerCode() {
         return playerCode;
     }
 
-    public String getPlayerBirthCountry() {
-        return playerBirthCountry;
+    public String getCountryOfBirth() {
+        return countryOfBirth;
     }
 
-    public String getPlayerBirthCity() {
-        return playerBirthCity;
+    public String getCityOfBirth() {
+        return cityOfBirth;
     }
 
-    public String getPlayerCitizenshipCountry() {
-        return playerCitizenshipCountry;
+    public String getCountryOfCitizenship() {
+        return countryOfCitizenship;
     }
 
-    public String getPlayerBirthDate() {
-        return playerBirthDate;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public String getPlayerSubPosition() {
-        return playerSubPosition;
+    public String getSubPosition() {
+        return subPosition;
     }
 
-    public String getPlayerPosition() {
-        return playerPosition;
+    public String getPosition() {
+        return position;
     }
 
-    public Integer getPlayerHeight() {
-        return playerHeight;
+    public String getFoot() {
+        return foot;
     }
 
-    public Integer getPlayerMarketValue() {
-        return playerMarketValue;
+    public Float getHeightInCm() {
+        return heightInCm;
     }
 
-    public Integer getPlayerHighestMarketValue() {
-        return playerHighestMarketValue;
+    public Float getMarketValueInEur() {
+        return marketValueInEur;
     }
 
-    public Integer getPlayerContractExpiration() {
-        return playerContractExpiration;
+    public Float getHighestMarketValueInEur() {
+        return highestMarketValueInEur;
     }
 
-    public String getPlayerAgentName() {
-        return playerAgentName;
+    public Date getContractExpirationDate() {
+        return contractExpirationDate;
     }
 
-    public String getPlayerImageUrl() {
-        return playerImageUrl;
+    public String getAgentName() {
+        return agentName;
     }
 
-    public String getPlayerUrl() {
-        return playerUrl;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public Integer getPlayerCurrentDomesticClubId() {
-        return playerCurrentDomesticClubId;
+    public String getUrl() {
+        return url;
     }
 
-    public String getPlayerCurrentClubName() {
-        return playerCurrentClubName;
+    public String getCurrentClubDomesticCompetitionId() {
+        return currentClubDomesticCompetitionId;
+    }
+
+    public String getCurrentClubName() {
+        return currentClubName;
     }
 
     public void setPlayerId(Long playerId) {
         this.playerId = playerId;
     }
 
-    public void setPlayerFirstName(String playerFirstName) {
-        this.playerFirstName = playerFirstName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setPlayerLastName(String playerLastName) {
-        this.playerLastName = playerLastName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setPlayerLastSeason(Integer playerLastSeason) {
-        this.playerLastSeason = playerLastSeason;
+    public void setLastSeason(Integer lastSeason) {
+        this.lastSeason = lastSeason;
     }
 
-    public void setPlayerCurrentClubId(int playerCurrentClubId) {
-        this.playerCurrentClubId = playerCurrentClubId;
+    public void setCurrentClubId(Integer currentClubId) {
+        this.currentClubId = currentClubId;
     }
 
     public void setPlayerCode(String playerCode) {
         this.playerCode = playerCode;
     }
 
-    public void setPlayerBirthCountry(String playerBirthCountry) {
-        this.playerBirthCountry = playerBirthCountry;
+    public void setCountryOfBirth(String countryOfBirth) {
+        this.countryOfBirth = countryOfBirth;
     }
 
-    public void setPlayerBirthCity(String playerBirthCity) {
-        this.playerBirthCity = playerBirthCity;
+    public void setCityOfBirth(String cityOfBirth) {
+        this.cityOfBirth = cityOfBirth;
     }
 
-    public void setPlayerCitizenshipCountry(String playerCitizenshipCountry) {
-        this.playerCitizenshipCountry = playerCitizenshipCountry;
+    public void setCountryOfCitizenship(String countryOfCitizenship) {
+        this.countryOfCitizenship = countryOfCitizenship;
     }
 
-    public void setPlayerBirthDate(String playerBirthDate) {
-        this.playerBirthDate = playerBirthDate;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public void setPlayerSubPosition(String playerSubPosition) {
-        this.playerSubPosition = playerSubPosition;
+    public void setSubPosition(String subPosition) {
+        this.subPosition = subPosition;
     }
 
-    public void setPlayerPosition(String playerPosition) {
-        this.playerPosition = playerPosition;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
-    public void setPlayerHeight(Integer playerHeight) {
-        this.playerHeight = playerHeight;
+    public void setFoot(String foot) {
+        this.foot = foot;
     }
 
-    public void setPlayerMarketValue(Integer playerMarketValue) {
-        this.playerMarketValue = playerMarketValue;
+    public void setHeightInCm(Float heightInCm) {
+        this.heightInCm = heightInCm;
     }
 
-    public void setPlayerHighestMarketValue(Integer playerHighestMarketValue) {
-        this.playerHighestMarketValue = playerHighestMarketValue;
+    public void setMarketValueInEur(Float marketValueInEur) {
+        this.marketValueInEur = marketValueInEur;
     }
 
-    public void setPlayerContractExpiration(Integer playerContractExpiration) {
-        this.playerContractExpiration = playerContractExpiration;
+    public void setHighestMarketValueInEur(Float highestMarketValueInEur) {
+        this.highestMarketValueInEur = highestMarketValueInEur;
     }
 
-    public void setPlayerAgentName(String playerAgentName) {
-        this.playerAgentName = playerAgentName;
+    public void setContractExpirationDate(Date contractExpirationDate) {
+        this.contractExpirationDate = contractExpirationDate;
     }
 
-    public void setPlayerImageUrl(String playerImageUrl) {
-        this.playerImageUrl = playerImageUrl;
+    public void setAgentName(String agentName) {
+        this.agentName = agentName;
     }
 
-    public void setPlayerUrl(String playerUrl) {
-        this.playerUrl = playerUrl;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public void setPlayerCurrentDomesticClubId(Integer playerCurrentDomesticClubId) {
-        this.playerCurrentDomesticClubId = playerCurrentDomesticClubId;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public void setPlayerCurrentClubName(String playerCurrentClubName) {
-        this.playerCurrentClubName = playerCurrentClubName;
+    public void setCurrentClubDomesticCompetitionId(String currentClubDomesticCompetitionId) {
+        this.currentClubDomesticCompetitionId = currentClubDomesticCompetitionId;
     }
 
-    public Player(Long playerId, String playerFirstName, String playerLastName, String playerName, Integer playerLastSeason, int playerCurrentClubId, String playerCode, String playerBirthCountry, String playerBirthCity, String playerCitizenshipCountry, String playerBirthDate, String playerSubPosition, String playerPosition, Integer playerHeight, Integer playerMarketValue, Integer playerHighestMarketValue, Integer playerContractExpiration, String playerAgentName, String playerImageUrl, String playerUrl, Integer playerCurrentDomesticClubId, String playerCurrentClubName) {
+    public void setCurrentClubName(String currentClubName) {
+        this.currentClubName = currentClubName;
+    }
+
+    public Player(Long playerId, String firstName, String lastName, String name, Integer lastSeason, Integer currentClubId, String playerCode, String countryOfBirth, String cityOfBirth, String countryOfCitizenship, Date dateOfBirth, String subPosition, String position, String foot, Float heightInCm, Float marketValueInEur, Float highestMarketValueInEur, Date contractExpirationDate, String agentName, String imageUrl, String url, String currentClubDomesticCompetitionId, String currentClubName) {
         this.playerId = playerId;
-        this.playerFirstName = playerFirstName;
-        this.playerLastName = playerLastName;
-        this.playerName = playerName;
-        this.playerLastSeason = playerLastSeason;
-        this.playerCurrentClubId = playerCurrentClubId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.name = name;
+        this.lastSeason = lastSeason;
+        this.currentClubId = currentClubId;
         this.playerCode = playerCode;
-        this.playerBirthCountry = playerBirthCountry;
-        this.playerBirthCity = playerBirthCity;
-        this.playerCitizenshipCountry = playerCitizenshipCountry;
-        this.playerBirthDate = playerBirthDate;
-        this.playerSubPosition = playerSubPosition;
-        this.playerPosition = playerPosition;
-        this.playerHeight = playerHeight;
-        this.playerMarketValue = playerMarketValue;
-        this.playerHighestMarketValue = playerHighestMarketValue;
-        this.playerContractExpiration = playerContractExpiration;
-        this.playerAgentName = playerAgentName;
-        this.playerImageUrl = playerImageUrl;
-        this.playerUrl = playerUrl;
-        this.playerCurrentDomesticClubId = playerCurrentDomesticClubId;
-        this.playerCurrentClubName = playerCurrentClubName;
+        this.countryOfBirth = countryOfBirth;
+        this.cityOfBirth = cityOfBirth;
+        this.countryOfCitizenship = countryOfCitizenship;
+        this.dateOfBirth = dateOfBirth;
+        this.subPosition = subPosition;
+        this.position = position;
+        this.foot = foot;
+        this.heightInCm = heightInCm;
+        this.marketValueInEur = marketValueInEur;
+        this.highestMarketValueInEur = highestMarketValueInEur;
+        this.contractExpirationDate = contractExpirationDate;
+        this.agentName = agentName;
+        this.imageUrl = imageUrl;
+        this.url = url;
+        this.currentClubDomesticCompetitionId = currentClubDomesticCompetitionId;
+        this.currentClubName = currentClubName;
     }
 }
 
