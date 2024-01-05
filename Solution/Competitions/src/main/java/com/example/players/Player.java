@@ -24,7 +24,7 @@ public class Player {
     private Integer playerLastSeason;
 
     @Column(name = "current_club_id")
-    private Long playerCurrentClubId;
+    private int playerCurrentClubId;
 
     @Column(name = "player_code")
     private String playerCode;
@@ -94,7 +94,7 @@ public class Player {
         return playerLastSeason;
     }
 
-    public Long getPlayerCurrentClubId() {
+    public int getPlayerCurrentClubId() {
         return playerCurrentClubId;
     }
 
@@ -182,7 +182,7 @@ public class Player {
         this.playerLastSeason = playerLastSeason;
     }
 
-    public void setPlayerCurrentClubId(Long playerCurrentClubId) {
+    public void setPlayerCurrentClubId(int playerCurrentClubId) {
         this.playerCurrentClubId = playerCurrentClubId;
     }
 
@@ -250,7 +250,7 @@ public class Player {
         this.playerCurrentClubName = playerCurrentClubName;
     }
 
-    public Player(Long playerId, String playerFirstName, String playerLastName, String playerName, Integer playerLastSeason, Long playerCurrentClubId, String playerCode, String playerBirthCountry, String playerBirthCity, String playerCitizenshipCountry, String playerBirthDate, String playerSubPosition, String playerPosition, Integer playerHeight, Integer playerMarketValue, Integer playerHighestMarketValue, Integer playerContractExpiration, String playerAgentName, String playerImageUrl, String playerUrl, Integer playerCurrentDomesticClubId, String playerCurrentClubName) {
+    public Player(Long playerId, String playerFirstName, String playerLastName, String playerName, Integer playerLastSeason, int playerCurrentClubId, String playerCode, String playerBirthCountry, String playerBirthCity, String playerCitizenshipCountry, String playerBirthDate, String playerSubPosition, String playerPosition, Integer playerHeight, Integer playerMarketValue, Integer playerHighestMarketValue, Integer playerContractExpiration, String playerAgentName, String playerImageUrl, String playerUrl, Integer playerCurrentDomesticClubId, String playerCurrentClubName) {
         this.playerId = playerId;
         this.playerFirstName = playerFirstName;
         this.playerLastName = playerLastName;

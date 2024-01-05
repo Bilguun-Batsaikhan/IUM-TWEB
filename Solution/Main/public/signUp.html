@@ -28,7 +28,7 @@
                 <div class="label">NICKNAME</div>
             </div>
         </div>
-        <form action="/signUpComplete" method="post" class="pt-10">
+        <form action="/signUpComplete" id="form" method="post" class="pt-10">
             <div class="container first" id="first">
                 <div class="col-md-6 mb-3">
                     <label for="name" class="form-label">Name:</label>
@@ -39,8 +39,8 @@
                     <input type="text" class="form-control" id="surname" name="surname" required>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label for="telephone_number" class="form-label">Telephone number</label>
-                    <input type="tel" class="form-control" id="telephone_number" name="telephone_number" required>
+                    <label for="telephone_number" class="form-label">Telephone number:</label>
+                    <input type="tel" class="form-control" id="telephone_number" name="telephone_number" required placeholder="In format +39 484349349">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="nation" class="form-label">Nation:</label>
@@ -49,21 +49,17 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="city" class="form-label">City:</label>
-                        <input type="text" class="form-control" id="city" name="city" required>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="provincia" class="form-label">Provincia</label>
-                        <input type="text" class="form-control" id="provincia" name="provincia" required >
+                        <input type="text" class="form-control" id="city" name="city" required placeholder="Es Turin">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="indirizzo_di_Residenza" class="form-label">Indirizzo di Residenza</label>
-                        <input type="text" class="form-control" id="indirizzo_di_Residenza" name="indirizzo_di_Residenza" required placeholder="Es Via Vittorio Amedeo II">
+                        <label for="address" class="form-label">Address:</label>
+                        <input type="text" class="form-control" id="address" name="address" required placeholder="Es Via Vittorio Amedeo II">
                     </div>
                     <div class="col-md-3">
-                        <label for="civico" class="form-label">Civico</label>
-                        <input type="text" class="form-control" id="civico" name="civico" required placeholder="Numero">
+                        <label for="number" class="form-label">Number:</label>
+                        <input type="text" class="form-control" id="number" name="number" required placeholder="Es 8">
                     </div>
                 </div>
                 <hr>
@@ -71,29 +67,44 @@
                     <button type="submit" class="btn btn-primary" id="firstButton" >Next</button>
                 </div>
             </div>
+            <!-- Second section of the form -->
             <div class="container second " id="second">
                 <div class="col-md-8 mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" required placeholder="Es username@gmail.com">
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
+                    <label for="password" class="form-label">Password:</label>
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
-                <hr>
-                <div class="text-end">
-                    <button type="submit" class="btn btn-primary" id="secondButton">Next</button>
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">Confirm Password:</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
                 </div>
-
+                <hr>
+                <div class ="row">
+                    <div class="col-md-6 text-start">
+                        <button type="submit" class="btn btn-primary" id="secondButtonPrev">Prev</button>
+                    </div>
+                    <div class="col-md-6 text-end">
+                         <button type="submit" class="btn btn-primary" id="secondButtonNext">Next</button>
+                    </div>
+                </div>
             </div>
+            <!-- Third section of the form -->
             <div class="container third " id="third">
                 <div class="col-md-5 mb-3">
                     <label for="nickname" class="form-label">Nickname</label>
                     <input type="text" class="form-control" id="nickname" name="nickname" required>
                 </div>
                 <hr>
-                <div class="text-end">
-                    <button type="submit" class="btn btn-primary" value="submit">Registrati</button>
+                <div class ="row">
+                     <div class="col-md-6 text-start">
+                         <button type="submit" class="btn btn-primary" id="thirdButtonPrev">Prev</button>
+                     </div>
+                     <div class="col-md-6 text-end">
+                          <button type="submit" class="btn btn-primary" value="submit" id="send">Complete SignUp</button>
+                     </div>
                 </div>
             </div>
         </form>

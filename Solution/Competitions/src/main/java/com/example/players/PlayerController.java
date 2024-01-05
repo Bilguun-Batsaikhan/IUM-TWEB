@@ -18,7 +18,7 @@ public class PlayerController {
 
     @PostMapping("/getplayersbyclub")
     public ResponseEntity<List<Player>> getPlayersByClubId(@RequestBody Map<String, String> body) {
-        Long clubId = Long.valueOf(body.get("club_id"));
+        int clubId = Integer.parseInt(body.get("club_id"));
         System.out.println(clubId);
         List<Player> players = playerService.getPlayersByClubId(clubId);
         return ResponseEntity.ok(players);
