@@ -13,6 +13,7 @@ function init() {
     }
 }
 
+// Fetch club data for given club ID
 function sendAxiosQuery(url, clubId) {
     axios.post(url, {club_id: clubId
     })

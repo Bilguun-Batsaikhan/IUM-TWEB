@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const gamesController = require('../controllers/games');
 const clubsController = require('../controllers/clubs');
 const clubValutationController = require('../controllers/club_valutation');
 var bodyParser = require('body-parser');
@@ -26,6 +27,17 @@ router.post('/valutation/club', async (req, res) => {
     console.log(clubId);
     const clubData = await clubValutationController.getClubById(clubId);
     res.json({result: clubData });
+  } catch (error) {
+    res.setHeader('Content-Type', 'application/json');
+    res.status(500).json({ error: 'Error retrieving club names', message: error.message });
+  }
+});
+
+router.post('/competition/games', async (req, res) => {
+  try {
+    const competitionId = req.body.competition_id;
+    const games = await gamesController.getGamesByCompetitionId(competitionId);
+    res.json({result: games });
   } catch (error) {
     res.setHeader('Content-Type', 'application/json');
     res.status(500).json({ error: 'Error retrieving club names', message: error.message });

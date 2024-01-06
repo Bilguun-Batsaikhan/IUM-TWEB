@@ -67,6 +67,22 @@ router.route('/competitionNames')
             })
     })
 
+router.route('/retrieveGames')
+    .post((req, res) => {
+        const competition_id = req.body.competition_id;
+        console.log(competition_id);
+        axios.post('http://localhost:3001/competition/games', {competition_id: competition_id})
+            .then(json => {
+                const games = json.data;
+                res.json({games});
+            })
+            .catch(err => {
+                console.error('Error while retrieving games in index router ', err);
+                res.setHeader('Content-Type', 'application/json');
+                res.status(500).json(err);
+            })
+    });
+
 //fetch competition ID from SpringBoot then return it
 router.route('/retrieveCompetitionID')
     .post((req, res) => {
