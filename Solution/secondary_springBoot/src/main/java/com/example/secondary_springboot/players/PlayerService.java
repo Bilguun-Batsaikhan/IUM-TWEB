@@ -1,4 +1,4 @@
-package com.example.players;
+package com.example.secondary_springboot.players;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;

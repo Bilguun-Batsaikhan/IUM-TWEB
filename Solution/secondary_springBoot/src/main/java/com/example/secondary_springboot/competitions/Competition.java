@@ -1,9 +1,9 @@
-package com.example.competitions;
+package com.example.secondary_springboot.competitions;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "competitions")
-public class Competition {
+public class Competition{
     public Competition() {}
 
     @Id
