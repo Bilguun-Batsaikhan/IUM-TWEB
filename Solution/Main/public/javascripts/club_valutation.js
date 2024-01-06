@@ -14,17 +14,18 @@ function init() {
 }
 
 function sendAxiosQuery(url, clubId) {
-    axios.post(url, {club_id: clubId
+    axios.post(url, {
+        club_id: clubId
     })
         .then(function (dataR) {
             var clubData = dataR.data.clubValutation;
-            if(!clubData)
+            if (!clubData)
                 window.location.href = '/error';
             console.log(clubData);
             fillHTML(clubData);
         })
         .catch(function (error) {
-            alert(JSON.stringify(error));
+            (JSON.stringify(error));
         });
 }
 
@@ -44,8 +45,8 @@ function fillHTML(clubData) {
     var clubSizeElement = document.querySelector('#squad_size');
     clubSizeElement.textContent = clubData.squad_size;
 
-    var clubAvgAgeElement = document.querySelector('#average_age');
-    clubAvgAgeElement.textContent = clubData.average_age;
+    //var clubAvgAgeElement = document.querySelector('#average_age');
+    //clubAvgAgeElement.textContent = clubData.average_age;
 
     var clubForeignersElement = document.querySelector('#foreigners_age');
     clubForeignersElement.textContent = clubData.foreigners_percentage;
@@ -58,12 +59,6 @@ function fillHTML(clubData) {
 
     var clubStadiumSeatsElement = document.querySelector('#stadium_seats');
     clubStadiumSeatsElement.textContent = clubData.stadium_seats;
-
-
-
-
-
-
 
 
 }

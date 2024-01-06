@@ -82,26 +82,7 @@ router.route('/retrieveCompetitionID')
                 res.setHeader('Content-Type', 'application/json');
                 res.status(505).json(err);
             })
-    }) 
-
-router.route('/valutation/club')
-    .get(function (req, res) {
-        res.render('club_valutation');
     })
-    .post(function (req, res) {
-        const clubId = req.body.club_id;
-        axios.post('http://localhost:3001/valutation/club', {club_id: clubId
-        })
-            .then(json => {
-                const clubValutation = json.data.result;
-                res.json({clubValutation});
-            })
-            .catch(err => {
-                console.error('Errore nella chiamata Axios:', err);
-                res.setHeader('Content-Type', 'application/json');
-                res.status(505).json(err);
-            });
-    });
 
 router.get('/error', function (req, res, next) {
     res.render('error', {title: 'Page not found'});
