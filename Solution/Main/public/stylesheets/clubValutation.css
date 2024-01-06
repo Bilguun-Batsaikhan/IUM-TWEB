@@ -12,6 +12,7 @@ span {
     display: contents;
 }
 
-.info{
-
+.table-primary .dark-label, .dark-label {
+    color: #000; /* Imposta il colore a nero */
+    font-weight: bold; /* Rende il testo più marcato/grassetto */
 }
