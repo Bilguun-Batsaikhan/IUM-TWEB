@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (!country || !competitionName) {
         window.location.href = '/error';
     } else {
-        // I'll add this part later
         const ID = fetchCompetitionID('/retrieveCompetitionID', country, competitionName);
     };
 });
@@ -99,10 +98,10 @@ async function createCountryMenu(countries) {
 
 //fetches competition names from SpringBoot then populates the dropdown menu 'competition'
 function fetchCompetitionNames(country, ul, li) {
-    return axios.post('http://localhost:8082/competitions/countriesData', { country: country })
+    return axios.post('/competitionNames', { country: country })
                     .then(function (response) {
                         const countryData = response.data;
-                        countryData.forEach(data => {
+                        countryData.countryData.forEach(data => {
                             const li2 = document.createElement('li');
                             const a2 = document.createElement('a');
                             a2.textContent = data;
