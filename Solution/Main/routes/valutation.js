@@ -8,19 +8,24 @@ router.route('/club')
     })
     .post(function (req, res) {
         const clubId = req.body.club_id;
-        axios.post('http://localhost:3001/valutation/club', {club_id: clubId
-        })
+        let clubData;
+        console.log(clubId);
+        axios.post('http://localhost:3001/valutation/club', {club_id: clubId})
             .then(json => {
-                console.log("abc");
-                const clubValutation = json.data.result;
-                res.json({clubValutation});
+                clubData = json.data.result;
+                return axios.post('http://localhost:8082/players/getplayersbyclub', {club_id: clubId});
+            })
+            .then(secondJson => {
+                const playersData = secondJson.data;
+                res.json({ clubData, playersData });
             })
             .catch(err => {
-                console.error('Errore nella chiamata Axios:', err);
+                console.error('Errore:', err);
                 res.setHeader('Content-Type', 'application/json');
                 res.status(505).json(err);
             });
     });
+
 
 router.get('/test', function(req, res, next) {
     res.send('respond with a resource');
