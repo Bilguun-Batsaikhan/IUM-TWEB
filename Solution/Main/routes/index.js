@@ -36,7 +36,7 @@ router.route('/chat')
                 res.status(505).json(err);
             });
     });
-
+//fetch countries
 router.route('/competition')
     .post(function (req, res) {
         axios.get('http://localhost:8082/competitions/countries')
@@ -52,6 +52,21 @@ router.route('/competition')
             });
     });
 
+router.route('/competitionNames')
+    .post((req, res) => {
+        const country = req.body.country;
+        axios.post('http://localhost:8082/competitions/countriesData', {country: country})
+            .then(json => {
+                const countryData = json.data;
+                res.json({countryData});
+            })
+            .catch(err => {
+                console.error('Error while retrieving competition Names in index router ', err);
+                res.setHeader('Content-Type', 'application/json');
+                res.status(505).json(err);
+            })
+    })
+
 //fetch competition ID from SpringBoot then return it
 router.route('/retrieveCompetitionID')
     .post((req, res) => {
@@ -63,7 +78,7 @@ router.route('/retrieveCompetitionID')
                 res.json({competitionID});
             })
             .catch(err => {
-                console.error('Error while retrieving competition ID in index router', err);
+                console.error('Error while retrieving competition ID in index router ', err);
                 res.setHeader('Content-Type', 'application/json');
                 res.status(505).json(err);
             })

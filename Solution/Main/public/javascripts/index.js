@@ -35,34 +35,6 @@ async function sendAxiosQuery(url) {
 }
 
 //fetches countries from SpringBoot then populates the dropdown menu 'country'
-// function fetchCountries() {
-//     return axios.get('http://localhost:8082/competitions/countries')
-//         .then(function (response) {
-//                 const countries = response.data;
-//                 const dropDownCountry = document.getElementById("country");
-//                 const promises = countries.map(country => {
-//                 const li = document.createElement('li');
-//                 li.className = 'dropdown-submenu';
-//                 const a = document.createElement('a');
-//                 a.textContent = country;
-//                 a.className = 'dropdown-item dropdown-toggle';
-//                 a.href = '#';
-//                 li.appendChild(a);
-//                 const ul = document.createElement('ul');
-//                 ul.className = 'dropdown-menu';
-//                 li.appendChild(ul);
-//                 dropDownCountry.appendChild(li);
-//                 console.log('Doing the second request to SpringBoot')
-//                 // Fetch second level data for this country
-//                 return fetchCompetitionNames(country, ul, li);
-//             });
-//             return Promise.all(promises);
-//         })
-//         .catch(function (error) {
-//             console.log('Error fetching countries ' + error);
-//         });
-// }
-//Array.from(competitionNames).forEach(competitionName =>
 async function createCountryMenu(countries) {
     const countriesArray = countries.countries;
     const dropDownCountry = document.getElementById("country");
@@ -92,10 +64,10 @@ async function createCountryMenu(countries) {
 
 //fetches competition names from SpringBoot then populates the dropdown menu 'competition'
 function fetchCompetitionNames(country, ul, li) {
-    return axios.post('http://localhost:8082/competitions/countriesData', { country: country })
+    return axios.post('/competitionNames', { country: country })
                     .then(function (response) {
-                        const countryData = response.data;
-                        countryData.forEach(data => {
+                        let countryData = response.data;
+                        countryData.countryData.forEach(data => {
                             const li2 = document.createElement('li');
                             const a2 = document.createElement('a');
                             a2.textContent = data;
