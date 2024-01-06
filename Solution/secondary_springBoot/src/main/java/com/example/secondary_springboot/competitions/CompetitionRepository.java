@@ -1,4 +1,4 @@
-package com.example.competitions;
+package com.example.secondary_springboot.competitions;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

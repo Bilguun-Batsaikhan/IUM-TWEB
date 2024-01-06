@@ -1,4 +1,4 @@
-package com.example.competitions;
+package com.example.secondary_springboot.competitions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.players;
+package com.example.secondary_springboot.players;
 import jakarta.persistence.*;
 import java.util.Date;
 

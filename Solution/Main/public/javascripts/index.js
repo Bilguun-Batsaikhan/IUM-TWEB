@@ -1,9 +1,15 @@
+let nickname;
 document.addEventListener('DOMContentLoaded', async function () {
     try {
         const countries = await sendAxiosQuery('/competition');
         console.log("countries", countries);
         // Further processing or function calls can be done here
         await createCountryMenu(countries);
+        nickname = localStorage.getItem("nickname");
+        if(!nickname)
+            console.log("Non è presente")
+        else
+            console.log(nickname)
     } catch (error) {
         console.error("Error fetching countries:", error);
         // Handle the error appropriately
@@ -13,7 +19,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 function init() {
     console.log('init()');
     const competitionNames = document.getElementsByClassName('competition-name');
-
     // Array.from(competitionNames).forEach(competitionName => {
     //     competitionName.addEventListener('click', function (event) {
     //         event.preventDefault();
