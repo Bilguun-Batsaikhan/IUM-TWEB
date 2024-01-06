@@ -18,18 +18,19 @@ function sendAxiosQuery(url, clubId) {
         club_id: clubId
     })
         .then(function (dataR) {
-            var clubData = dataR.data.clubValutation;
+            let clubData = dataR.data.clubData;
+            let playersData = dataR.data.playersData;
             if (!clubData)
                 window.location.href = '/error';
-            console.log(clubData);
-            fillHTML(clubData);
+            //console.log(clubData);
+            fillHTML(clubData, playersData);
         })
         .catch(function (error) {
             (JSON.stringify(error));
         });
 }
 
-function fillHTML(clubData) {
+function fillHTML(clubData, playersData) {
     document.getElementById('results').innerHTML = "The result is: " + JSON.stringify(clubData);
     // it set club name
     const clubNameElement = document.querySelector('#club_name');
@@ -60,6 +61,7 @@ function fillHTML(clubData) {
     var clubStadiumSeatsElement = document.querySelector('#stadium_seats');
     clubStadiumSeatsElement.textContent = clubData.stadium_seats;
 
+    document.getElementById('players').innerHTML = "The result is: " + JSON.stringify(playersData);
 
 }
 
