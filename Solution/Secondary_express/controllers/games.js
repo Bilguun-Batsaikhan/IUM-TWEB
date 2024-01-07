@@ -9,6 +9,15 @@ function getGamesByCompetitionId(competition_id) {
 
         console.log(competitionIdString);
         Model.find({ competition_id: competitionIdString })
+            .select({
+                home_club_name: 1,
+                away_club_name: 1,
+                home_club_goals: 1,
+                away_club_goals: 1,
+                date: 1,
+                stadium: 1,
+                // Add other fields you want to include
+            })
             .then(results => {
                 resolve(results);
             })
@@ -18,5 +27,7 @@ function getGamesByCompetitionId(competition_id) {
             });
     });
 }
+
+
 
 module.exports.getGamesByCompetitionId = getGamesByCompetitionId;
