@@ -31,6 +31,18 @@ document.addEventListener('DOMContentLoaded', async function () {
         //console.log(JSON.stringify(games, null, 2));
         displayGamesData(games, currentPage);
         init(games);
+
+        const imgElement = document.createElement('img');
+        // console.log("ID: " + ID.competitionID)
+        fetchGraphImage(ID.competitionID)
+        .then(imgUrl => {
+            imgElement.src = imgUrl;
+            document.getElementById('graphContainer').appendChild(imgElement);
+        })
+        .catch(error => {
+            // Handle the error
+            console.error('Error:', error);
+        });
     };
 });
 
@@ -69,6 +81,28 @@ async function sendAxiosQuery(url) {
         throw error;
     }
 }
+
+//request graph image from main server then dynamically create the graph image in html file
+async function fetchGraphImage(competitionId) {
+    try {
+        console.log("LALLAL" + competitionId)
+      // Make request to Express server using axios
+      const response = await axios.get(`/retrieveGraph?competition_id=${competitionId}`, {
+        responseType: 'arraybuffer', // Specify the response type as arraybuffer to handle binary data
+      });
+  
+      // Convert the array buffer to a blob
+      const blob = new Blob([response.data], { type: 'image/png' });
+  
+      // Create a temporary URL for the blob
+      const imgUrl = URL.createObjectURL(blob);
+  
+      return imgUrl;
+    } catch (error) {
+      console.error('Error fetching graph:', error);
+      throw error; // Propagate the error for handling in the calling code
+    }
+  }
 
 //creates the dropdown menu 'country' and populates it with countries
 async function createCountryMenu(countries) {
