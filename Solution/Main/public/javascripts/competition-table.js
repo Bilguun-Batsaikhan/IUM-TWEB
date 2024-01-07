@@ -1,3 +1,6 @@
+// variables for pagination
+let currentPage = 1;
+const itemsPerPage = 10;
 document.addEventListener('DOMContentLoaded', async function () {
     // Get the competition name from the query parameters
     const urlParams = new URLSearchParams(window.location.search);
@@ -25,17 +28,40 @@ document.addEventListener('DOMContentLoaded', async function () {
         const ID = await fetchCompetitionID('/retrieveCompetitionID', country, competitionName);
         console.log('ID ' + JSON.stringify(ID, null, 2));
         const games = await fetchGamesTable(ID);
-        console.log(JSON.stringify(games, null, 2));
-        displayGamesData(games, 10);
+        //console.log(JSON.stringify(games, null, 2));
+        displayGamesData(games, currentPage);
+        init(games);
+
+        const imgElement = document.createElement('img');
+        // console.log("ID: " + ID.competitionID)
+        fetchGraphImage(ID.competitionID)
+        .then(imgUrl => {
+            imgElement.src = imgUrl;
+            document.getElementById('graphContainer').appendChild(imgElement);
+        })
+        .catch(error => {
+            // Handle the error
+            console.error('Error:', error);
+        });
     };
 });
 
-function init() {
+function init(gamesData) {
     console.log('init()');
-    const competitionNames = document.getElementsByClassName('competition-name');
-    
+    document.getElementById('nextButton').addEventListener('click', () => {
+        currentPage++;
+        goToPage(gamesData, currentPage);
+    });
+    document.getElementById('prevButton').addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            goToPage(gamesData,currentPage);
+        }
+    });
 }
-
+function goToPage(gamesData, page) {
+    displayGamesData(gamesData, page);
+}
 //fetch competition ID for given country and competition name
 async function fetchCompetitionID(url, country, competitionName) {
     try {
@@ -55,6 +81,28 @@ async function sendAxiosQuery(url) {
         throw error;
     }
 }
+
+//request graph image from main server then dynamically create the graph image in html file
+async function fetchGraphImage(competitionId) {
+    try {
+        console.log("LALLAL" + competitionId)
+      // Make request to Express server using axios
+      const response = await axios.get(`/retrieveGraph?competition_id=${competitionId}`, {
+        responseType: 'arraybuffer', // Specify the response type as arraybuffer to handle binary data
+      });
+  
+      // Convert the array buffer to a blob
+      const blob = new Blob([response.data], { type: 'image/png' });
+  
+      // Create a temporary URL for the blob
+      const imgUrl = URL.createObjectURL(blob);
+  
+      return imgUrl;
+    } catch (error) {
+      console.error('Error fetching graph:', error);
+      throw error; // Propagate the error for handling in the calling code
+    }
+  }
 
 //creates the dropdown menu 'country' and populates it with countries
 async function createCountryMenu(countries) {
@@ -82,21 +130,6 @@ async function createCountryMenu(countries) {
     await Promise.all(promises);
 }
 
-// function sendAxiosQuery(url, queryParameter) {
-//     axios.post(url, {club_id: clubId
-//     })
-//         .then(function (dataR) {
-//             var clubData = dataR.data.clubValutation;
-//             if(!clubData)
-//                 window.location.href = '/error';
-//             console.log(clubData);
-//             fillHTML(clubData);
-//         })
-//         .catch(function (error) {
-//             alert(JSON.stringify(error));
-//         });
-// }
-
 //fetch games table data for given competition ID
 async function fetchGamesTable(competition_id) {
     try {
@@ -113,9 +146,30 @@ async function fetchGamesTable(competition_id) {
 
 //displays the games table for give games table
 // displays the games table for given games data
-function displayGamesData(gamesData, limit) {
+// function displayGamesData(gamesData, limit) {
+//     const tableBody = document.getElementById('competition-table-body');
+//     const gamesToDisplay = gamesData.games.result.slice(0, limit);
+//
+//     gamesToDisplay.forEach(game => {
+//         const row = tableBody.insertRow();
+//         row.innerHTML = `
+//             <td>${game.home_club_name}</td>
+//             <td>${game.away_club_name}</td>
+//             <td>${game.home_club_goals}</td>
+//             <td>${game.away_club_goals}</td>
+//             <td>${new Date(game.date).toLocaleDateString()}</td>
+//             <td>${game.stadium}</td>
+//         `;
+//     });
+// }
+
+function displayGamesData(gamesData, page) {
     const tableBody = document.getElementById('competition-table-body');
-    const gamesToDisplay = gamesData.games.result.slice(0, limit);
+    tableBody.innerHTML = ''; // Clear existing rows
+
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const gamesToDisplay = gamesData.games.result.slice(startIndex, endIndex);
 
     gamesToDisplay.forEach(game => {
         const row = tableBody.insertRow();
@@ -128,9 +182,8 @@ function displayGamesData(gamesData, limit) {
             <td>${game.stadium}</td>
         `;
     });
+    document.getElementById('currentPage').innerText = page;
 }
-
-
 
 //fetches competition names from SpringBoot then populates the dropdown menu 'competition'
 function fetchCompetitionNames(country, ul, li) {

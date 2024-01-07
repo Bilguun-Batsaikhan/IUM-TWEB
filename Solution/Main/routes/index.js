@@ -100,6 +100,25 @@ router.route('/retrieveCompetitionID')
             })
     })
 
+//fetch a graph given competition ID
+router.route('/retrieveGraph')
+    .get(async (req, res) => {
+        const competitionId = req.query.competition_id; // Assuming the competition_id is in the query string
+        console.log("competitionID: " + JSON.stringify(competitionId))
+        try {
+            // Make request to Flask server
+            const response = await axios.get(`http://127.0.0.1:5000/generate_graph/${competitionId}`, {
+                responseType: 'arraybuffer', // Specify the response type as arraybuffer to handle binary data
+            });
+            // Send the image data as the response to the client
+            res.set('Content-Type', 'image/png');
+            res.send(response.data);
+        } catch (error) {
+            console.error('Error making request to Flask server:', error);
+            res.status(500).send('Internal Server Error');
+        }
+    });
+
 router.get('/error', function (req, res, next) {
     res.render('error', {title: 'Page not found'});
 });

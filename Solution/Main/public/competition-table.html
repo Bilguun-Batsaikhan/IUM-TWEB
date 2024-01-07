@@ -27,7 +27,7 @@
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav justify-content-around w-100">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="#">Home</a>
+                                    <a class="nav-link" href="index.html">Home</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">About</a>
@@ -62,7 +62,7 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Chat</a>
+                                    <a class="nav-link" href="chat.html">Chat</a>
                                 </li>
                             </ul>
                         </div>
@@ -79,10 +79,10 @@
     </header>
 
 <!-- Here table lies -->
-<div class="container mt-4">
-    <h2>Games Table</h2>
-    <table class="table">
-        <thead>
+    <div class="container mt-4">
+        <h2>Games Table</h2>
+        <table class="table">
+            <thead>
             <tr>
                 <th>Home Team</th>
                 <th>Away Team</th>
@@ -91,13 +91,21 @@
                 <th>Date</th>
                 <th>Stadium</th>
             </tr>
-        </thead>
-        <tbody id="competition-table-body"></tbody>
-    </table>
-</div>
+            </thead>
+            <tbody id="competition-table-body"></tbody>
+        </table>
+        <div id="pagination" class="mb-3">
+            <button id="prevButton" class="btn btn-primary">Previous</button>
+            <span class="mx-2">Page: <span id="currentPage">1</span></span>
+            <button id="nextButton" class="btn btn-primary">Next</button>
+        </div>
+    </div>
+    <div id="graphContainer"></div>
 
 
-<footer class="footer bg-dark text-white py-3">
+
+
+    <footer class="footer bg-dark text-white py-3">
     <div class="container">
         <div class="row text-center">
             <div class="col">
