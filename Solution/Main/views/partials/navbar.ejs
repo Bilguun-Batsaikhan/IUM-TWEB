@@ -1,0 +1,69 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <div class="row w-100">
+                <div class="col-lg-2 d-flex justify-content-start">
+                    <a class="navbar-brand" href="#">Logo</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                <div class="col-lg-8">
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav justify-content-around w-100">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="index.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Services</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Contact</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Competitions
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Competition Name</a>
+                                        <ul class="dropdown-menu">
+                                            <!-- These are placeholders add these data from other servers by querying -->
+                                            <li><a class="dropdown-item" href="#">Item 1</a></li>
+                                            <li><a class="dropdown-item" href="#">Item 2</a></li>
+                                            <li><a class="dropdown-item" href="#">Item 3</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Competition Country</a>
+                                        <ul class="dropdown-menu" id="country">
+                                            <!-- Country list items will be added here -->
+                                        </ul>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else...</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="chat.html">Chat</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="d-flex justify-content-end">
+                        <form action="/login" method="POST">
+                            <button class="btn rounded-pill me-2 login" id="loginButton">Login</button>
+                        </form>
+                        <form action="/signUp" method="POST">
+                            <button class="btn rounded-pill signup" id="signupButton">Signup</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

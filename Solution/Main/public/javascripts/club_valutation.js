@@ -114,5 +114,6 @@ function fillHTML(clubData, playersData) {
 
     //document.getElementById('players').innerHTML = "The result is: " + JSON.stringify(playersData);
     populatePlayersTable(playersData);
+    //console.log(playersData);
 }
 
