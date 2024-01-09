@@ -70,6 +70,8 @@ body {
   .box-area {
     margin: 0 10px;
   }
+
+
 }
 
 .navbar-nav {
@@ -144,14 +146,25 @@ body {
   z-index: 2;
 }
 
-#nickNameLabel{
-  background-color: #ececec;
+#nickNameP{
+  border: 1px solid #000;
+  display: inline-block;
+  font-size: 16px;
+  padding: 5px;
+  text-align: center;
+  border-radius: 5px;
+  margin-bottom: auto;
+  margin-top: auto;
+  margin-right: 10px;
+  width: auto;
+}
+#logoutButton{
+  background-color: indianred;
   border-color: #3f474f !important;
   color: black;
-  padding: 16px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  width: 100px;
+  width: 79px;
 }

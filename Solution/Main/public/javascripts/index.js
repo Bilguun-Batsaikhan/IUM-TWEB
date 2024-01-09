@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
 
     try {
-        const countries = await sendAxiosQuery('/competition');
+        const countries = await sendAxiosIndexQuery('/competition');
         console.log("countries", countries);
         // Further processing or function calls can be done here
         await createCountryMenu(countries);
