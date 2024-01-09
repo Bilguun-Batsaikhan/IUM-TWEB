@@ -173,15 +173,20 @@ function displayGamesData(gamesData, page) {
 
     gamesToDisplay.forEach(game => {
         const row = tableBody.insertRow();
-        row.innerHTML = `
-            <td>${game.home_club_name}</td>
-            <td>${game.away_club_name}</td>
-            <td>${game.home_club_goals}</td>
-            <td>${game.away_club_goals}</td>
-            <td>${new Date(game.date).toLocaleDateString()}</td>
-            <td>${game.stadium}</td>
-        `;
+        const anchor = document.createElement('a');
+        anchor.href = '/your-route/' + game.home_club_name; // Replace '/your-route/' with the actual route you want to navigate to
+        anchor.textContent = game.home_club_name;
+
+        const cell = row.insertCell();
+        cell.appendChild(anchor);
+
+        row.insertCell().textContent = game.away_club_name;
+        row.insertCell().textContent = game.home_club_goals;
+        row.insertCell().textContent = game.away_club_goals;
+        row.insertCell().textContent = new Date(game.date).toLocaleDateString();
+        row.insertCell().textContent = game.stadium;
     });
+
     document.getElementById('currentPage').innerText = page;
 }
 
@@ -195,7 +200,7 @@ function fetchCompetitionNames(country, ul, li) {
                             const a2 = document.createElement('a');
                             a2.textContent = data;
                             a2.className = 'dropdown-item competition-name';
-                            a2.href = '/competition-table.html?competition=' + encodeURIComponent(data) + '&country=' + encodeURIComponent(country);
+                            a2.href = '/competition-table?competition=' + encodeURIComponent(data) + '&country=' + encodeURIComponent(country);
                             li2.appendChild(a2);
                             ul.appendChild(li2);
                         });
@@ -204,6 +209,6 @@ function fetchCompetitionNames(country, ul, li) {
                         console.log('Error fetching country data for ' + country + ':', error);
                     })
                     .finally(function () {
-                        console.log('Finished request for ' + country);
+                        //console.log('Finished request for ' + country);
                     });
 }

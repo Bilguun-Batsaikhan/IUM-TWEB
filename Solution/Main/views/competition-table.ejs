@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <%- include('partials/navbarScripts') %>
+    <script src="./javascripts/competition-table.js"></script>
+</head>
+<body class="body">
+<%- include('partials/navbar') %>
+
+<!-- Here table lies -->
+<div class="container mt-4">
+    <h2>Games Table</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Home Team</th>
+            <th>Away Team</th>
+            <th>Home Team Goals</th>
+            <th>Away Team Goals</th>
+            <th>Date</th>
+            <th>Stadium</th>
+        </tr>
+        </thead>
+        <tbody id="competition-table-body"></tbody>
+    </table>
+    <div id="pagination" class="mb-3">
+        <button id="prevButton" class="btn btn-primary">Previous</button>
+        <span class="mx-2">Page: <span id="currentPage">1</span></span>
+        <button id="nextButton" class="btn btn-primary">Next</button>
+    </div>
+</div>
+<div id="graphContainer"></div>
+
+
+
+
+<%- include('partials/footer') %>
+
+</body>
+</html>
+
