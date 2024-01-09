@@ -26,9 +26,23 @@ router.route('/club')
             });
     });
 
-
-router.get('/test', function(req, res, next) {
-    res.send('respond with a resource');
-});
+router.route('/player')
+    .get(function (req, res) {
+        res.render('player_valutation');
+    })
+    .post(function (req, res) {
+        const playerId = req.body.player_id;
+        let playerData;
+        axios.post('http://localhost:8082/players/getplayerbyid', {player_id: playerId})
+            .then(json => {
+                playerData = json.data;
+                res.json({ playerData });
+            })
+            .catch(err => {
+                console.error('Errore:', err);
+                res.setHeader('Content-Type', 'application/json');
+                res.status(505).json(err);
+            });
+    });
 
 module.exports = router;

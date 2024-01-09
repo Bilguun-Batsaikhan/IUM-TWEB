@@ -21,18 +21,6 @@ router.post('/chat', async (req, res) => {
   }
 });
 
-router.post('/valutation/club', async (req, res) => {
-  try {
-    const clubId = req.body.club_id;
-    console.log(clubId);
-    const clubData = await clubValutationController.getClubById(clubId);
-    res.json({result: clubData });
-  } catch (error) {
-    res.setHeader('Content-Type', 'application/json');
-    res.status(500).json({ error: 'Error retrieving club names', message: error.message });
-  }
-});
-
 router.post('/competition/games', async (req, res) => {
   try {
     const competitionId = req.body.competition_id;
