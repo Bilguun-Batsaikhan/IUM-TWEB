@@ -4,14 +4,14 @@
     <title><%= title %></title>
     <script src="/socket.io/socket.io.js"></script>
     <link rel='stylesheet' href='/stylesheets/chat.css'/>
+    <%- include('partials/navbarScripts') %>
     <script>
         var nickname = '<%= nickname %>'
-
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/javascripts/chat.js"></script>
 </head>
 <body onload="init()">
+<%- include('partials/navbar') %>
 <h1>Welcome <%= nickname %></h1>
 <div id="initial_form" style="display: block">
     <p>Please select the Room you want to Join</p>
@@ -46,5 +46,6 @@
     </div>
 
 </div>
+<%- include('partials/footer') %>
 </body>
 </html>

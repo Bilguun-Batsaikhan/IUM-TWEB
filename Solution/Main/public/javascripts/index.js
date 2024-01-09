@@ -1,7 +1,7 @@
 let nickname;
 document.addEventListener('DOMContentLoaded', async function () {
     try {
-        const countries = await sendAxiosQuery('/competition');
+        const countries = await sendAxiosIndexQuery('/competition');
         console.log("countries", countries);
         // Further processing or function calls can be done here
         await createCountryMenu(countries);
@@ -16,21 +16,9 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 });
 
-function init() {
-    console.log('init()');
-    const competitionNames = document.getElementsByClassName('competition-name');
-    // Array.from(competitionNames).forEach(competitionName => {
-    //     competitionName.addEventListener('click', function (event) {
-    //         event.preventDefault();
-    //         console.log('Clicked on ' + competitionName.textContent);
-    //
-    //         // Navigate to competition-table.html with the competition name as a query parameter
-    //         window.location.href = '/competition-table.html?competition=' + encodeURIComponent(competitionName.textContent);
-    //     });
-    // });
-}
 
-async function sendAxiosQuery(url) {
+
+async function sendAxiosIndexQuery(url) {
     try {
         const response = await axios.post(url);
         return response.data;
