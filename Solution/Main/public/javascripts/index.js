@@ -1,21 +1,43 @@
 let nickname;
+
 document.addEventListener('DOMContentLoaded', async function () {
+    hideDiv();
+    const logout = document.getElementById('logoutButton');
+    logout.addEventListener('click', function () {
+        localStorage.clear();
+        hideDiv();
+    });
+
     try {
-        const countries = await sendAxiosIndexQuery('/competition');
+        const countries = await sendAxiosQuery('/competition');
         console.log("countries", countries);
         // Further processing or function calls can be done here
         await createCountryMenu(countries);
-        nickname = localStorage.getItem("nickname");
-        if(!nickname)
-            console.log("Non è presente")
-        else
-            console.log(nickname)
     } catch (error) {
         console.error("Error fetching countries:", error);
         // Handle the error appropriately
     }
 });
 
+function hideDiv() {
+    const itemStr = localStorage.getItem('nicknameData');
+    const item = JSON.parse(itemStr);
+    const now = new Date();
+    let time = now.getTime();
+
+    if (!item || (time - item.timestamp) > 220000) {
+        localStorage.removeItem('nicknameData');
+        console.log("Nickname not found. Hiding elements.");
+        document.getElementById('nickNameLabel').classList.add('d-none');
+        document.getElementById('buttonUser').classList.remove('d-none');
+    } else {
+        console.log("Nickname found. Displaying elements.");
+        console.log(item.nickname);
+        document.getElementById('buttonUser').classList.add('d-none');
+        document.getElementById('nickNameLabel').classList.remove('d-none');
+        document.getElementById('nickNameP').innerHTML = item.nickname;
+    }
+}
 
 
 async function sendAxiosIndexQuery(url) {
