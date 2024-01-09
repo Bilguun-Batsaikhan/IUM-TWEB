@@ -24,10 +24,11 @@ public class PlayerController {
         return ResponseEntity.ok(players);
     }
 
-
-    @PostMapping("/hello")
-    public String hello() {
-        return "Ciao2!";
+    @PostMapping("/getplayerbyid")
+    public ResponseEntity<List<Player>> getPlayerById(@RequestBody Map<String, String> body) {
+        int playerId = Integer.parseInt(body.get("player_id"));
+        List<Player> players = playerService.getPlayerById(playerId);
+        return ResponseEntity.ok(players);
     }
 
 }

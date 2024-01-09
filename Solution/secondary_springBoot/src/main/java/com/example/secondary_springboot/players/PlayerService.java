@@ -15,4 +15,8 @@ public class PlayerService {
     public List<Player> getPlayersByClubId(int club_id) {
         return playerRepository.findAllByClubId(club_id);
     }
+
+    public List<Player> getPlayerById(int player_id) {
+        return playerRepository.findPlayerByPlayerId(player_id);
+    }
 }

@@ -43,7 +43,7 @@ function populatePlayersTable(playersData) {
         marketValueInEur = setEurValue(marketValueInEur);
         var row = '<tr>' +
             '<td>' + imageUrl + '</td>' +
-            '<td>' + name + '</td>' +
+            '<td><a href="../valutation/player?player_id=' + player.playerId + '">' + name + '</a></td>' +
             '<td>' + dateOfBirth + '</td>' +
             '<td>' + countryOfBirth + '</td>' +
             '<td>' + marketValueInEur + '</td>' +
