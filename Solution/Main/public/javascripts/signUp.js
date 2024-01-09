@@ -143,9 +143,16 @@ function send()
     let result = validateThirdBlock();
     if (!result)
         alert(errorStringThird);
-    else
-        localStorage.setItem("nickname",document.getElementById('nickname').value);
+    else {
+        const nickname = document.getElementById('nickname').value;
+        const now = new Date();
+        const item = {
+            nickname: nickname,
+            timestamp: now.getTime(), // Ottiene il timestamp corrente in millisecondi
+        };
+        localStorage.setItem('nicknameData', JSON.stringify(item));
         document.getElementById("form").submit();
+    }
 }
 
 function validateThirdBlock()

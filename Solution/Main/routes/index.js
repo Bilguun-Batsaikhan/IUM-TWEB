@@ -5,7 +5,7 @@ const axios = require('axios')
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.render('index', {title: 'Express'});
+    res.render('index');
 });
 
 /* The nickname should be retrieved from the login page. */
@@ -127,12 +127,12 @@ router.post('/login', function(req, res, next) {
     res.sendFile(path.join(__dirname, '../public/login.html'));
 });
 router.post('/loginComplete', function(req, res, next) {
-    res.sendFile(path.join(__dirname, '../public/index.html'));
+    res.render('index');
 });
 router.post('/signUp', function(req, res, next) {
     res.sendFile(path.join(__dirname, '../public/signUp.html'));
 });
 router.post('/signUpComplete', function(req, res, next) {
-    res.sendFile(path.join(__dirname, '../public/index.html'));
+    res.render('index');
 });
 module.exports = router;
