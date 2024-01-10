@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
 
     try {
-        const countries = await sendAxiosQuery('/competition');
+        const countries = await sendAxiosIndexQuery('/competition');
         console.log("countries", countries);
         // Further processing or function calls can be done here
         await createCountryMenu(countries);
@@ -87,7 +87,7 @@ function fetchCompetitionNames(country, ul, li) {
                             const a2 = document.createElement('a');
                             a2.textContent = data;
                             a2.className = 'dropdown-item competition-name';
-                            a2.href = '/competition-table.html?competition=' + encodeURIComponent(data) + '&country=' + encodeURIComponent(country);
+                            a2.href = '/competition-table?competition=' + encodeURIComponent(data) + '&country=' + encodeURIComponent(country);
                             li2.appendChild(a2);
                             ul.appendChild(li2);
                         });

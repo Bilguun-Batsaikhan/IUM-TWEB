@@ -8,6 +8,10 @@ router.get('/', function (req, res, next) {
     res.render('index');
 });
 
+router.get('/competition-table', function (req, res, next) {
+    res.render('competition-table');
+});
+
 /* The nickname should be retrieved from the login page. */
 var nickname = 'Admin';
 /* GET chat page. */
