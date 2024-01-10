@@ -12,10 +12,8 @@ app = Flask(__name__)
 
 @app.route('/generate_graph/<competition_id>')
 def generate_graph(competition_id):
-    # Replace this with your actual data loading code
-    # For example, loading a DataFrame from a CSV file
-    gms = pd.read_csv('../csv/games.csv')
 
+    gms = pd.read_csv('../csv/games.csv')
     # Filter the DataFrame for the specific competition ID
     filtered_gms = gms[gms['competition_id'] == competition_id]
 
