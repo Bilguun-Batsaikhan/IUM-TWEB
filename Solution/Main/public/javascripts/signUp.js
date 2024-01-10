@@ -2,7 +2,7 @@ let errorStringFrist;
 let errorStringSecond;
 let errorStringThird;
 
-function init() {
+function initial() {
     // Hide the first div initially
     document.getElementById("first").style.display = "block";
 
@@ -85,7 +85,7 @@ function changeSecondToThird(){
     if(result)
         showThirdBlock();
     else
-        alert(errorStringSecond)
+        alert(errorStringSecond);
 }
 
 
@@ -96,6 +96,32 @@ function validateSecondBlock(){
 
     if (email === '' || password === '' || confirmPassword === '') {
         errorStringSecond = "Please, fill all the fields"
+        return false;
+    }
+    let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    // Verifica se l'email segue il formato desiderato
+    if (!emailRegex.test(email)) {
+        errorStringSecond = "Please enter a valid email address";
+        return false;
+    }
+    const minLength = 8;
+
+    // Check for minimum length
+    if (password.length < minLength) {
+        errorStringSecond = "Password must be at least " + minLength + " characters long";
+        return false;
+    }
+    // Use a regular expression to check for at least one number
+    const numberRegex = /\d/;
+    if (!numberRegex.test(password)) {
+        errorStringSecond = "Password must contain at least one number";
+        return false;
+    }
+
+    // Use a regular expression to check for at least one special character
+    const specialCharRegex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
+    if (!specialCharRegex.test(password)) {
+        errorStringSecond = "Password must contain at least one special character";
         return false;
     }
     if (password !== confirmPassword) {

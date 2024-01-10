@@ -134,7 +134,7 @@ router.post('/loginComplete', function(req, res, next) {
     res.render('index');
 });
 router.post('/signUp', function(req, res, next) {
-    res.sendFile(path.join(__dirname, '../public/signUp.html'));
+    res.render('signUp');
 });
 router.post('/signUpComplete', function(req, res, next) {
     res.render('index');
