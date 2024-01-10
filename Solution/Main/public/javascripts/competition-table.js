@@ -173,14 +173,25 @@ function displayGamesData(gamesData, page) {
 
     gamesToDisplay.forEach(game => {
         const row = tableBody.insertRow();
-        const anchor = document.createElement('a');
-        anchor.href = '/your-route/' + game.home_club_name; // Replace '/your-route/' with the actual route you want to navigate to
-        anchor.textContent = game.home_club_name;
+        // Create anchor for home club
+        const homeClubAnchor = document.createElement('a');
+        homeClubAnchor.href = '/valutation/club?club_id=' + game.home_club_id;
+        homeClubAnchor.textContent = game.home_club_name;
 
-        const cell = row.insertCell();
-        cell.appendChild(anchor);
+        // Create anchor for away club
+        const awayClubAnchor = document.createElement('a');
+        awayClubAnchor.href = '/valutation/club?club_id=' + game.away_club_id;
+        awayClubAnchor.textContent = game.away_club_name;
 
-        row.insertCell().textContent = game.away_club_name;
+        // Append home club anchor to cell
+        const homeCell = row.insertCell();
+        homeCell.appendChild(homeClubAnchor);
+
+        // Append away club anchor to cell
+        const awayCell = row.insertCell();
+        awayCell.appendChild(awayClubAnchor);
+
+        // Add other game information
         row.insertCell().textContent = game.home_club_goals;
         row.insertCell().textContent = game.away_club_goals;
         row.insertCell().textContent = new Date(game.date).toLocaleDateString();

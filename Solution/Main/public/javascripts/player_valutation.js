@@ -8,7 +8,7 @@ function init() {
     if (!playerId || isNaN(playerId) || !/^\d+$/.test(playerId)) {
         window.location.href = '/error';
     } else {
-        console.log('player:', parseInt(playerId));
+        //console.log('player:', parseInt(playerId));
         sendAxiosQuery('/valutation/player', playerId);
     }
 }
@@ -20,7 +20,7 @@ function sendAxiosQuery(url, playerId) {
     })
         .then(function (dataR) {
             let playerData = dataR.data;
-            console.log(playerData);
+            //console.log(playerData);
             if (!playerData)
                 window.location.href = '/error';
             fillHTML(playerData);

@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     try {
         const countries = await sendAxiosIndexQuery('/competition');
-        console.log("countries", countries);
+        //console.log("countries", countries);
         // Further processing or function calls can be done here
         await createCountryMenu(countries);
     } catch (error) {
@@ -96,7 +96,7 @@ function fetchCompetitionNames(country, ul, li) {
                         console.log('Error fetching country data for ' + country + ':', error);
                     })
                     .finally(function () {
-                        console.log('Finished request for ' + country);
+                        //console.log('Finished request for ' + country);
                     });
 }
 
