@@ -1,6 +1,7 @@
 // variables for pagination
 let currentPage = 1;
 const itemsPerPage = 10;
+const ID;
 document.addEventListener('DOMContentLoaded', async function () {
     // Get the competition name from the query parameters
     const urlParams = new URLSearchParams(window.location.search);
@@ -25,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (!country || !competitionName) {
         window.location.href = '/error';
     } else {
-        const ID = await fetchCompetitionID('/retrieveCompetitionID', country, competitionName);
+        ID = await fetchCompetitionID('/retrieveCompetitionID', country, competitionName);
         console.log('ID ' + JSON.stringify(ID, null, 2));
         const games = await fetchGamesTable(ID);
         //console.log(JSON.stringify(games, null, 2));
