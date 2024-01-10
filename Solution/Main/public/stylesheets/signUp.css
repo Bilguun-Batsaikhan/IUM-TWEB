@@ -68,6 +68,10 @@ h1 {
     margin-left: 10px;
 }
 
+.buttonSecondStyle{
+    display: inline-block;
+}
+
 @media screen and (max-width: 350px) {
     h1{
         font-size: 15px;
