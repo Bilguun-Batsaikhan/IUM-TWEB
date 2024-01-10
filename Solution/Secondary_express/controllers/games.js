@@ -16,6 +16,8 @@ function getGamesByCompetitionId(competition_id) {
                 away_club_goals: 1,
                 date: 1,
                 stadium: 1,
+                home_club_id: 1,
+                away_club_id: 1
                 // Add other fields you want to include
             })
             .then(results => {

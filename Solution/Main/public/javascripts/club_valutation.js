@@ -8,7 +8,7 @@ function init() {
     if (!clubId || isNaN(clubId) || !/^\d+$/.test(clubId)) {
         window.location.href = '/error';
     } else {
-        console.log('club_id:', parseInt(clubId));
+        //console.log('club_id:', parseInt(clubId));
         sendAxiosQuery('/valutation/club', clubId);
     }
 }
