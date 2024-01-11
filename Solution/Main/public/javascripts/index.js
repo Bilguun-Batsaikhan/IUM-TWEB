@@ -10,12 +10,12 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     try {
         const countries = await sendAxiosIndexQuery('/competition');
-        //console.log("countries", countries);
-        // Further processing or function calls can be done here
-        await createCountryMenu(countries);
+        await createDropDownMenu(countries.countries, "country", "#");
+        const competitionType = await sendAxiosIndexQuery('/competitionType');
+        console.log("competitionType", competitionType.competitionTypes)
+        await createDropDownMenu(competitionType.competitionTypes, "competitionType", "/competition-table");
     } catch (error) {
-        console.error("Error fetching countries:", error);
-        // Handle the error appropriately
+        console.error("Error fetching data:", error);
     }
 });
 
@@ -50,25 +50,28 @@ async function sendAxiosIndexQuery(url) {
 }
 
 //fetches countries from SpringBoot then populates the dropdown menu 'country'
-async function createCountryMenu(countries) {
-    const countriesArray = countries.countries;
-    const dropDownCountry = document.getElementById("country");
-    const promises = countriesArray.map(async country => {
+async function createDropDownMenu(data, elementID, url) {
+    const dropDownCountry = document.getElementById(elementID);
+    console.log("data", data);
+    const promises = data.map(async data => {
         const li = document.createElement('li');
         li.className = 'dropdown-submenu';
         const a = document.createElement('a');
-        a.textContent = country;
+        a.textContent = data;
         a.className = 'dropdown-item dropdown-toggle';
-        a.href = '#';
+        a.href = url;
         li.appendChild(a);
-        const ul = document.createElement('ul');
-        ul.className = 'dropdown-menu';
-        li.appendChild(ul);
         dropDownCountry.appendChild(li);
 
-        console.log('Doing the second request to SpringBoot');
-        // Fetch second level data for this country
-        await fetchCompetitionNames(country, ul, li);
+        // Only create second dropdown if elementID is 'country'
+        if(elementID === "country") {
+            console.log('Doing the second request to SpringBoot');
+            const ul = document.createElement('ul');
+            ul.className = 'dropdown-menu';
+            li.appendChild(ul);
+            // Fetch second level data for this country
+            await fetchCompetitionNames(data, ul, li);
+        }
     });
 
     // Wait for all promises to resolve

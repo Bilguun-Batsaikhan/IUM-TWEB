@@ -56,6 +56,21 @@ router.route('/competition')
             });
     });
 
+router.route('/competitionType')
+    .post((req, res) => {
+        const country = req.body.country;
+        axios.get('http://localhost:8082/competitions/competitionTypes')
+            .then(json => {
+                const competitionTypes = json.data;
+                res.json({competitionTypes});
+            })
+            .catch(err => {
+                console.error('Error while retrieving competition Types in index router ', err);
+                res.setHeader('Content-Type', 'application/json');
+                res.status(505).json(err);
+            })
+    });
+
 router.route('/competitionNames')
     .post((req, res) => {
         const country = req.body.country;

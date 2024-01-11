@@ -16,6 +16,11 @@ public class CompetitionService {
     public List<String> getAllCountries() {
         return competitionRepository.findAllDistinctCountries();
     }
+
+    // returns a list of all distinct competition types in competition table
+    public List<String> getAllCompetitionTypes() {
+        return competitionRepository.findAllDistinctCompetitionTypes();
+    }
     // returns a list of all competition names in a given country
     public List<String> getCompetitionsByCountry(String country) {
         return competitionRepository.findAllByCountry(country);

@@ -14,4 +14,6 @@ public interface CompetitionRepository extends JpaRepository<Competition, Long> 
     List<String> findAllByCountry(String country);
     @Query("SELECT c.competitionId FROM Competition c WHERE c.countryName = :country AND c.name = :name")
     Optional<String> findCompetitionIdByCountryAndName(@Param("country") String country, @Param("name") String name);
+    @Query("SELECT DISTINCT subType FROM Competition WHERE subType IS NOT NULL")
+    List<String> findAllDistinctCompetitionTypes();
 }

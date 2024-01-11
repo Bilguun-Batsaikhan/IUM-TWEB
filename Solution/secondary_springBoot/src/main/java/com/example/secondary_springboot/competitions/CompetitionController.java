@@ -21,10 +21,13 @@ public class CompetitionController {
     @GetMapping("/countries")
     public ResponseEntity<List<String>> getAllCompetitions() {
         List<String> countries = competitionService.getAllCountries();
-        System.out.println(countries);
         return ResponseEntity.ok(countries);
     }
-
+    @GetMapping("/competitionTypes")
+    public ResponseEntity<List<String>> getAllCompetitionTypes() {
+        List<String> competitionTypes = competitionService.getAllCompetitionTypes();
+        return ResponseEntity.ok(competitionTypes);
+    }
     @PostMapping("/countriesData")
     public ResponseEntity<List<String>> getCompetitionsByCountry(@RequestBody Map<String, String> body) {
         String country = body.get("country");
