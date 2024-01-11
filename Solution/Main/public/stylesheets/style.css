@@ -70,8 +70,6 @@ body {
   .box-area {
     margin: 0 10px;
   }
-
-
 }
 
 .navbar-nav {
@@ -82,7 +80,9 @@ body {
   flex: 1;
   border-radius: 5px;
 }
-
+.exclude-justify {
+  justify-content: normal !important;
+}
 .footer {
   left: 0;
   bottom: 0;
@@ -155,7 +155,8 @@ body {
   border-radius: 5px;
   margin-bottom: auto;
   margin-top: auto;
-  margin-right: 10px;
+  margin-right: 8px;
+  margin-left: auto;
   width: auto;
 }
 #logoutButton{
@@ -168,3 +169,4 @@ body {
   font-size: 16px;
   width: 79px;
 }
+

@@ -47,7 +47,7 @@ h1 {
 }
 
 .container {
-    margin: 50px;
+    margin: auto;
 }
 
 .segment.active .circle, .segment.active .line {
@@ -67,11 +67,6 @@ h1 {
 #third{
     margin-left: 10px;
 }
-
-.buttonSecondStyle{
-    display: inline-block;
-}
-
 @media screen and (max-width: 350px) {
     h1{
         font-size: 15px;
