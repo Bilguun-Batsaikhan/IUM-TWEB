@@ -1,3 +1,7 @@
+let currentPage = 1;
+const playersPerPage = 5;
+let totalPages = 0;
+
 function init() {
     /* The code for obtaining URL parameters has been adapted from:
      https://www.sitepoint.com/get-url-parameters-with-javascript/
@@ -81,7 +85,47 @@ function calculateAge(birthDateString) {
     return birthDateString + ' (' + age + ')';
 }
 
+function paginatePlayers(playersData) {
+    const start = (currentPage - 1) * playersPerPage;
+    const end = start + playersPerPage;
+    return playersData.slice(start, end);
+}
+
+function updatePageNumber(){
+    let pageNumber = document.querySelector('#pagination_number');
+    pageNumber.textContent = currentPage + '/' + totalPages;
+}
+
+function handlePagination(playersData) {
+    document.getElementById('prevButton').addEventListener('click', function() {
+        if (currentPage > 1) {
+            currentPage--;
+            updatePlayersTable(playersData);
+            updatePageNumber();
+        }
+    });
+
+    document.getElementById('nextButton').addEventListener('click', function() {
+        if (currentPage < Math.ceil(playersData.length / playersPerPage)) {
+            currentPage++;
+            updatePlayersTable(playersData);
+            updatePageNumber();
+        }
+    });
+}
+
+function updatePlayersTable(playersData) {
+    var tableBody = document.getElementById('players-table-body');
+    tableBody.innerHTML = '';
+    populatePlayersTable(paginatePlayers(playersData));
+}
+
 function fillHTML(clubData, playersData) {
+    updatePlayersTable(playersData);
+    handlePagination(playersData);
+    totalPages = Math.ceil(playersData.length / playersPerPage);
+    updatePageNumber();
+
     //document.getElementById('results').innerHTML = "The result is: " + JSON.stringify(clubData);
     // it set club name
     const clubNameElement = document.querySelector('#club_name');
@@ -113,7 +157,7 @@ function fillHTML(clubData, playersData) {
     clubStadiumSeatsElement.textContent = clubData.stadium_seats;
 
     //document.getElementById('players').innerHTML = "The result is: " + JSON.stringify(playersData);
-    populatePlayersTable(playersData);
+    //populatePlayersTable(playersData);
     //console.log(playersData);
 }
 

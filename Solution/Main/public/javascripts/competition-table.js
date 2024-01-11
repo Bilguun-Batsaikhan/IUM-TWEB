@@ -1,6 +1,8 @@
 // variables for pagination
 let currentPage = 1;
+
 let itemsPerPage = 10;
+
 let ID;
 document.addEventListener('DOMContentLoaded', async function () {
     // Get the competition name from the query parameters
