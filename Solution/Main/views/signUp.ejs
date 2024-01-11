@@ -11,7 +11,7 @@
 <body onload="initial()">
 <%- include('partials/navbar') %>
 <div class="container d-flex justify-content-center mt-3 mb-3">
-    <div class="row">
+    <div class="row border rounder-5 p-3 bg-white shadow box-area">
         <h1 class="text-center"><i>SignUp</i></h1>
         <div class = "text-center">
             <div class="segment active" id="firstStep">
@@ -89,7 +89,7 @@
                     <div class="col-md-8  exclude-justify">
                         <span>Password Criteria:
                             <br>
-                            - At least 8 characters long
+                            - From 8 until 15 characters
                             <br>
                             - Must contain at least one number
                             <br>
@@ -115,6 +115,12 @@
                         <label for="nickname" class="form-label">Choose your Nickname:</label>
                         <input type="text" class="form-control" id="nickname" name="nickname" required>
                     </div>
+                </div>
+                <div class="col-md-8  exclude-justify">
+                        <span>Nickname Criteria:
+                            <br>
+                            - Max 15 characters
+                        </span>
                 </div>
                 <hr>
                 <div class="row">

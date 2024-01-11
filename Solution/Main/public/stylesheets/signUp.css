@@ -102,3 +102,7 @@ h1 {
         margin-left: 0px;
     }
 }
+
+h1{
+    letter-spacing: 3px;
+}
