@@ -1,6 +1,8 @@
 // variables for pagination
 let currentPage = 1;
-const itemsPerPage = 10;
+
+let itemsPerPage = 10;
+
 let ID;
 document.addEventListener('DOMContentLoaded', async function () {
     // Get the competition name from the query parameters
@@ -16,8 +18,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     try {
         const countries = await sendAxiosQuery('/competition');
         console.log("countries", countries);
-        // Further processing or function calls can be done here
-        await createCountryMenu(countries);
     } catch (error) {
         console.error("Error fetching countries:", error);
         // Handle the error appropriately
@@ -50,19 +50,32 @@ document.addEventListener('DOMContentLoaded', async function () {
 function init(gamesData) {
     console.log('init()');
     document.getElementById('nextButton').addEventListener('click', () => {
+        if(currentPage < gamesData.games.result.length / itemsPerPage)
         currentPage++;
-        goToPage(gamesData, currentPage);
+        displayGamesData(gamesData, currentPage);
     });
     document.getElementById('prevButton').addEventListener('click', () => {
         if (currentPage > 1) {
             currentPage--;
-            goToPage(gamesData,currentPage);
+            displayGamesData(gamesData,currentPage);
         }
     });
+    let button = document.getElementById('expandButton');
+
+    button.addEventListener('click', () => {
+        if (button.id === 'expandButton') {
+            itemsPerPage += 10;
+            button.textContent = 'Show Less';
+            button.id = 'shrinkButton';
+        } else if (button.id === 'shrinkButton' && itemsPerPage > 10) {
+            itemsPerPage -= 10;
+            button.textContent = 'Show More';
+            button.id = 'expandButton';
+        }
+        displayGamesData(gamesData, currentPage);
+    });
 }
-function goToPage(gamesData, page) {
-    displayGamesData(gamesData, page);
-}
+
 //fetch competition ID for given country and competition name
 async function fetchCompetitionID(url, country, competitionName) {
     try {
@@ -105,32 +118,6 @@ async function fetchGraphImage(competitionId) {
     }
   }
 
-//creates the dropdown menu 'country' and populates it with countries
-async function createCountryMenu(countries) {
-    const countriesArray = countries.countries;
-    const dropDownCountry = document.getElementById("country");
-    const promises = countriesArray.map(async country => {
-        const li = document.createElement('li');
-        li.className = 'dropdown-submenu';
-        const a = document.createElement('a');
-        a.textContent = country;
-        a.className = 'dropdown-item dropdown-toggle';
-        a.href = '#';
-        li.appendChild(a);
-        const ul = document.createElement('ul');
-        ul.className = 'dropdown-menu';
-        li.appendChild(ul);
-        dropDownCountry.appendChild(li);
-
-        console.log('Doing the second request to SpringBoot');
-        // Fetch second level data for this country
-        await fetchCompetitionNames(country, ul, li);
-    });
-
-    // Wait for all promises to resolve
-    await Promise.all(promises);
-}
-
 //fetch games table data for given competition ID
 async function fetchGamesTable(competition_id) {
     try {
@@ -145,24 +132,6 @@ async function fetchGamesTable(competition_id) {
     }
 }
 
-//displays the games table for give games table
-// displays the games table for given games data
-// function displayGamesData(gamesData, limit) {
-//     const tableBody = document.getElementById('competition-table-body');
-//     const gamesToDisplay = gamesData.games.result.slice(0, limit);
-//
-//     gamesToDisplay.forEach(game => {
-//         const row = tableBody.insertRow();
-//         row.innerHTML = `
-//             <td>${game.home_club_name}</td>
-//             <td>${game.away_club_name}</td>
-//             <td>${game.home_club_goals}</td>
-//             <td>${game.away_club_goals}</td>
-//             <td>${new Date(game.date).toLocaleDateString()}</td>
-//             <td>${game.stadium}</td>
-//         `;
-//     });
-// }
 
 function displayGamesData(gamesData, page) {
     const tableBody = document.getElementById('competition-table-body');
@@ -171,7 +140,7 @@ function displayGamesData(gamesData, page) {
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const gamesToDisplay = gamesData.games.result.slice(startIndex, endIndex);
-
+    const totalRows = gamesData.games.result.length;
     gamesToDisplay.forEach(game => {
         const row = tableBody.insertRow();
         // Create anchor for home club
@@ -199,28 +168,5 @@ function displayGamesData(gamesData, page) {
         row.insertCell().textContent = game.stadium;
     });
 
-    document.getElementById('currentPage').innerText = page;
-}
-
-//fetches competition names from SpringBoot then populates the dropdown menu 'competition'
-function fetchCompetitionNames(country, ul, li) {
-    return axios.post('/competitionNames', { country: country })
-                    .then(function (response) {
-                        const countryData = response.data;
-                        countryData.countryData.forEach(data => {
-                            const li2 = document.createElement('li');
-                            const a2 = document.createElement('a');
-                            a2.textContent = data;
-                            a2.className = 'dropdown-item competition-name';
-                            a2.href = '/competition-table?competition=' + encodeURIComponent(data) + '&country=' + encodeURIComponent(country);
-                            li2.appendChild(a2);
-                            ul.appendChild(li2);
-                        });
-                    })
-                    .catch(function (error) {
-                        console.log('Error fetching country data for ' + country + ':', error);
-                    })
-                    .finally(function () {
-                        //console.log('Finished request for ' + country);
-                    });
+    document.getElementById('currentPage').innerText = page + "/" + Math.ceil(totalRows / itemsPerPage);
 }

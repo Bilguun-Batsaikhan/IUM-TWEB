@@ -67,6 +67,8 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
   font-family: 'Poppins', sans-serif;
   background-color: #ececec;
   background-size: cover;
@@ -98,6 +100,7 @@ body {
   flex: 1;
   border-radius: 5px;
 }
+
 .exclude-justify {
   justify-content: normal !important;
 }
@@ -110,6 +113,7 @@ body {
   text-align: center;
 }
 
+
 .login {
   background-color: #ececec;
   color: white !important;
@@ -120,6 +124,10 @@ body {
   font-size: 16px;
   width: 79px;
   margin-top: 0;
+}
+
+.footer {
+  margin-top: auto;
 }
 
 .signup {
@@ -200,4 +208,7 @@ body {
   font-size: 16px;
   width: 79px;
 }
+
+
+/*https://visme.co/blog/website-color-schemes/*/
 
