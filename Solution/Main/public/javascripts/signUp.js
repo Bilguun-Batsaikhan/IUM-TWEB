@@ -105,10 +105,11 @@ function validateSecondBlock(){
         return false;
     }
     const minLength = 8;
+    const maxLength = 15;
 
     // Check for minimum length
-    if (password.length < minLength) {
-        errorStringSecond = "Password must be at least " + minLength + " characters long";
+    if (password.length < minLength && password.length > maxLength) {
+        errorStringSecond = "Password must follow criteria for length!";
         return false;
     }
     // Use a regular expression to check for at least one number
@@ -188,6 +189,9 @@ function validateThirdBlock()
         errorStringThird = "Please, fill nickname fild"
         return false;
     }
+    if(nickname.lenght > 15){
+        errorStringThird = "Max length of nickname is 15"
+        return false;}
     return true;
 }
 function backToSecond() {

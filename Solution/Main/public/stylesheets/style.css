@@ -148,10 +148,13 @@ body {
 }
 
 @media (min-width: 992px) {
-  .btn.signup, .btn.login {
-    margin-top: 20px;
+  .btn.signup, .btn.login, .btn.logout{
+    margin-top: 24px;
   }
+
+
 }
+
 
 .btn.rounded-pill.me-2 {
   /* background-color: #3f474f !important; old color */
@@ -186,14 +189,15 @@ body {
 }
 
 #nickNameP{
-  border: 1px solid #000;
+  border: 1px solid #FFF;
   display: inline-block;
+  color: gainsboro;
   font-size: 16px;
   padding: 5px;
   text-align: center;
   border-radius: 5px;
   margin-bottom: auto;
-  margin-top: auto;
+  margin-top: 24px;
   margin-right: 8px;
   margin-left: auto;
   width: auto;

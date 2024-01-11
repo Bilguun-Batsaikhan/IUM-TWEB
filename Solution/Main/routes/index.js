@@ -143,7 +143,7 @@ router.get('/error', function (req, res, next) {
 });
 
 router.post('/login', function(req, res, next) {
-    res.sendFile(path.join(__dirname, '../public/login.html'));
+    res.render('login');
 });
 router.post('/loginComplete', function(req, res, next) {
     res.render('index');
