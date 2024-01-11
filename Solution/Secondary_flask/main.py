@@ -9,13 +9,15 @@ import matplotlib.pyplot as plt
 from io import BytesIO
 
 app = Flask(__name__)
-
+gms = pd.read_csv('../csv/games.csv')
 @app.route('/generate_graph/<competition_id>')
 def generate_graph(competition_id):
 
-    gms = pd.read_csv('../csv/games.csv')
     # Filter the DataFrame for the specific competition ID
     filtered_gms = gms[gms['competition_id'] == competition_id]
+
+    # Filter out data after the year 2022
+    filtered_gms = filtered_gms[filtered_gms['season'].astype(int) <= 2022]
 
     # Group by season and calculate the sum of home and away team goals
     grouped_data = filtered_gms.groupby('season')[['home_club_goals', 'away_club_goals']].sum()
