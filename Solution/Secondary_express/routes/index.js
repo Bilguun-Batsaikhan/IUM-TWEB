@@ -32,4 +32,18 @@ router.post('/competition/games', async (req, res) => {
   }
 });
 
+router.post('/club', async (req, res) => {
+  try {
+    // Parse the request body
+    const clubSearch = req.body.name;
+    console.log(clubSearch + "Aaaaaaaaaaaaa");
+    // Wait for the promise from the 'res.json' call to resolve before accessing the 'clubSearch' property
+    const clubNamesSearch = await clubsController.getClubNamesForSearchBar(clubSearch);
+    res.json({ result: clubNamesSearch });
+  } catch (error) {
+    res.setHeader('Content-Type', 'application/json');
+    res.status(500).json({ error: 'Error retrieving club names for bar search', message: error.message });
+  }
+});
+
 module.exports = router;

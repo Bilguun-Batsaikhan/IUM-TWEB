@@ -19,4 +19,8 @@ public class PlayerService {
     public List<Player> getPlayerById(int player_id) {
         return playerRepository.findPlayerByPlayerId(player_id);
     }
+
+    public List<String> searchPlayer(String playerName) {
+        return playerRepository.searchPlayerByName(playerName);
+    }
 }

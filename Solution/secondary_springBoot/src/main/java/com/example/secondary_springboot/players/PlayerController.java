@@ -31,4 +31,11 @@ public class PlayerController {
         return ResponseEntity.ok(players);
     }
 
+    @PostMapping("/getsearchplayer")
+    public ResponseEntity<List<String>> getSearchPlayer(@RequestBody Map<String, String> body){
+        String playerName = body.get("player_name");
+        List<String> searchPlayers = playerService.searchPlayer(playerName);
+        return ResponseEntity.ok(searchPlayers);
+    }
+
 }
