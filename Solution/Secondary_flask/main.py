@@ -6,7 +6,10 @@ from aiohttp import ClientSession, ClientResponseError
 from flask import request, jsonify
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 from io import BytesIO
+
+
 
 app = Flask(__name__)
 gms = pd.read_csv('../csv/games.csv')
@@ -22,21 +25,20 @@ def generate_graph(competition_id):
     # Group by season and calculate the sum of home and away team goals
     grouped_data = filtered_gms.groupby('season')[['home_club_goals', 'away_club_goals']].sum()
 
-    # Use a different style for the plot
-    plt.style.use('seaborn-v0_8')
+    # Use Seaborn style
+    sns.set(style="whitegrid")
 
     # Create a figure with a higher dpi and a larger size
-    plt.figure(figsize=(12, 6), dpi=200)
+    plt.figure(figsize=(12, 6), dpi=200, facecolor='lightgray')  # Set facecolor to the desired background color
 
-    # Plot the data with thinner lines and different colors
-    grouped_data.plot(style='.-', color=['orange', 'purple'], lw=0.5)
-    plt.grid(True)
+    # Plot the data with Seaborn
+    sns.lineplot(data=grouped_data, palette=['orange', 'purple'], dashes=False)
 
     # Set the title, labels, and legend for the plot
-    plt.title(f'Distribution of Home and Away Team Goals Over Time - {competition_id}', fontsize=20)
+    plt.title(f'Distribution of Home and Away Team Goals Over Time - {competition_id}', fontsize=16)
     plt.xlabel('Season', fontsize=12)
     plt.ylabel('Goals', fontsize=12)
-    plt.legend(['Home Team Goals', 'Away Team Goals'], loc='upper left', fontsize='large')
+    plt.legend(['Home Team Goals', 'Away Team Goals'], loc='upper left', fontsize='medium')
 
     # Save the plot to a BytesIO object
     img_buf = BytesIO()

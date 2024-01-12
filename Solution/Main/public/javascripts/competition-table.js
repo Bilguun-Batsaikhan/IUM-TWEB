@@ -1,7 +1,8 @@
 // variables for pagination
 let currentPage = 1;
-
+let lastPage = 1;
 let itemsPerPage = 10;
+let gamesData = null;
 
 let ID;
 document.addEventListener('DOMContentLoaded', async function () {
@@ -28,10 +29,13 @@ document.addEventListener('DOMContentLoaded', async function () {
     } else {
         ID = await fetchCompetitionID('/retrieveCompetitionID', country, competitionName);
         console.log('ID ' + JSON.stringify(ID, null, 2));
-        const games = await fetchGamesTable(ID);
+        gamesData = await fetchGamesTable(ID);
+        // Sort gamesData by date in descending order
+        gamesData.games.result.sort((a, b) => new Date(b.date) - new Date(a.date));
+
         //console.log(JSON.stringify(games, null, 2));
-        displayGamesData(games, currentPage);
-        init(games);
+        displayGamesData(gamesData, currentPage);
+        init(gamesData);
 
         const imgElement = document.createElement('img');
         // console.log("ID: " + ID.competitionID)
@@ -45,21 +49,32 @@ document.addEventListener('DOMContentLoaded', async function () {
             console.error('Error:', error);
         });
     };
+
+    let dateSelect = document.getElementById('dateSelect');
+    let uniqueYears = [...new Set(gamesData.games.result.map(game => game.date.substring(0, 4)))];
+    
+    uniqueYears.forEach(year => {
+        let option = document.createElement('option');
+        option.value = year;
+        option.text = year;
+        dateSelect.appendChild(option);
+    });
 });
 
 function init(gamesData) {
     console.log('init()');
     document.getElementById('nextButton').addEventListener('click', () => {
-        if(currentPage < gamesData.games.result.length / itemsPerPage)
+        if(currentPage < lastPage)
         currentPage++;
-        displayGamesData(gamesData, currentPage);
+        displayGamesData(gamesData, currentPage, dateSelect.value);
     });
     document.getElementById('prevButton').addEventListener('click', () => {
         if (currentPage > 1) {
             currentPage--;
-            displayGamesData(gamesData,currentPage);
+            displayGamesData(gamesData,currentPage, dateSelect.value);
         }
     });
+
     let button = document.getElementById('expandButton');
 
     button.addEventListener('click', () => {
@@ -71,8 +86,25 @@ function init(gamesData) {
             itemsPerPage -= 10;
             button.textContent = 'Show More';
             button.id = 'expandButton';
+    
+            // Update currentPage to stay on the correct page after changing itemsPerPage
+            const totalPages = Math.ceil(lastPage / itemsPerPage);
+            currentPage = Math.min(currentPage, totalPages);
         }
-        displayGamesData(gamesData, currentPage);
+    
+        displayGamesData(gamesData, currentPage, dateSelect.value);
+    });
+    
+
+    let topButton = document.getElementById('topButton');
+
+    topButton.addEventListener('click', () => {
+    window.scrollTo(0, 0);
+    });
+
+    dateSelect.addEventListener('change', () => {
+        currentPage = 1;
+        displayGamesData(gamesData, currentPage, dateSelect.value);
     });
 }
 
@@ -133,14 +165,24 @@ async function fetchGamesTable(competition_id) {
 }
 
 
-function displayGamesData(gamesData, page) {
+function displayGamesData(gamesData, page, year) {
     const tableBody = document.getElementById('competition-table-body');
     tableBody.innerHTML = ''; // Clear existing rows
 
+    let gamesToDisplay = gamesData.games.result;
+
+    // Filter gamesData by year if a year is selected
+    if (year) {
+        gamesToDisplay = gamesToDisplay.filter(game => game.date.substring(0, 4) === year);
+    }
+
+    // Apply pagination to gamesToDisplay
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const gamesToDisplay = gamesData.games.result.slice(startIndex, endIndex);
-    const totalRows = gamesData.games.result.length;
+    gamesToDisplay = gamesToDisplay.slice(startIndex, endIndex);
+
+    const totalRows = year ? gamesData.games.result.filter(game => game.date.substring(0, 4) === year).length : gamesData.games.result.length;
+
     gamesToDisplay.forEach(game => {
         const row = tableBody.insertRow();
         // Create anchor for home club
@@ -167,6 +209,7 @@ function displayGamesData(gamesData, page) {
         row.insertCell().textContent = new Date(game.date).toLocaleDateString();
         row.insertCell().textContent = game.stadium;
     });
-
-    document.getElementById('currentPage').innerText = page + "/" + Math.ceil(totalRows / itemsPerPage);
+    lastPage = Math.ceil(totalRows / itemsPerPage);
+    document.getElementById('currentPage').innerText = page + "/" + lastPage;
 }
+
