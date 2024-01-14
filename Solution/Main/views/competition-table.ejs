@@ -6,6 +6,7 @@
     <%- include('partials/navbarScripts') %>
     <script src="./javascripts/competition-table.js"></script>
     <link rel="stylesheet" href="./stylesheets/competition-table.css">
+
 </head>
 <body class="body">
 <%- include('partials/navbar') %>
@@ -13,6 +14,10 @@
 <!-- Here table lies -->
 <div class="container mt-4">
     <h2 style="color: aliceblue;">Games Table</h2>
+    <select id="dateSelect">
+        <option value="">All Dates</option>
+        <!-- Dates will be added here by JavaScript -->
+    </select>
     <table class="table">
         <thead>
         <tr>
@@ -36,7 +41,7 @@
 <div id="graphContainer"></div>
 
 
-
+<button id="topButton" class="topButton"> <img src="/img/arrow1.png" alt=""></button>
 
 <%- include('partials/footer') %>
 
