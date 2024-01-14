@@ -46,7 +46,24 @@ function getClubNames() {
             });
     });
 }
-
 module.exports.getClubNames = getClubNames;
+
+function getClubNamesForSearchBar(clubSearch) {
+    return new Promise((resolve, reject) => {
+        console.log(clubSearch +"Hello");
+        const clubSearchString = "" + clubSearch;
+        // Utilizza l'operatore $regex per cercare i club che contengono la parte del nome specificata
+        Model.find({ name: { $regex: clubSearchString, $options: 'i' } }, { name: 1 })
+            .then(results => {
+                const clubNames = results.map((club) => club.name);
+                resolve(clubNames);
+            })
+            .catch(error => {
+                reject(error);
+            });
+    });
+}
+module.exports.getClubNamesForSearchBar= getClubNamesForSearchBar;
+
 
 
