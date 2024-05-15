@@ -5,28 +5,30 @@
     <title>LoginUser</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/stylesheets/style.css" rel="stylesheet">
-    <script src="/javascripts/javascript.js"></script>
+    <link href="/stylesheets/login.css" rel="stylesheet">
+    <script src="/javascripts/login.js"></script>
     <%- include('partials/navbarScripts') %>
 </head>
 <body onload="init()">
 <%- include('partials/navbar') %>
-<div class="container d-flex justify-content-center align-items-center mt-4 mb-4">
-    <div class="row border rounded-5 p-2 bg-white shadow box-area">
+<div class="container-fluid d-flex justify-content-center bg-custom" id= "login_background">
+    <div class="row border rounded-5 mt-5 mb-5 p-2 bg-white shadow box-area">
         <div class="box">
-            <div class="d-flex flex-column align-items-center"> <!-- Modifica qui -->
-                <h1 class="text-center mb-3"><i>Login User</i></h1>
-                <p class="text-center mb-3">We are happy to have you back</p>
-                <div class="col-md-6">
+                <button type="button" class="btn shadow border rounded-4" onclick="backToHomePage()">
+                     <img src="/img/left_arrow.png" alt="Left arrow to return to homepage" id ="leftArrow">
+                </button>
+            <div class="d-flex flex-column align-items-center" id="boxFormLogin">
+                <h1 id="loginHeader" class="text-center mt-3 mb-3"> Welcome back! </h1>
+                <div class="col-md-6 mt-5 ">
                     <form action="/loginComplete" method="post" id="form">
                         <div class="mb-3">
-                            <label for="nickname" class="form-label">Nickname:</label>
-                            <input type="text" class="form-control" id="nickname" name="nickname">
+                            <input type="text" class="form-control" id="nickname" name="nickname" required placeholder="Enter your Nickname">
                         </div>
                         <div class="mb-4">
                             <label for="password" class="form-label">Password:</label>
                             <input type="password" class="form-control" id="password" name="password">
                         </div>
-                            <button class="btn btn-lg btn-primary w-100 fs-6" id="submitForm" value="submit" type="submit">Submit</button>
+                        <button class="btn btn-lg btn-primary w-100 fs-6" id="submitForm" value="submit" type="submit">Submit</button>
                     </form>
                 </div>
             </div>

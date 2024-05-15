@@ -47,3 +47,6 @@ function controlInfo(nickname) {
     return true;
 }
 
+function backToHomePage(){
+    window.location.href = "/";
+}
