@@ -90,12 +90,23 @@ body {
   font-family: Arial, sans-serif;
 }
 
+.nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
 .nav-el {
   border-bottom: solid 1px transparent;
 }
 
 .nav-el:hover {
   border-bottom: solid 1px #1769FF;
+}
+
+.nav-item-right {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .exclude-justify {
@@ -189,6 +200,10 @@ body {
   width: 79px;
 }
 
-
+.custom-search-bar {
+  width: 300px;
+  height: 30px;
+  border-radius: 10px !important;
+}
 /*https://visme.co/blog/website-color-schemes/*/
 
