@@ -1,1 +1,27 @@
 h1{letter-spacing: 3px;}
+
+.bg-custom {
+    background-image: url('../img/background_photo.webp');
+    background-size: cover;
+    background-position: center;
+}
+
+#login_background {
+    height: 100vh;
+}
+
+#loginHeader{
+    font-size: 40px;
+}
+
+#boxFormLogin{
+    margin-top: 20px;
+}
+
+#leftArrow{
+        height: 30px;
+        width: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
