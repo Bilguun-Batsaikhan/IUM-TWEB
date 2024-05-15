@@ -145,6 +145,9 @@ router.get('/error', function (req, res, next) {
 router.post('/login', function(req, res, next) {
     res.render('login');
 });
+router.get('/login', function(req, res, next) {
+    res.render('login');
+});
 router.post('/loginComplete', function(req, res, next) {
     res.render('index');
 });
