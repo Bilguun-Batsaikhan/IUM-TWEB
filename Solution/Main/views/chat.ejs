@@ -12,40 +12,58 @@
 </head>
 <body onload="init()">
 <%- include('partials/navbar') %>
-<h1>Welcome <%= nickname %></h1>
-<div id="initial_form" style="display: block">
-    <p>Please select the Room you want to Join</p>
-    <form onsubmit="return false;">
-        <p>
-            <label for="roomNo"> Your room </label>
-            <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="roomNo" name="roomNo">
-                <option value="null">Please wait for the connection to the database</option>
-            </select>
-        </p>
-        <button id="connect" onclick="connectToRoom()">Connect</button>
-    </form>
-</div>
-<div id="chat_interface" style="display: none">
-    <div id="chat_container" class="split left">
-        <h1>Chat</h1>
-        <div>
-            <div id="who_you_are" style="display: inline"></div>
-            , you are chatting in room:
-            <div id="in_room" style="display: inline"></div>
-        </div>
-        <div id="chat_history" class="boxed"></div>
-        <div id="chat_box" class="bottom boxed">
-            <form onsubmit="return false;" style="width: 100%">
-                <p>
-                    <label for="name"> chat: </label>
-                    <input type="text" id="chat_input" name="chat_input" style="width: 80%">
-                    <button id="chat_send" onclick="sendChatText()">Send</button>
-                </p>
+<!------- select room interface ------->
+<div class="container" id="initial_form">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-4"></div> <!-- left empty space -->
+        <div class="col-md-4">
+            <div class="text-center mb-3">
+                <h2>Join the chat room</h2>
+            </div>
+            <form onsubmit="return false;">
+                <div class="form-group mb-3">
+                    <select class="form-select" id="roomNo" name="roomNo">
+                        <option value="null">Please wait for the connection to the database</option>
+                    </select>
+                </div>
+                <div class="text-center">
+                    <button id="connect" onclick="connectToRoom()" class="btn btn-primary w-100 mb-5">Start chatting</button>
+                </div>
             </form>
         </div>
+        <div class="col-md-4"></div> <!-- right empty space -->
     </div>
-
 </div>
+<!-- Chat interface -->
+<div id="chat_interface" class="container" style="min-height: 100px;">
+    <div id="chat_container" class="row">
+        <div class="col-md-12">
+            <h1 class="text-center">Chat</h1>
+            <div class="text-center">
+                <div id="who_you_are" class="d-inline"></div>,
+                you are chatting in room:
+                <div id="in_room" class="d-inline"></div>
+            </div>
+            <div id="chat_history" class="boxed mt-3"></div>
+            <div id="chat_box" class="bottom boxed mt-3">
+                <form onsubmit="return false;">
+                    <div class="form-group row">
+                        <label for="chat_input" class="col-sm-2 col-form-label">Chat:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="chat_input" name="chat_input">
+                        </div>
+                        <div class="col-sm-2">
+                            <button id="chat_send" onclick="sendChatText()" class="btn btn-primary">Send</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <%- include('partials/footer') %>
 </body>
 </html>
