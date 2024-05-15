@@ -10,12 +10,30 @@ let chat= io.connect('/chat');
  * plus the associated actions
  */
 function init() {
+   checkLogin();
    // it sets up the interface so that userId and room are selected
    document.getElementById('initial_form').style.display = 'block';
    document.getElementById('chat_interface').style.display = 'none';
 
    sendAxiosQuery('/chat');
    initChatSocket();
+}
+
+function checkLogin(){
+      const itemStr = localStorage.getItem('nicknameData');
+      const item = JSON.parse(itemStr);
+      const now = new Date();
+      let time = now.getTime();
+
+      if (!item || (time - item.timestamp) > 220000) {
+         localStorage.removeItem('nicknameData');
+         console.log("You are not logged!");
+         window.location.href = '/login';
+      } else {
+         console.log("Welcome " + item.nickname);
+         name = item.nickname;
+         console.log(item.nickname);
+      }
 }
 
 
@@ -60,9 +78,11 @@ function sendChatText() {
  */
 function connectToRoom() {
    roomNo = document.getElementById('roomNo').value;
-   name = nickname;
-   if (!name) name = 'Unknown-' + Math.random();
+   //name = nickname; not work anymore
+   /* chat's nickname for not logged user
+   if (!name) name = 'Unknown-' + Math.random();*/
    chat.emit('create or join', roomNo, name);
+
 }
 
 /**
