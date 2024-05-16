@@ -103,4 +103,8 @@ function fetchCompetitionNames(country, ul, li) {
                     });
 }
 
+function goLogin(){
+    window.location.href = "/login";
+}
+
 //export {fetchCountries, fetchCompetitionNames};

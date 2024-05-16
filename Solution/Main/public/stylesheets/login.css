@@ -15,7 +15,7 @@ h1{letter-spacing: 3px;}
 }
 
 #boxFormLogin{
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 #leftArrow{
@@ -24,4 +24,41 @@ h1{letter-spacing: 3px;}
         display: flex;
         justify-content: center;
         align-items: center;
+}
+
+#facebook
+{
+    padding: 15px;
+    height: 60px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#google
+{
+    padding: 15px;
+    height: 60px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#apple{
+    padding: 17px;
+    height: 63px;
+    width: 63px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.text {
+    margin-top: 5px;
+    white-space: nowrap;
+    text-shadow: black;
+    text-align: center;
 }

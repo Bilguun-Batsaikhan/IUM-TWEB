@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LoginUser</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/stylesheets/style.css" rel="stylesheet">
+    <link href="/stylesheets/congratsPage.css" rel="stylesheet">
+    <script src="/javascripts/login.js"></script>
+    <%- include('partials/navbarScripts') %>
+</head>
+<body onload="init()">
+<%- include('partials/navbar') %>
+<div class="container-fluid d-flex justify-content-center bg-custom" id= "congrats_background">
+    <div class="row border rounded-5 mt-5 mb-5 p-2 bg-white shadow box-area">
+        <div class="box">
+            <div class="row mt-3">
+                <h1>Thank you for signing up</h1>
+                <img src="/img/congratsPage.png" alt="Simple photo of a soccer ball in movement">
+                <p>Enjoy our service</p>
+            </div>
+            <div class = "bot">
+                <button onclick=goHome()> Back to home</button>
+            </div>
+        </div>
+    </div>
+</div>>
+
+<%- include('partials/footer') %>
+</body>
+</html>
