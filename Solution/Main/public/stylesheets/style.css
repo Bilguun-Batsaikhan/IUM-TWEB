@@ -1,3 +1,14 @@
+.main-content {
+  background-image: url("../img/background_photo.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.mainContent {
+  padding: 0 30px 0 30px !important;
+}
+
 .topButton {
   position: fixed;
   bottom: 20px;
@@ -14,7 +25,62 @@ img {
 }
 
 .sideContent {
-  background-color: #843636;
+  height: 100vh;
+  background-color: rgba(7, 18, 36, 0.5);
+}
+
+.row.table {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50% !important;
+  <!-- background-color: aquamarine; -->
+}
+
+.topTable {
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 50%;
+  <!-- background-color: #b97fff; -->
+}
+
+.table {
+  padding: 20px 300px 20px  50px !important;
+  margin: 0 !important;
+}
+
+.row.table h1 {
+  margin: 0;
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(7, 18, 36, 0.5);
+  <!-- border: 1px solid black; -->
+}
+
+.cell-img-1 {
+  border-radius: 20px;
+  width: 80%; /* Adjust this value to make the image smaller or larger */
+  height: auto; /* This will maintain the aspect ratio of the image */
+}
+
+#topRight {
+  border-top-right-radius: 25px;
+}
+
+#topLeft {
+  border-top-left-radius: 25px;
+}
+
+#bottomRight {
+  border-bottom-right-radius: 25px;
+}
+
+#bottomLeft {
+  border-bottom-left-radius: 25px;
 }
 
 .navbar .dropdown-submenu .dropdown-toggle::after {
@@ -54,7 +120,7 @@ img {
   text-align: center;
 }
 
-body {
+.body {
   display: flex;
   flex-direction: column;
   font-family: 'Poppins', sans-serif;
@@ -184,10 +250,7 @@ body {
   padding: 5px;
   text-align: center;
   border-radius: 5px;
-  margin-bottom: auto;
-  margin-top: 24px;
-  margin-right: 8px;
-  margin-left: auto;
+  margin: 24px 8px auto auto;
   width: auto;
 }
 #logoutButton{
