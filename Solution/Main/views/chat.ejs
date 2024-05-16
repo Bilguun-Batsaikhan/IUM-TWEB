@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><%= title %></title>
+    <title>Chat</title>
     <script src="/socket.io/socket.io.js"></script>
     <link rel='stylesheet' href='/stylesheets/chat.css'/>
     <%- include('partials/navbarScripts') %>
-    <script>
-        var nickname = '<%= nickname %>'
-    </script>
+
     <script src="/javascripts/chat.js"></script>
 </head>
 <body onload="init()">
@@ -35,26 +33,25 @@
     </div>
 </div>
 <!-- Chat interface -->
-<div id="chat_interface" class="container" style="min-height: 100px;">
+<div id="chat_interface" class="container" style="">
     <div id="chat_container" class="row">
         <div class="col-md-12">
-            <h1 class="text-center">Chat</h1>
             <div class="text-center">
-                <div id="who_you_are" class="d-inline"></div>,
-                you are chatting in room:
-                <div id="in_room" class="d-inline"></div>
+                <div id="who_you_are" class="d-inline mt-5"></div> welcome to
+                <p id="in_room" class="font-weight-bold d-inline"></p> chat!
             </div>
             <div id="chat_history" class="boxed mt-3"></div>
             <div id="chat_box" class="bottom boxed mt-3">
                 <form onsubmit="return false;">
                     <div class="form-group row">
-                        <label for="chat_input" class="col-sm-2 col-form-label">Chat:</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="chat_input" name="chat_input">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control chat-input" id="chat_input" name="chat_input" autocomplete="off">
                         </div>
                         <div class="col-sm-2">
                             <button id="chat_send" onclick="sendChatText()" class="btn btn-primary">Send</button>
                         </div>
+                        <div class="col-sm-3"></div>
                     </div>
                 </form>
             </div>
