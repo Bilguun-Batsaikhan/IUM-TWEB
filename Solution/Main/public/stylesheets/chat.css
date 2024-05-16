@@ -1,33 +1,61 @@
 body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    height: 100px;
 }
 
 a {
     color: #00B7FF;
 }
 
-.boxed {
-    width: 100%;
-    padding:10px;
-}
 .bottom {
     position: absolute;
-    bottom: 10px;
+    bottom: 10%;
     width: 90%;
 }
 
-/* Split the screen in half */
-.split {
-    height: 100%;
-    width: 50%;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    overflow-x: hidden;
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
+#chat_history {
+    min-height: 50vh;
+    max-height: 50vh;
+    overflow-y: auto; /* Abilita lo scroll verticale quando necessario */
+    display: flex; /* Utilizza un layout flex */
+    flex-direction: column; /* Imposta la direzione dei figli su colonna */
+    padding: 2px;
 }
+
+/* Stili per i messaggi della chat */
+.chat-message {
+    padding: 5px 10px; /* Spaziatura interna del messaggio */
+    border-radius: 10px; /* Bordo arrotondato del messaggio */
+    margin: 5px 0; /* Spaziatura esterna del messaggio */
+    word-wrap: break-word;
+    display: inline-block;
+    max-width: fit-content;
+}
+
+.chat-message.force-text-right {
+    text-align: right !important;
+}
+#chat_history .chat-message.force-text-right {
+    text-align: right;
+}
+
+.my-message{
+    background-color: #DCF8C8;
+}
+
+.others-message{
+    background-color: #98d16f;
+}
+
+.chat-input {
+    border: 2px solid black; !important;
+}
+
+
+#chat_container{
+    min-height: 100vh;
+}
+
 
 /* Control the left side */
 .left {
@@ -40,4 +68,8 @@ a {
     right: 0;
     background-color: #228B22;
     color: white;
+}
+
+.font-weight-bold{
+ font-weight: bold;
 }

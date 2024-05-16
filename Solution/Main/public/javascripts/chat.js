@@ -91,10 +91,22 @@ function connectToRoom() {
  */
 function writeOnChatHistory(text) {
    let history = document.getElementById('chat_history');
-   let paragraph = document.createElement('p');
+   let paragraph = document.createElement('div');
    paragraph.innerHTML = text;
+   paragraph.classList.add('chat-message');
+    var mytext = '<b>' + 'Me' + ':</b> ';
+
+    if (text.startsWith(mytext)) {
+        paragraph.classList.add('my-message');
+        paragraph.classList.add('force-text-right');
+    } else {
+        paragraph.classList.add('others-message');
+    }
+
    history.appendChild(paragraph);
    document.getElementById('chat_input').value = '';
+    var chatHistory = document.getElementById('chat_history');
+    chatHistory.scrollTop = chatHistory.scrollHeight;
 }
 
 /**
@@ -117,8 +129,9 @@ function writeOnNewsHistory(text) {
 function hideLoginInterface(room, userId) {
    document.getElementById('initial_form').style.display = 'none';
    document.getElementById('chat_interface').style.display = 'block';
-   document.getElementById('who_you_are').innerHTML= userId;
+   document.getElementById('who_you_are').innerHTML= name;
    document.getElementById('in_room').innerHTML= ' '+room;
+   console.log("name: "+ name);
 }
 
 function sendAxiosQuery(url){
