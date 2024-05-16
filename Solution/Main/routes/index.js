@@ -154,6 +154,9 @@ router.post('/loginComplete', function(req, res, next) {
 router.post('/signUp', function(req, res, next) {
     res.render('signUp');
 });
+router.get('/signUp', function(req, res, next) {
+    res.render('signUp');
+});
 router.post('/signUpComplete', function(req, res, next) {
     res.render('index');
 });
