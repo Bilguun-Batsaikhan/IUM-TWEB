@@ -17,4 +17,8 @@ public interface PlayerRepository extends JpaRepository<Player, Long> {
     @Query("SELECT p.name, p.playerId, p.imageUrl FROM Player p WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :playerName, '%'))")
     List<String> searchPlayerByName(@Param("playerName") String playerName);
 
+    @Query("SELECT p FROM Player p WHERE p.marketValueInEur IS NOT NULL ORDER BY p.marketValueInEur DESC LIMIT 8")
+    List<Player> searchPlayers();
+
+
 }

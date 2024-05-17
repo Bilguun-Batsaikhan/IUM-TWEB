@@ -7,17 +7,9 @@ a {
     color: #00B7FF;
 }
 
-<<<<<<< HEAD
-.boxed {
-    width: 100%;
-    padding:10px;
-}
-
-=======
->>>>>>> c3d6b84fe49738fbdcc1fa310120a34b3d2a9222
 .bottom {
     position: absolute;
-    bottom: 10%;
+    bottom: 5%;
     width: 90%;
 }
 
@@ -61,7 +53,7 @@ a {
 
 
 #chat_container{
-    min-height: 100vh;
+    min-height: 90vh;
 }
 
 
@@ -79,5 +71,5 @@ a {
 }
 
 .font-weight-bold{
- font-weight: bold;
+    font-weight: bold;
 }

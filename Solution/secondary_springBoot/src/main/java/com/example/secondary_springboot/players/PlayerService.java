@@ -23,4 +23,8 @@ public class PlayerService {
     public List<String> searchPlayer(String playerName) {
         return playerRepository.searchPlayerByName(playerName);
     }
+
+    public List<Player> getPopularPlayers() {
+        return playerRepository.searchPlayers();
+    }
 }

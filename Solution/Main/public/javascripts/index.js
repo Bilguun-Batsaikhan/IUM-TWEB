@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         localStorage.clear();
         hideDiv();
     });
+    
+    getPopularPlayers();
 
     try {
         const countries = await sendAxiosIndexQuery('/competition');
@@ -107,4 +109,15 @@ function goLogin(){
     window.location.href = "/login";
 }
 
+function getPopularPlayers(){
+    console.log("J");
+    try {
+        const popPlayers = sendAxiosIndexQuery('/getpopularplayers');
+        //await createDropDownMenu(countries.countries, "country", "#");
+        //const competitionType = await sendAxiosIndexQuery('/competitionType');
+        console.log("Popular Players: "+ popPlayers)
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+}
 //export {fetchCountries, fetchCompetitionNames};
