@@ -1,51 +1,49 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-bg">
-        <div class="container">
-            <div class="row w-100">
-                <div class="col-md-12 d-flex">
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav justify-content-around w-100">
-                            <li class="nav-item active nav-el">
-                                <a class="nav-link" href="/">Home</a>
-                            </li>
-                            <li class="nav-item dropdown nav-el">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Competitions
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li class="dropdown-submenu">
-                                        <a class="dropdown-item dropdown-toggle" href="#">Competition Type</a>
-                                        <ul class="dropdown-menu" id = "competitionType">
-
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown-submenu">
-                                        <a class="dropdown-item dropdown-toggle" href="#">Competition Country</a>
-                                        <ul class="dropdown-menu" id="country">
-                                            <!-- Country list items will be added here -->
-                                        </ul>
-                                    </li>
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav w-100 justify-content-around">
+                    <li class="nav-item active nav-el">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item dropdown nav-el">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Competitions
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-item dropdown-toggle" href="#">Competition Type</a>
+                                <ul class="dropdown-menu" id="competitionType">
+                                    <!-- Competition Type items here -->
                                 </ul>
                             </li>
-                            <li class="nav-item nav-el">
-                                <a class="nav-link" href="/chat">Chat</a>
-                            </li>
-                            <li class="nav-item nav-el">
-                                <a class="nav-link" href="/about">About</a>
-                            </li>
-                            <li class="nav-item">
-                            <li class="nav-item">
-                                <input class="ms-2 form-control me-2 custom-search-bar" type="search" placeholder="Search" aria-label="Search" id="searchInput">
-                                <div id="searchResults" class="dropdown-menu" style="width:100%;">
-                                    <!-- search results here -->
-                                </div>
-                            </li>
-                            <li class="nav-item nav-item-right">
-                                <img src="/img/icon.png" alt="icon" class="logo" style="width: 40px; height: 40px;" onclick=goLogin()>
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-item dropdown-toggle" href="#">Competition Country</a>
+                                <ul class="dropdown-menu" id="country">
+                                    <!-- Country list items here -->
+                                </ul>
                             </li>
                         </ul>
-                    </div>
-                </div>
+                    </li>
+                    <li class="nav-item nav-el">
+                        <a class="nav-link" href="/chat">Chat</a>
+                    </li>
+                    <li class="nav-item nav-el">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <input class="ms-2 form-control me-2 custom-search-bar" type="search" placeholder="Search" aria-label="Search" id="searchInput">
+                        <div id="searchResults" class="dropdown-menu" style="width:100%;">
+                            <!-- Search results here -->
+                        </div>
+                    </li>
+                    <li class="nav-item nav-item-right">
+                        <img src="/img/icon.png" alt="icon" class="logo" style="width: 40px; height: 40px;" onclick="goLogin()">
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>

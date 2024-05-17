@@ -112,6 +112,12 @@ function goLogin(){
     window.location.href = "/login";
 }
 
+
+function toggleMenu() {
+    const navLinks = document.querySelector('.nav-links');
+    navLinks.style.display = navLinks.style.display === 'block' ? 'none' : 'block';
+}
+
 async function getPopularPlayers() {
     try {
         const responseData = await sendAxiosIndexQuery('/getpopularplayers');
@@ -121,6 +127,8 @@ async function getPopularPlayers() {
         console.error("Error fetching data:", error);
     }
 }
+
+
 
 
 //export {fetchCountries, fetchCompetitionNames};
