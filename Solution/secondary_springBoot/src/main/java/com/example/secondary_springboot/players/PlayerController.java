@@ -38,4 +38,10 @@ public class PlayerController {
         return ResponseEntity.ok(searchPlayers);
     }
 
+    @PostMapping("/getpopularplayers")
+    public ResponseEntity<List<Player>> getPopularPlayers(){
+        List<Player> players = playerService.getPopularPlayers();
+        return ResponseEntity.ok(players);
+    }
+
 }

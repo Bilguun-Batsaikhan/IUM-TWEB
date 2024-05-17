@@ -2,11 +2,15 @@ let nickname;
 
 document.addEventListener('DOMContentLoaded', async function () {
     hideDiv();
+    //X ALEX1: ho commentato temporaneamente finchè non viene reinserito il pulsante di logout
+    /*
     const logout = document.getElementById('logoutButton');
     logout.addEventListener('click', function () {
         localStorage.clear();
         hideDiv();
     });
+    */
+    getPopularPlayers();
 
     try {
         const countries = await sendAxiosIndexQuery('/competition');
@@ -28,14 +32,15 @@ function hideDiv() {
     if (!item || (time - item.timestamp) > 220000) {
         localStorage.removeItem('nicknameData');
         console.log("Nickname not found. Hiding elements.");
-        document.getElementById('nickNameLabel').classList.add('d-none');
-        document.getElementById('buttonUser').classList.remove('d-none');
+        //X ALEX 2: ho commentato momentaneamente finchè non viene rimesso il label per il nickname
+        //document.getElementById('nickNameLabel').classList.add('d-none');
+        //document.getElementById('buttonUser').classList.remove('d-none');
     } else {
         console.log("Nickname found. Displaying elements.");
         console.log(item.nickname);
-        document.getElementById('buttonUser').classList.add('d-none');
-        document.getElementById('nickNameLabel').classList.remove('d-none');
-        document.getElementById('nickNameP').innerHTML = item.nickname;
+        //document.getElementById('buttonUser').classList.add('d-none');
+        //document.getElementById('nickNameLabel').classList.remove('d-none');
+        //document.getElementById('nickNameP').innerHTML = item.nickname;
     }
 }
 
@@ -107,10 +112,23 @@ function goLogin(){
     window.location.href = "/login";
 }
 
+
 function toggleMenu() {
     const navLinks = document.querySelector('.nav-links');
     navLinks.style.display = navLinks.style.display === 'block' ? 'none' : 'block';
 }
+
+async function getPopularPlayers() {
+    try {
+        const responseData = await sendAxiosIndexQuery('/getpopularplayers');
+        const players = responseData.popPlayers;
+        console.log("Popular Players: " + JSON.stringify(players));
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+}
+
+
 
 
 //export {fetchCountries, fetchCompetitionNames};
