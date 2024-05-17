@@ -12,11 +12,12 @@ function submitForm(event) {
         const now = new Date();
         const item = {
             nickname: nickname,
-            timestamp: now.getTime(), // Ottiene il timestamp corrente in millisecondi
+            timestamp: now.getTime(),
         };
         localStorage.setItem('nicknameData', JSON.stringify(item));
         document.getElementById("form").submit();
     }
+    event.preventDefault();
 }
 
 function controlInfo(nickname) {
@@ -43,7 +44,6 @@ function controlInfo(nickname) {
     if (!specialCharRegex.test(password))
         return false;
 
-    // If all checks pass, return true
     return true;
 }
 

@@ -134,7 +134,8 @@ img {
 }
 
 .box-area {
-  width: 930px;
+  min-height: 80vh;
+  min-width: 85vh;
 }
 
 ::placeholder {

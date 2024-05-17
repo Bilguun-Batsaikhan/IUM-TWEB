@@ -1,0 +1,10 @@
+.bg-custom {
+    background-image: url('../img/background_photo.webp');
+    background-size: cover;
+    background-position: center;
+}
+
+#congratsPage{
+    height: 100vh;
+}
+
