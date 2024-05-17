@@ -107,4 +107,10 @@ function goLogin(){
     window.location.href = "/login";
 }
 
+function toggleMenu() {
+    const navLinks = document.querySelector('.nav-links');
+    navLinks.style.display = navLinks.style.display === 'block' ? 'none' : 'block';
+}
+
+
 //export {fetchCountries, fetchCompetitionNames};
