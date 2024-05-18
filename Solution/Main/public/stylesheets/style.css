@@ -299,6 +299,21 @@ img {
   height: 60px;
 }
 
+.navbar-toggler{
+  margin-left: 10px;
+}
+
+.navbar-toggler {
+  border: none !important;
+}
+
+.navbar-toggler:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+
+
 #nickNameP{
   border: 1px solid #FFF;
   display: inline-block;
@@ -322,10 +337,45 @@ img {
 }
 
 .custom-search-bar {
-  width: 300px;
+  max-width: 300px;
   height: 30px;
   border-radius: 10px !important;
 }
+
+.nav-item-center .login-logo {
+  width: 40px;
+  height: 40px;
+  transition: width 0.3s ease, height 0.3s ease;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+
+@media (max-width: 767.98px) {
+  .custom-search-bar {
+    max-width: 50%;
+  }
+
+  .navbar-collapse {
+    text-align: center;
+  }
+
+  .navbar-collapse.show .nav-item-center .login-logo {
+    width: 60px !important;
+    height: 60px !important;
+    margin: auto !important;
+  }
+
+  .navbar-nav {
+    justify-content: center;
+  }
+}
+
+.login-logo:hover {
+  cursor: pointer;
+}
+
+
 
 /*https://visme.co/blog/website-color-schemes/*/
 
