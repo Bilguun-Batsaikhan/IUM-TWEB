@@ -118,6 +118,19 @@ router.route('/retrieveCompetitionID')
                 res.status(505).json(err);
             })
     })
+router.route('/getpopularplayers')
+    .post((req, res) => {
+        axios.post('http://localhost:8082/players/getpopularplayers')
+            .then(json => {
+                const popPlayers = json.data;
+                res.json({popPlayers});
+            })
+            .catch(err => {
+                console.error('Error while retrieving games in index router ', err);
+                res.setHeader('Content-Type', 'application/json');
+                res.status(500).json(err);
+            })
+    });
 
 //fetch a graph given competition ID
 router.route('/retrieveGraph')

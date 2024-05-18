@@ -10,7 +10,9 @@ document.addEventListener('DOMContentLoaded', async function () {
         hideDiv();
     });
     */
-    getPopularPlayers();
+
+    // Funzione che chiama getPopularPlayers
+    callGetPopularPlayers()
 
     try {
         const countries = await sendAxiosIndexQuery('/competition');
@@ -118,17 +120,13 @@ function toggleMenu() {
     navLinks.style.display = navLinks.style.display === 'block' ? 'none' : 'block';
 }
 
-async function getPopularPlayers() {
-    try {
-        const responseData = await sendAxiosIndexQuery('/getpopularplayers');
-        const players = responseData.popPlayers;
-        console.log("Popular Players: " + JSON.stringify(players));
-    } catch (error) {
-        console.error("Error fetching data:", error);
+
+function callGetPopularPlayers() {
+    if (typeof getPopularPlayers === 'function') {
+        getPopularPlayers();
+    } else {
+        //console.error("getPopularPlayers is not defined in this page.");
     }
 }
-
-
-
 
 //export {fetchCountries, fetchCompetitionNames};
