@@ -2,7 +2,7 @@
 @media (max-width: 820px), (max-width: 768px), (max-width: 1024px), (max-width: 912px), (max-width: 540px) {
   .cell {
     width: 100%;
-    padding: 20px;
+    padding: 10px !important;
   }
   .row {
     padding: 0 !important;
@@ -10,6 +10,53 @@
   }
   .table {
     padding-right: 0 !important;
+  }
+
+  .cell-img-1, .cell-img-2 {
+    width: 30%;
+    height: auto;
+  }
+  .cell {
+    padding: 10px !important;
+  }
+
+}
+
+@media (max-width: 540px) {
+  #topRight, #topLeft, #bottomRight, #bottomLeft {
+    border-radius: 0 !important;
+  }
+
+  .cell {
+    padding: 5px !important;
+  }
+
+  .cell-img-1, .cell-img-2 {
+    width: 80%;
+    height: auto;
+  }
+
+  .mainContent {
+    padding: 0 !important;
+  }
+
+  .table {
+    padding: 0 !important;
+  }
+
+  .row {
+    margin: 0 !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .cell {
+    padding: 3px !important;
+  }
+
+  .cell-img-1, .cell-img-2 {
+    width: 75%;
+    height: auto;
   }
 }
 
@@ -66,6 +113,8 @@ img {
 .cell {
   background-color: rgba(7, 18, 36, 0.5);
   padding: 0 !important;
+  padding: 10px !important;
+  box-sizing: border-box;
 }
 .cell-img-1 {
   border-radius: 20px;
@@ -74,12 +123,28 @@ img {
   margin: 10px;
   padding: 0 !important;
 }
+
 .cell-img-2 {
-  border-radius: 100px;
-  width: 70%;
+  border-radius: 50%; /* Ensures circular images */
+  width: 80%; /* Adjust this to control the size of the images */
   height: auto;
   padding: 0;
-  margin: 10px;
+  margin: 10px auto; /* Centers the image horizontally and adds some vertical spacing */
+  display: block; /* Ensures block-level rendering for proper alignment */
+  object-fit: cover; /* Ensures the image covers the area while maintaining aspect ratio */
+}
+
+.custom-table.table > :not(caption) > * > * {
+  padding: 0 !important;
+  background-color: transparent !important; /* Ensures no background from Bootstrap */
+  box-shadow: none !important; /* Removes the inset shadow from Bootstrap */
+}
+
+.player-link {
+  display: block;
+  width: 100%;
+  height: auto;
+  text-align: center;
 }
 
 /* Border Radius */
@@ -326,6 +391,8 @@ img {
   height: 30px;
   border-radius: 10px !important;
 }
+
+
 
 /*https://visme.co/blog/website-color-schemes/*/
 
