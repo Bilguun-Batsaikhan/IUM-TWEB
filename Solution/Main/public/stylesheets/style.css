@@ -209,6 +209,12 @@ img {
   min-width: 85vh;
 }
 
+.box-login
+{
+  min-height: 60vh;
+  min-width: 65vh;
+}
+
 ::placeholder {
   font-size: 16px;
 }
