@@ -2,8 +2,7 @@
 @media (max-width: 820px), (max-width: 768px), (max-width: 1024px), (max-width: 912px), (max-width: 540px) {
   .cell {
     width: 100%;
-    padding-right: 0;
-    padding-bottom: 20px;
+    padding: 20px;
   }
   .row {
     padding: 0 !important;
@@ -51,10 +50,7 @@ img {
 
 /* Tables */
 .table {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 50%;
+  padding: 20px;
 }
 .topTable {
   margin: 0 !important;
@@ -68,21 +64,22 @@ img {
 
 /* Cells */
 .cell {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: rgba(7, 18, 36, 0.5);
+  padding: 0 !important;
 }
 .cell-img-1 {
   border-radius: 20px;
-  width: 80%;
+  width: 65%;
   height: auto;
+  margin: 10px;
+  padding: 0 !important;
 }
 .cell-img-2 {
   border-radius: 100px;
   width: 70%;
   height: auto;
   padding: 0;
+  margin: 10px;
 }
 
 /* Border Radius */
@@ -265,12 +262,20 @@ img {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #ececec;
-  color: black;
+  background-color: #071224;
   text-align: center;
-}
-.footer {
+  font-family: 'Poppins', sans-serif;
   margin-top: auto;
+}
+.social-icons {
+  margin-top: 15px;
+  width: 100%;
+  height: auto;
+}
+
+.icon-padding {
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 .btn {
@@ -286,7 +291,7 @@ img {
 
 .btn.rounded-pill.me-2 {
   /* background-color: #3f474f !important; old color */
-  background-color: #050b0e !important;
+  background-color: #071224 !important;
 }
 
 .navbar {
