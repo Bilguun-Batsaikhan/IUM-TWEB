@@ -1,31 +1,19 @@
 let errorStringFrist;
 let errorStringSecond;
-let errorStringThird;
 
-function initial() {
+function init() {
     // Hide the first div initially
     document.getElementById("first").style.display = "block";
 
     // Hide the second div initially
     document.getElementById("second").style.display = "none";
 
-    // Hide the third div initially
-    document.getElementById("third").style.display = "none";
-
     // Get the buttons for setting the functions
-    const firstButton = document.getElementById("firstButton");
+    const firstButton = document.getElementById("next");
     firstButton.addEventListener('click', changeFirstToSecond);
 
-    const secondButtonPrev = document.getElementById("secondButtonPrev");
-    const secondButtonNext = document.getElementById("secondButtonNext");
-    secondButtonNext.addEventListener('click', changeSecondToThird);
-    secondButtonPrev.addEventListener('click', backToFirst);
-
-    const thirdButtonPrev = document.getElementById("thirdButtonPrev");
-    const thirdButtonNext = document.getElementById("send");
-    thirdButtonNext.addEventListener('click', send);
-    thirdButtonPrev.addEventListener('click', backToSecond);
-
+    const secondButtonNext = document.getElementById("send");
+    secondButtonNext.addEventListener('click', send);
     event.preventDefault();
 }
 function changeFirstToSecond(){
@@ -36,27 +24,45 @@ function changeFirstToSecond(){
         alert(errorStringFrist);
 }
 
-function validateFirstBlock() {
-    let name = document.getElementById('name').value;
-    let surname = document.getElementById('surname').value;
-    let telephoneNumber = document.getElementById('telephone_number').value;
-    let nation = document.getElementById('nation').value;
-    let city = document.getElementById('city').value;
-    let address = document.getElementById('address').value;
-    let number = document.getElementById('number').value;
+function backToLogin(){
+    window.location.href = "/login";
+}
 
-    // Effettua il controllo che i campi non siano nulli
-    if (name === '' || surname === '' || telephoneNumber === '' || nation === '' || city === '' || address === '' || number === '') {
+function validateFirstBlock() {
+    let username = document.getElementById('username').value;
+    let email = document.getElementById('email').value;
+    let password = document.getElementById('password').value;
+    let confirmPassword = document.getElementById('confirmPassword').value;
+
+    if (username === '' || email === '' || telephoneNumber === '' || confirmPassword === '') {
         errorStringFrist = "Please, fill all the fields"
         return false;
     }
-    if (!(/^\d+$/.test(telephoneNumber) || /^\+\d{1,2} \d+$/.test(telephoneNumber))){
-        errorStringFrist = 'The field Telephone Number must contains only numbers.';
+    let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailRegex.test(email)) {
+        errorStringFrist = "Please enter a valid email address";
         return false;
     }
-    // Controllo che number contenga solo caratteri numerici
-    if (!(/^\d+$/.test(number))) {
-        errorStringFrist = 'Ther field Number must contains only numbers.';
+    const minLength = 8;
+    const maxLength = 15;
+    if (password.length < minLength && password.length > maxLength) {
+        errorStringFrist = "Password must follow criteria for length!";
+        return false;
+    }
+    // Use a regular expression to check for at least one number
+    const numberRegex = /\d/;
+    if (!numberRegex.test(password)) {
+        errorStringFrist = "Password must contain at least one number";
+        return false;
+    }
+
+    const specialCharRegex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
+    if (!specialCharRegex.test(password)) {
+        errorStringFrist = "Password must contain at least one special character";
+        return false;
+    }
+    if (password !== confirmPassword) {
+        errorStringFrist = "The passwords are not equals"
         return false;
     }
     return true;
@@ -65,29 +71,8 @@ function validateFirstBlock() {
 function showSecondBlock() {
     document.getElementById('first').style.display = 'none';
     document.getElementById('second').style.display = 'block';
-    const activeSegment = document.querySelector('.segment.second');
-
-    for (const element of activeSegment.querySelectorAll('.circle, .label, .line')) {
-        if (element.classList.contains('circle'))
-            element.style.backgroundColor ='#007bff';
-        else if ( element.classList.contains('line')) {
-            element.style.color ='#007bff';
-            element.style.backgroundColor ='#007bff';
-        }
-        else
-            element.style.color = '#007bff';
-    }
     event.preventDefault();
 }
-
-function changeSecondToThird(){
-    let result = validateSecondBlock();
-    if(result)
-        showThirdBlock();
-    else
-        alert(errorStringSecond);
-}
-
 
 function validateSecondBlock(){
     let email = document.getElementById('email').value;
@@ -98,70 +83,14 @@ function validateSecondBlock(){
         errorStringSecond = "Please, fill all the fields"
         return false;
     }
-    let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    // Verifica se l'email segue il formato desiderato
-    if (!emailRegex.test(email)) {
-        errorStringSecond = "Please enter a valid email address";
-        return false;
-    }
-    const minLength = 8;
-    const maxLength = 15;
 
-    // Check for minimum length
-    if (password.length < minLength && password.length > maxLength) {
-        errorStringSecond = "Password must follow criteria for length!";
-        return false;
-    }
-    // Use a regular expression to check for at least one number
-    const numberRegex = /\d/;
-    if (!numberRegex.test(password)) {
-        errorStringSecond = "Password must contain at least one number";
-        return false;
-    }
-
-    // Use a regular expression to check for at least one special character
-    const specialCharRegex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
-    if (!specialCharRegex.test(password)) {
-        errorStringSecond = "Password must contain at least one special character";
-        return false;
-    }
-    if (password !== confirmPassword) {
-        errorStringSecond = "The passwords are not equals"
-        return false;
-    }
-    return true;
 }
 
-
-
-function showThirdBlock() {
-    document.getElementById('second').style.display = 'none';
-    document.getElementById('third').style.display = 'block';
-    const activeSegment = document.querySelector('.segment.third');
-    for (const element of activeSegment.querySelectorAll('.circle, .label')) {
-        if (element.classList.contains('circle'))
-            element.style.backgroundColor ='#007bff';
-        else
-            element.style.color ='#007bff';
-    }
-    event.preventDefault();
-}
 
 function backToFirst() {
     document.getElementById('second').style.display = 'none';
     document.getElementById('first').style.display = 'block';
-    const activeSegment = document.querySelector('.segment.second');
 
-    for (const element of activeSegment.querySelectorAll('.circle, .label, .line')) {
-        if (element.classList.contains('circle'))
-            element.style.backgroundColor = '#A8A9AD';
-        else if ( element.classList.contains('line')) {
-            element.style.color = '#A8A9AD';
-            element.style.backgroundColor = '#A8A9AD';
-        }
-        else
-            element.style.color = '#A8A9AD';
-    }
     event.preventDefault();
 }
 
@@ -193,21 +122,4 @@ function validateThirdBlock()
         errorStringThird = "Max length of nickname is 15"
         return false;}
     return true;
-}
-function backToSecond() {
-    document.getElementById("second").style.display = "block";
-    document.getElementById("third").style.display = "none";
-
-    const activeSegment = document.querySelector('.segment.third');
-    for (const element of activeSegment.querySelectorAll('.circle, .label')) {
-        if (element.classList.contains('circle'))
-            element.style.backgroundColor ='#A8A9AD';
-        else if ( element.classList.contains('line')) {
-            element.style.color ='#A8A9AD';
-            element.style.backgroundColor ='#A8A9AD';
-        }
-        else
-            element.style.color ='#A8A9AD';
-    }
-    event.preventDefault();
 }

@@ -4,136 +4,73 @@
     <meta charset="UTF-8">
     <title>SignUp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/stylesheets/signUp.css" rel="stylesheet">
+    <link href="/stylesheets/style.css" rel="stylesheet">
+    <link href="/stylesheets/signup.css" rel="stylesheet">
     <script src="/javascripts/signUp.js"></script>
     <%- include('partials/navbarScripts') %>
 </head>
-<body onload="initial()">
+<body onload="init()">
+
 <%- include('partials/navbar') %>
-<div class="container d-flex justify-content-center mt-3 mb-3">
-    <div class="row border rounder-5 p-3 bg-white shadow box-area">
-        <h1 class="text-center"><i>SignUp</i></h1>
-        <div class = "text-center">
-            <div class="segment active" id="firstStep">
-                <div class="circle">1</div>
-                <div class="label">PERSONAL DATA</div>
-                <div class="line"></div>
-            </div>
-            <div class="segment second">
-                <div class="circle">2</div>
-                <div class="label ">CREDENTIALS</div>
-                <div class="line"></div>
-            </div>
-            <div class="segment third">
-                <div class="circle">3</div>
-                <div class="label">NICKNAME</div>
-            </div>
+
+<div class="container-fluid d-flex justify-content-center bg-custom" id="signUp_background">
+    <div class="mt-5 mb-5 w-60">
+        <div class="row border rounded-5 p-1 bg-white shadow box-area">
+            <div class="box">
+                <form action="/signUpComplete" method="post" id="form">
+                    <div id = "first">
+                            <button type="button" class="btn shadow border rounded-4" onclick="backToLogin()">
+                                <img src="/img/left_arrow.png" alt="Left arrow to return to homepage" id="leftArrow">
+                            </button>
+                        <div class="d-flex flex-column align-items-center w-60" id="boxFormSignUp">
+                            <h1 class="text-center mt-3 mb-1 fs-8"> Hello! </h1>
+                            <h1 class="text-center fs-8"> Register to get started</h1>
+                            <div class="mt-2">
+                                 <div class="mb-3">
+                                    <input type="text" class="form-control form-control-lg" id="nickname" name="nickname" required placeholder="Enter your Nickname" style="background-color: #D9D9D9; opacity: 60%">
+                                </div>
+                                <div class="mb-4">
+                                    <input type="password" class="form-control form-control-lg" id="password" name="password" required placeholder="Password" style="background-color: #D9D9D9; opacity: 60%">
+                                </div>
+                                <button class="btn btn-lg btn-primary w-100 fs-7" id="submitForm" value="submit" type="submit" style="background-color: #1E232C; color: #FFFFFF">Login</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="d-flex flex-column align-items-center" id="boxFormSignUp">
+                    <div class="w-60 mt-3">  <div class="row">
+                            <div class="col-4">
+                                <hr>
+                            </div>
+                            <div class="col-4 text-center">
+                                <p class="text">Or Sign Up with</p>
+                            </div>
+                            <div class="col-4">
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-4">
+                                <button type="button" class="btn shadow border rounded-4 ">
+                                    <img src="/img/facebook.png" id="facebook" alt="Login with facebook">
+                                </button>
+                            </div>
+                            <div class="col-4">
+                                <button type="button" class="btn shadow border rounded-4 ">
+                                    <img src="/img/google.png" id="google" alt="Login with google">
+                                </button>
+                            </div>
+                            <div class="col-4">
+                                <button type="button" class="btn shadow border rounded-4">
+                                    <img src="/img/apple.png" id="apple" alt="login with apple">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
-        <form action="/signUpComplete" id="form" method="post" class="pt-10 mt-5">
-            <div class="container first" id="first">
-                <div class="row justify-content-center">
-                    <div class="col-md-6 mb-3">
-                        <label for="name" class="form-label">Name:</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="surname" class="form-label">Surname:</label>
-                        <input type="text" class="form-control" id="surname" name="surname" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="city" class="form-label">City:</label>
-                        <input type="text" class="form-control" id="city" name="city" required placeholder="Example Turin">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="nation" class="form-label">Nation:</label>
-                        <input type="text" class="form-control" id="nation" name="nation" required placeholder="Example Italy">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="address" class="form-label">Address:</label>
-                        <input type="text" class="form-control" id="address" name="address" required placeholder="Example Via Vittorio Amedeo II">
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="number" class="form-label">Number:</label>
-                        <input type="text" class="form-control" id="number" name="number" required placeholder="Example 8">
-                    </div>
-                    <div class="col-md-3"></div>
-                    <div class="col-md-6 mb-3">
-                        <label for="telephone_number" class="form-label">Telephone number:</label>
-                        <input type="tel" class="form-control" id="telephone_number" name="telephone_number" required placeholder="In format +39 484349349">
-                    </div>
-                    <div class="col-md-6"></div>
-                </div>
-                <hr>
-                <div class="row justify-content-end">
-                    <div class="col-md-6 text-end">
-                        <button type="submit" class="btn btn-primary" id="firstButton">Next</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Second section of the form -->
-            <div class="container second" id="second">
-                <div class="row justify-content-center ">
-                    <div class="col-md-8 mb-3">
-                        <label for="email" class="form-label">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" required placeholder="Es username@gmail.com">
-                    </div>
-                    <div class="col-md-8 mb-3">
-                        <label for="password" class="form-label">Password:</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
-                    </div>
-                    <div class="col-md-8 mb-3">
-                        <label for="confirmPassword" class="form-label">Confirm Password:</label>
-                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-                    </div>
-                    <div class="col-md-8  exclude-justify">
-                        <span>Password Criteria:
-                            <br>
-                            - From 8 until 15 characters
-                            <br>
-                            - Must contain at least one number
-                            <br>
-                            - Must contain at least one special character (e.g., !@#$%^&*()_+{}[]:;<>,.?~\/-)
-                        </span>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-6 text-start">
-                        <button type="submit" class="btn btn-primary" id="secondButtonPrev">Prev</button>
-                    </div>
-                    <div class="col-6 text-end">
-                        <button type="submit" class="btn btn-primary" id="secondButtonNext">Next</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Third section of the form -->
-            <div class="container third" id="third">
-                <div class="row justify-content-center">
-                    <div class="col-md-7 mb-3">
-                        <label for="nickname" class="form-label">Choose your Nickname:</label>
-                        <input type="text" class="form-control" id="nickname" name="nickname" required>
-                    </div>
-                </div>
-                <div class="col-md-8  exclude-justify">
-                        <span>Nickname Criteria:
-                            <br>
-                            - Max 15 characters
-                        </span>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-6 text-start">
-                        <button type="submit" class="btn btn-primary" id="thirdButtonPrev">Prev</button>
-                    </div>
-                    <div class="col-6 text-end">
-                        <button type="submit" class="btn btn-primary" value="submit" id="send">Complete SignUp</button>
-                    </div>
-                </div>
-            </div>
-        </form>
     </div>
+</div>
 </div>
 <%- include('partials/footer') %>
 </body>

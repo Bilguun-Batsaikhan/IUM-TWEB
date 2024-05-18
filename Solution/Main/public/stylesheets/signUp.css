@@ -1,108 +1,56 @@
-body {
-    background-color: #FFFFFF;
-    font-family: Arial, sans-serif;
-}
-
 h1 {
-    font-size: 20px;
-}
-
-.segment {
-    position: relative;
-    display: inline-block;
-    margin-right: -10px;
-    margin-top: 30px;
-
-}
-
-.circle {
-    display: inline-block;
-    background-color: #A8A9AD;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 50%;
-    color: white;
-    overflow: hidden;
-    text-align: center;
-    font-size: 14px;
-}
-
-.line {
-    display: inline-block;
-    width: 100px;
-    height: 3px;
-    margin: 12px 0;
-    background-color: #A8A9AD;
-    position: relative;
-    left: -5px;
-}
-
-.label {
-    position: absolute;
-    left: 13px;
-    transform: translate(-50%, 0); /* Move to left */
-    font-size: 11px;
-    color: #A8A9AD;
-}
-
-.container {
-    margin: auto;
-}
-
-.segment.active .circle, .segment.active .line {
-    background-color: #007bff;
-}
-.segment.active .label {
-    color: #007bff;
-}
-
-#first{
-    margin-left: 10px;
-}
-
-#second{
-    margin-left: 10px;
-}
-#third{
-    margin-left: 10px;
-}
-@media screen and (max-width: 350px) {
-    h1{
-        font-size: 15px;
-    }
-    .segment {
-        margin-top: 15px; /* Riduci il margine superiore per schermi più piccoli */
-    }
-
-    .circle {
-        width: 20px;
-        height: 20px;
-        line-height: 20px;
-        font-size: 10px;
-    }
-
-    .line {
-        width: 50px;
-        height: 2px;
-        margin: 8px 0;
-    }
-
-    .label {
-        font-size: 10px;
-    }
-    #first{
-        margin-left: 0px;
-    }
-
-    #second{
-        margin-left: 0px;
-    }
-    #third{
-        margin-left: 0px;
-    }
-}
-
-h1{
+    font-size: 5px;
     letter-spacing: 3px;
+}
+
+
+
+.bg-custom {
+    background-image: url('../img/background_photo.webp');
+    background-size: cover;
+    background-position: center;
+}
+#leftArrow{
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#facebook
+{
+    padding: 15px;
+    height: 60px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#google
+{
+    padding: 15px;
+    height: 60px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#apple{
+    padding: 17px;
+    height: 63px;
+    width: 63px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#signUp_background {
+    height: 100vh;
+}
+
+#boxFormSignUp{
+    margin: auto;
 }

@@ -11,73 +11,65 @@
 </head>
 <body onload="init()">
 <%- include('partials/navbar') %>
-<div class="container-fluid d-flex justify-content-center bg-custom" id= "login_background">
-    <div class="row border rounded-5 mt-5 mb-5 p-2 bg-white shadow box-area">
-        <div class="box">
+<div class="container-fluid d-flex justify-content-center bg-custom" id="login_background">
+    <div class="mt-5 mb-5 w-60">
+        <div class="row border rounded-5 p-2 bg-white shadow box-area">
+            <div class="box">
                 <button type="button" class="btn shadow border rounded-4" onclick="backToHomePage()">
-                     <img src="/img/left_arrow.png" alt="Left arrow to return to homepage" id ="leftArrow">
+                    <img src="/img/left_arrow.png" alt="Left arrow to return to homepage" id="leftArrow">
                 </button>
-            <div class="d-flex flex-column align-items-center" id="boxFormLogin">
-                <h1 id="loginHeader" class="text-center mt-3 mb-3"> Welcome back! </h1>
-                <div class="col-md-6 mt-5 ">
-                    <form action="/loginComplete" method="post" id="form">
-                        <div class="mb-3">
-                            <input type="text" class="form-control form-control-lg" id="nickname" name="nickname" required placeholder="Enter your Nickname" style="background-color: #D9D9D9; opacity: 60%">
-                        </div>
-                        <div class="mb-4">
-                            <input type="password" class="form-control form-control-lg" id="password" name="password"  required placeholder="Password"  style="background-color: #D9D9D9; opacity: 60%">
-                        </div>
-                        <button class="btn btn-lg btn-primary w-100 fs-7 " id="submitForm" value="submit" type="submit" style="background-color: #1E232C; color: #FFFFFF">Login</button>
-                    </form>
-                </div>
-                <div class="col-md-6 mt-3">
-                    <div class="row">
-                        <div class ="col-4">
-                            <hr>
-                        </div>
-                         <div class ="col-4">
-                            <p class="text">Or Login with</p>
-                         </div>
-                         <div class ="col-4">
-                           <hr>
-                         </div>
-                    </div>
-                    <div class="row mt-3 ">
-                        <div class ="col-4">
-                            <button type="button" class="btn shadow border rounded-4">
-                                <img src="/img/facebook.png" id="facebook" alt="Login with facebook">
-                            </button>
-                        </div>
-                        <div class ="col-4">
-                            <button type="button" class="btn shadow border rounded-4" >
-                                <img src="/img/google.png" id = "google" alt="Login with google">
-                            </button>
-                        </div>
-                        <div class ="col-4">
-                            <button type="button" class="btn shadow border rounded-4">
-                                <img src="/img/apple.png" id = "apple" alt="login with apple" >
-                            </button>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="row mt-3">
-                            <hr>
-                        </div>
-                        <div class="row mt-3">
-                            <div class ="col-7">
-                                <p>Don’t have an account? </p>
+                <div class="d-flex flex-column align-items-center" id="boxFormLogin">
+                    <h1 id="loginHeader" class="text-center mt-3 mb-3"> Welcome back! </h1>
+                    <div class="w-50">  <form action="/loginComplete" method="post" id="form">
+                            <div class="mb-3">
+                                <input type="text" class="form-control form-control-lg" id="nickname" name="nickname" required placeholder="Enter your Nickname" style="background-color: #D9D9D9; opacity: 60%">
                             </div>
-                            <div class ="col-5">
-                                <a href="http://localhost:3000/signUp" style="color: #35C2C1"> Register Now</a>
+                            <div class="mb-4">
+                                <input type="password" class="form-control form-control-lg" id="password" name="password" required placeholder="Password" style="background-color: #D9D9D9; opacity: 60%">
+                            </div>
+                            <button class="btn btn-lg btn-primary w-100 fs-7" id="submitForm" value="submit" type="submit" style="background-color: #1E232C; color: #FFFFFF">Login</button>
+                        </form>
+                    </div>
+                    <div class="w-50 mt-3">  <div class="row">
+                            <div class="col-4">
+                                <hr>
+                            </div>
+                            <div class="col-4 text-center">
+                                <p class="text">Or Login with</p>
+                            </div>
+                            <div class="col-4">
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-4">
+                                <button type="button" class="btn shadow border rounded-4 ">
+                                    <img src="/img/facebook.png" id="facebook" alt="Login with facebook">
+                                </button>
+                            </div>
+                            <div class="col-4">
+                                <button type="button" class="btn shadow border rounded-4 ">
+                                    <img src="/img/google.png" id="google" alt="Login with google">
+                                </button>
+                            </div>
+                            <div class="col-4">
+                                <button type="button" class="btn shadow border rounded-4">
+                                    <img src="/img/apple.png" id="apple" alt="login with apple">
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">  <hr>
+                                <p class="text">Don’t have an account? <a href="http://localhost:3000/signUp" style="color: #35C2C1"> Register Now</a></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
-
 <%- include('partials/footer') %>
 </body>
 </html>
