@@ -12,6 +12,11 @@
     margin: auto;
 }
 
+.box-login {
+    min-height: 80vh;
+    min-width: 85vh;
+}
+
 .leftArrow{
         height: 20px;
         width: 20px;

@@ -211,8 +211,8 @@ img {
 
 .box-login
 {
-  min-height: 60vh;
-  min-width: 65vh;
+  min-height: 80vh;
+  min-width: 85vh;
 }
 
 ::placeholder {

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/stylesheets/style.css" rel="stylesheet">
     <link href="/stylesheets/signup.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400&display=swap" rel="stylesheet">
     <script src="/javascripts/signUp.js"></script>
     <%- include('partials/navbarScripts') %>
 </head>
@@ -14,7 +15,7 @@
 <%- include('partials/navbar') %>
 
 <div class="container-fluid d-flex justify-content-center bg-custom">
-    <div class="row border rounded-5 mt-3 mb-2 p-2 bg-white shadow ">
+    <div class="row border rounded-5 mt-3 mb-2 bg-white shadow box-signup">
         <div id ="boxForSignUp">
              <form action="/signUpComplete" method="post" id="form">
                   <div id = "first">
@@ -23,7 +24,7 @@
                               <img src="/img/left_arrow.png" alt="Left arrow to return to homepage" class="leftArrow">
                           </button>
                       </div>
-                      <div class="d-flex flex-column align-items-center "  id="boxFormSignUp">
+                      <div class="d-flex flex-column align-items-center boxFormSignUp" >
                           <h1 class="text-center mt-2 mb-1 signUpHeader"> Hello! </h1>
                           <h1 class="text-center signUpHeader"> Register to get started</h1>
                           <div class="mt-3 w-75"  style="max-width: 400px;">
@@ -35,11 +36,18 @@
                               </div>
                               <div class="mb-4">
                                   <input type="password" class="form-control form-control-lg" id="password" name="password" required placeholder="Password" style="background-color: #D9D9D9; opacity: 60%">
+                                  <div id="password-criteria" class="hidden">
+                                      <ul>
+                                          <li>From 8 until 15 characters</li>
+                                          <li>Must contain at least one number</li>
+                                          <li>Must contain at least one special character (es. !@#$%^&*)</li>
+                                      </ul>
+                                  </div>
                               </div>
                               <div class="mb-3">
                                   <input type="text" class="form-control form-control-lg" id="correctPassword" name="correctPassword" required placeholder="Confirm Password" style="background-color: #D9D9D9; opacity: 60%">
                               </div>
-                              <button class="btn btn-lg btn-primary w-100 fs-7" id="next" value="next" style="background-color: #1E232C; color: #FFFFFF">Next</button>
+                              <button class="btn btn-lg btn-primary w-100 fs-7" id="next" value="next" onclick=changeFirstToSecond() style="background-color: #1E232C; color: #FFFFFF">Next</button>
                           </div>
                       </div>
                   </div>
@@ -49,7 +57,7 @@
                              <img src="/img/left_arrow.png" alt="Left arrow to return to homepage" class="leftArrow">
                          </button>
                      </div>
-                     <div class="d-flex flex-column align-items-center "  id="boxFormSignUp">
+                     <div class="d-flex flex-column align-items-center boxFormSignUp"  >
                          <h1 class="text-center mt-2 signUpHeader"> We are almost done </h1>
                          <div class="mt-3 w-75"  style="max-width: 400px;">
                              <div class="mb-3">
@@ -59,18 +67,26 @@
                                  <input type="text" class="form-control form-control-lg" id="nation" name="nation" required placeholder="Nation" style="background-color: #D9D9D9; opacity: 60%">
                              </div>
                              <div class="mb-4">
-                                 <input type="password" class="form-control form-control-lg" id="address" name="address" required placeholder="Address" style="background-color: #D9D9D9; opacity: 60%">
+                                 <input type="text" class="form-control form-control-lg" id="address" name="address" required placeholder="Address" style="background-color: #D9D9D9; opacity: 60%">
                              </div>
                              <div class="mb-3">
                                  <input type="text" class="form-control form-control-lg" id="phone" name="phone" required placeholder="Phone Number" style="background-color: #D9D9D9; opacity: 60%">
                              </div>
-                             <button class="btn btn-lg btn-primary w-100 fs-7" id="next" value="next" style="background-color: #1E232C; color: #FFFFFF">Next</button>
+                             <button class="btn btn-lg btn-primary w-100 fs-7" id="endSign" value="endSign" onclick=congrats() style="background-color: #1E232C; color: #FFFFFF">Next</button>
                          </div>
+                     </div>
+                 </div>
+                 <div id = "third">
+                     <div class ="d-flex flex-column align-items-center">
+                        <h1 class ="mb-5 signUpHeader mt-5">Thank you for sign up</h1>
+                        <img src="/img/soccerBall.png" alt="Football ball in movement" id="ball">
+                        <p class="mt-5 custom">Enjoy our service</p>
+                        <button class="btn btn-lg btn-primary w-100 fs-7 w-75 mb-5" id="submit" value="submit" type="submit" style="background-color: #1E232C; color: #FFFFFF; max-width: 400px;">Finish SignUp</button>
                      </div>
                  </div>
              </form>
         </div>
-        <div class="col-md-12 mt-3 w-75 " style="max-width: 400px;" id = "boxFormSignUp">
+        <div class="col-md-12 mt-3 mb-3 w-75 boxFormSignUp" style="max-width: 400px;" id = "signAlternative">
             <div class="row">
                 <div class="col-4">
                     <hr>
@@ -102,6 +118,7 @@
         </div>
     </div>
 </div>
+
 <%- include('partials/footer') %>
 </body>
 </html>

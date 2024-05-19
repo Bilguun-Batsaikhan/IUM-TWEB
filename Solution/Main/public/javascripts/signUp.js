@@ -2,19 +2,24 @@ let errorStringFrist;
 let errorStringSecond;
 
 function init() {
-    // Hide the first div initially
+
     document.getElementById("first").style.display = "block";
-
-    // Hide the second div initially
     document.getElementById("second").style.display = "none";
+    document.getElementById("third").style.display = "none";
+    const passwordInput = document.getElementById('password');
+    const passwordCriteria = document.getElementById('password-criteria');
 
-    // Get the buttons for setting the functions
-    const firstButton = document.getElementById("next");
-    firstButton.addEventListener('click', changeFirstToSecond);
+    passwordInput.addEventListener('focus', () => {
+        console.log('Focus event triggered');
+        passwordCriteria.classList.remove('hidden');
+    });
 
-    const secondButtonNext = document.getElementById("send");
-    secondButtonNext.addEventListener('click', send);
-    event.preventDefault();
+    passwordInput.addEventListener('blur', () => {
+        console.log('Blur event triggered');
+        setTimeout(() => {
+            passwordCriteria.classList.add('hidden');
+        }, 200);
+    });
 }
 function changeFirstToSecond(){
     let result = validateFirstBlock();
@@ -22,6 +27,7 @@ function changeFirstToSecond(){
         showSecondBlock();
     else
         alert(errorStringFrist);
+    event.preventDefault();
 }
 
 function backToLogin(){
@@ -29,12 +35,12 @@ function backToLogin(){
 }
 
 function validateFirstBlock() {
-    let username = document.getElementById('username').value;
+    let username = document.getElementById('nickname').value;
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
-    let confirmPassword = document.getElementById('confirmPassword').value;
+    let confirmPassword = document.getElementById('correctPassword').value;
 
-    if (username === '' || email === '' || telephoneNumber === '' || confirmPassword === '') {
+    if (nickname === '' || email === '' || password === '' || confirmPassword === '') {
         errorStringFrist = "Please, fill all the fields"
         return false;
     }
@@ -68,6 +74,12 @@ function validateFirstBlock() {
     return true;
 }
 
+function signUpFirst(){
+    document.getElementById("first").style.display = "block";
+    document.getElementById("second").style.display = "none";
+    event.preventDefault();
+}
+
 function showSecondBlock() {
     document.getElementById('first').style.display = 'none';
     document.getElementById('second').style.display = 'block';
@@ -75,51 +87,35 @@ function showSecondBlock() {
 }
 
 function validateSecondBlock(){
-    let email = document.getElementById('email').value;
-    let password = document.getElementById('password').value;
-    let confirmPassword = document.getElementById('confirmPassword').value;
+    let city = document.getElementById('city').value;
+    let nation = document.getElementById('nation').value;
+    let address = document.getElementById('address').value;
+    let phoneNumber = document.getElementById('phone').value;
 
-    if (email === '' || password === '' || confirmPassword === '') {
+    if (city === '' || nation === '' || address === '' || phoneNumber === '') {
         errorStringSecond = "Please, fill all the fields"
         return false;
     }
 
-}
-
-
-function backToFirst() {
-    document.getElementById('second').style.display = 'none';
-    document.getElementById('first').style.display = 'block';
-
-    event.preventDefault();
-}
-
-function send()
-{
-    let result = validateThirdBlock();
-    if (!result)
-        alert(errorStringThird);
-    else {
-        const nickname = document.getElementById('nickname').value;
-        const now = new Date();
-        const item = {
-            nickname: nickname,
-            timestamp: now.getTime(), // Ottiene il timestamp corrente in millisecondi
-        };
-        localStorage.setItem('nicknameData', JSON.stringify(item));
-        document.getElementById("form").submit();
-    }
-}
-
-function validateThirdBlock()
-{
-    let nickname = document.getElementById('nickname').value;
-    if (nickname === '') {
-        errorStringThird = "Please, fill nickname fild"
+    if (!(/^\d+$/.test(phoneNumber) || /^\+\d{1,2} \d+$/.test(phoneNumber))){
+        errorStringFrist = 'The field Telephone Number must contains only numbers.';
         return false;
     }
-    if(nickname.lenght > 15){
-        errorStringThird = "Max length of nickname is 15"
-        return false;}
-    return true;
 }
+
+function congrats()
+{
+    document.getElementById("third").style.display = "block";
+    document.getElementById("second").style.display = "none";
+    document.getElementById("signAlternative").style.display = "none";
+    event.preventDefault();
+    const nickname = document.getElementById('nickname').value;
+    const now = new Date();
+    const item = {
+        nickname: nickname,
+        timestamp: now.getTime(),
+    };
+    localStorage.setItem('nicknameData', JSON.stringify(item));
+    document.getElementById("form").submit();
+}
+
