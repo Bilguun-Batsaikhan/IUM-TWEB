@@ -54,21 +54,10 @@
     padding: 3px !important;
   }
 
-  .cell-img-1, .cell-img-2 {
+  .cell-img {
     width: 75%;
     height: auto;
   }
-}
-
-/* Main Content */
-.main-content {
-  background-image: url("../img/background_photo.webp");
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100vh;
-}
-.mainContent {
-  padding: 0 30px 0 30px !important;
 }
 
 /* Buttons */
@@ -95,6 +84,12 @@ img {
   background-color: rgba(7, 18, 36, 0.5);
 }
 
+.main-content {
+  background-image: url("../img/background_photo.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 /* Tables */
 .table {
   padding: 20px;
@@ -102,7 +97,7 @@ img {
 .topTable {
   margin: 0 !important;
   padding: 0 !important;
-  height: 50%;
+
 }
 .table {
   padding: 20px 300px 20px  50px;
@@ -110,35 +105,36 @@ img {
 }
 
 /* Cells */
+
 .cell {
+  position: relative;
+  overflow: hidden;
   background-color: rgba(7, 18, 36, 0.5);
-  padding: 0 !important;
-  padding: 10px !important;
   box-sizing: border-box;
-}
-.cell-img-1 {
-  border-radius: 20px;
-  width: 65%;
-  height: auto;
-  margin: 10px;
-  padding: 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.cell-img-2 {
-  border-radius: 50%; /* Ensures circular images */
-  width: 80%; /* Adjust this to control the size of the images */
-  height: auto;
-  padding: 0;
-  margin: 10px auto; /* Centers the image horizontally and adds some vertical spacing */
-  display: block; /* Ensures block-level rendering for proper alignment */
-  object-fit: cover; /* Ensures the image covers the area while maintaining aspect ratio */
+.cell img {
+
+  object-fit: cover;
+  border-radius: 50%;
 }
 
-.custom-table.table > :not(caption) > * > * {
-  padding: 0 !important;
-  background-color: transparent !important; /* Ensures no background from Bootstrap */
-  box-shadow: none !important; /* Removes the inset shadow from Bootstrap */
+.image-container{
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: transparent !important;
 }
+
+.bo1{
+  height: 50px;
+  width: 50px;
+
+}
+
 
 .player-link {
   display: block;
@@ -146,6 +142,12 @@ img {
   height: auto;
   text-align: center;
 }
+
+.competition-link-1 {
+  background-color: transparent !important;
+  text-decoration: none !important;
+}
+
 
 /* Border Radius */
 #topRight {
