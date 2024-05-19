@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SignUp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/stylesheets/style.css" rel="stylesheet">
+    <link href="/stylesheets/about.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400&display=swap" rel="stylesheet">
+    <script src="/javascripts/about.js"></script>
+    <%- include('partials/navbarScripts') %>
+</head>
+<body>
+
+<%- include('partials/navbar') %>
+
+<div class="container-fluid d-flex justify-content-center bg-custom">
+    <div class="row border rounded-5 mt-3 mb-3 bg-white shadow box-signup">
+        <div class=" p-3">
+            <button type="button" class="btn shadow border rounded-4" onclick=backToHomePage()>
+                <img src="/img/left_arrow.png" alt="Left arrow to return to homepage" class="leftArrow">
+            </button>
+            <div class ="mt-1" style="max-width: 800px">
+                <div class = "row text-center mb-2">
+                    <h2>Welcome on our website</h2>
+                    <p>We are a team of three university students from the University of Turin, and we are creating this website as a final project for the IUM-TWEB exam.</p>
+                </div>
+                <div class = "row text-center mb-2">
+                    <h2>Our vision</h2>
+                    <p>Our goal is to provide football enthusiasts with an engaging and informative online experience. We aim to create a platform that offers rankings, recent matches, statistics, and in-depth analysis of the football world, both nationally and internationally.</p>
+                </div>
+                <div class = "row text-center mb-2 space">
+                <h2>What We Offer:</h2>
+                    <ul>
+                        <li>Latest updates on matches and teams</li>
+                        <li>Tactical analyses and detailed statistics</li>
+                        <li>Rankings of various leagues, cups, and international competitions</li>
+                    </ul>
+                </div>
+                <div class = "row text-center mb-2 space">
+                <h2>Our Team:</h2>
+                    <ul>
+                        <li><strong>Bilguun Batsaikhan</strong>: A web development enthusiast, he is our back-end web development expert.</li>
+                        <li><strong>Emanuele Machetti</strong>: With his passion for data, he is responsible for data processing.</li>
+                        <li><strong>Alex Agliuzza</strong>: An expert in data analysis and football statistics, he conducts in-depth research and analysis to provide detailed information to our readers.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('partials/footer') %>
+</body>
+</html>
