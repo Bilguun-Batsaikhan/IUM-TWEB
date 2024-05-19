@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
@@ -7,55 +8,91 @@
   <!-- connect to styles.css -->
 
   <%- include('partials/navbarScripts') %>
-  <script src="/javascripts/popular_players.js"></script>
+    <script src="/javascripts/popular_players.js"></script>
 </head>
+
 <body class="body">
-<%- include('partials/navbar') %>
-<div class="main-content">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-3 sideContent">
-        <h1>Sidebar contents goes here</h1>
-      </div>
-      <div class="col-9 mainContent">
-        <div class="row table">
-          <div class="row topTable">
-            <div class="col-12 col-sm-3 cell text-center d-flex align-items-center justify-content-center py-2" id="topLeft"><img src="img/Champions League/c1.jpg" alt="" class="cell-img-1"></div>
-            <div class="col-12 col-sm-3 cell text-center d-flex align-items-center justify-content-center py-2"><img src="img/Champions League/c2.jpg" alt="" class="cell-img-1"></div>
-            <div class="col-12 col-sm-3 cell text-center d-flex align-items-center justify-content-center py-2"><img src="img/Champions League/c3.jpg" alt="" class="cell-img-1"></div>
-            <div class="col-12 col-sm-3 cell text-center d-flex align-items-center justify-content-center py-2" id="topRight"><img src="img/Champions League/c4.jpg" alt="" class="cell-img-1"></div>
+  <%- include('partials/navbar') %>
+    <div class="main-content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-3 sideContent">
+            <h1>Sidebar contents goes here</h1>
           </div>
-          <div class="row topTable">
-            <!--
-            <div class="col-12 col-sm-3 cell text-center d-flex align-items-center justify-content-center" id="bottomLeft">
-            -->
-            <div class="col-12 col-sm-3 cell text-center d-flex align-items-center justify-content-center py-2" id="bottomLeft"><img src="img/Champions League/c5.jpg" alt="" class="cell-img-1"></div>
-            <div class="col-12 col-sm-3 cell text-center d-flex align-items-center justify-content-center py-2"><img src="img/Champions League/c6.jpg" alt="" class="cell-img-1"></div>
-            <div class="col-12 col-sm-3 cell text-center d-flex align-items-center justify-content-center py-2"><img src="img/Champions League/c7.jpg" alt="" class="cell-img-1"></div>
-            <div class="col-12 col-sm-3 cell text-center d-flex align-items-center justify-content-center py-2" id="bottomRight"><img src="img/Champions League/c8.jpg" alt="" class="cell-img-1"></div>
+          <div class="col-9 mainContent">
+            <div class="row table">
+              <div class="row topTable">
+                <div class="col-6 col-sm-3 cell text-center d-flex align-items-center justify-content-center py-2"
+                  id="topLeft">
+                  <img src="img/Champions League/c1.jpg" alt="" class="cell-img-1">
+                </div>
+                <div class="col-6 col-sm-3 cell text-center d-flex align-items-center justify-content-center py-2">
+                  <img src="img/Champions League/c2.jpg" alt="" class="cell-img-1">
+                </div>
+                <div class="col-6 col-sm-3 cell text-center d-flex align-items-center justify-content-center py-2">
+                  <img src="img/Champions League/c3.jpg" alt="" class="cell-img-1">
+                </div>
+                <div class="col-6 col-sm-3 cell text-center d-flex align-items-center justify-content-center py-2"
+                  id="topRight">
+                  <img src="img/Champions League/c4.jpg" alt="" class="cell-img-1">
+                </div>
+              </div>
+              <div class="row topTable">
+                <div class="col-6 col-sm-3 cell text-center d-flex align-items-center justify-content-center py-2"
+                  id="bottomLeft">
+                  <img src="img/Champions League/c5.jpg" alt="" class="cell-img-1">
+                </div>
+                <div class="col-6 col-sm-3 cell text-center d-flex align-items-center justify-content-center py-2">
+                  <img src="img/Champions League/c6.jpg" alt="" class="cell-img-1">
+                </div>
+                <div class="col-6 col-sm-3 cell text-center d-flex align-items-center justify-content-center py-2">
+                  <img src="img/Champions League/c7.jpg" alt="" class="cell-img-1">
+                </div>
+                <div class="col-6 col-sm-3 cell text-center d-flex align-items-center justify-content-center py-2"
+                  id="bottomRight">
+                  <img src="img/Champions League/c8.jpg" alt="" class="cell-img-1">
+                </div>
+              </div>
+            </div>
+            <div class="row table custom-table">
+              <div class="row topTable">
+                <div class="col-6 col-sm-3 cell" id="topLeft">
+                  <img id="player-1" src="img/Players/p1.png" alt="" class="cell-img-2">
+                </div>
+                <div class="col-6 col-sm-3 cell">
+                  <img id="player-2" src="img/Players/p2.png" alt="" class="cell-img-2">
+                </div>
+                <div class="col-6 col-sm-3 cell">
+                  <img id="player-3" src="img/Players/p3.png" alt="" class="cell-img-2">
+                </div>
+                <div class="col-6 col-sm-3 cell" id="topRight">
+                  <img id="player-4" src="img/Players/p4.png" alt="" class="cell-img-2">
+                </div>
+              </div>
+              <div class="row topTable">
+                <div class="col-6 col-sm-3 cell" id="bottomLeft">
+                  <img id="player-5" src="img/Players/p5.png" alt="" class="cell-img-2">
+                </div>
+                <div class="col-6 col-sm-3 cell">
+                  <img id="player-6" src="img/Players/p6.png" alt="" class="cell-img-2">
+                </div>
+                <div class="col-6 col-sm-3 cell">
+                  <img id="player-7" src="img/Players/p7.png" alt="" class="cell-img-2">
+                </div>
+                <div class="col-6 col-sm-3 cell" id="bottomRight">
+                  <img id="player-8" src="img/Players/p8.png" alt="" class="cell-img-2">
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="row table">
-          <div class="row topTable">
-            <div class="col-12 col-sm-3 cell" id="topLeft"><img id="player-1" src="img/Players/p1.png" alt="" class="cell-img-2"></div>
-            <div class="col-12 col-sm-3 cell"><img id="player-2" src="img/Players/p2.png" alt="" class="cell-img-2"></div>
-            <div class="col-12 col-sm-3 cell"><img id="player-3" src="img/Players/p3.png" alt="" class="cell-img-2"></div>
-            <div class="col-12 col-sm-3 cell" id="topRight"><img id="player-4" src="img/Players/p4.png" alt="" class="cell-img-2"></div>
-          </div>
-          <div class="row topTable">
-            <div class="col-12 col-sm-3 cell" id="bottomLeft"><img id="player-5" src="img/Players/p5.png" alt="" class="cell-img-2"></div>
-            <div class="col-12 col-sm-3 cell"><img id="player-6" src="img/Players/p6.png" alt="" class="cell-img-2"></div>
-            <div class="col-12 col-sm-3 cell"><img id="player-7" src="img/Players/p7.png" alt="" class="cell-img-2"></div>
-            <div class="col-12 col-sm-3 cell" id="bottomRight"><img id="player-8" src="img/Players/p8.png" alt="" class="cell-img-2"></div>
-          </div>
+
         </div>
       </div>
     </div>
-  </div>
-</div>
-<%- include('partials/footer') %>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <%- include('partials/footer') %>
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
