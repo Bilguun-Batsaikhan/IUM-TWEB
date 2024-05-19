@@ -1,32 +1,25 @@
 let errorStringFrist;
 let errorStringSecond;
-let errorStringThird;
 
-function initial() {
-    // Hide the first div initially
+function init() {
+
     document.getElementById("first").style.display = "block";
-
-    // Hide the second div initially
     document.getElementById("second").style.display = "none";
-
-    // Hide the third div initially
     document.getElementById("third").style.display = "none";
+    const passwordInput = document.getElementById('password');
+    const passwordCriteria = document.getElementById('password-criteria');
 
-    // Get the buttons for setting the functions
-    const firstButton = document.getElementById("firstButton");
-    firstButton.addEventListener('click', changeFirstToSecond);
+    passwordInput.addEventListener('focus', () => {
+        console.log('Focus event triggered');
+        passwordCriteria.classList.remove('hidden');
+    });
 
-    const secondButtonPrev = document.getElementById("secondButtonPrev");
-    const secondButtonNext = document.getElementById("secondButtonNext");
-    secondButtonNext.addEventListener('click', changeSecondToThird);
-    secondButtonPrev.addEventListener('click', backToFirst);
-
-    const thirdButtonPrev = document.getElementById("thirdButtonPrev");
-    const thirdButtonNext = document.getElementById("send");
-    thirdButtonNext.addEventListener('click', send);
-    thirdButtonPrev.addEventListener('click', backToSecond);
-
-    event.preventDefault();
+    passwordInput.addEventListener('blur', () => {
+        console.log('Blur event triggered');
+        setTimeout(() => {
+            passwordCriteria.classList.add('hidden');
+        }, 200);
+    });
 }
 function changeFirstToSecond(){
     let result = validateFirstBlock();
@@ -34,180 +27,95 @@ function changeFirstToSecond(){
         showSecondBlock();
     else
         alert(errorStringFrist);
-}
-
-function validateFirstBlock() {
-    let name = document.getElementById('name').value;
-    let surname = document.getElementById('surname').value;
-    let telephoneNumber = document.getElementById('telephone_number').value;
-    let nation = document.getElementById('nation').value;
-    let city = document.getElementById('city').value;
-    let address = document.getElementById('address').value;
-    let number = document.getElementById('number').value;
-
-    // Effettua il controllo che i campi non siano nulli
-    if (name === '' || surname === '' || telephoneNumber === '' || nation === '' || city === '' || address === '' || number === '') {
-        errorStringFrist = "Please, fill all the fields"
-        return false;
-    }
-    if (!(/^\d+$/.test(telephoneNumber) || /^\+\d{1,2} \d+$/.test(telephoneNumber))){
-        errorStringFrist = 'The field Telephone Number must contains only numbers.';
-        return false;
-    }
-    // Controllo che number contenga solo caratteri numerici
-    if (!(/^\d+$/.test(number))) {
-        errorStringFrist = 'Ther field Number must contains only numbers.';
-        return false;
-    }
-    return true;
-}
-
-function showSecondBlock() {
-    document.getElementById('first').style.display = 'none';
-    document.getElementById('second').style.display = 'block';
-    const activeSegment = document.querySelector('.segment.second');
-
-    for (const element of activeSegment.querySelectorAll('.circle, .label, .line')) {
-        if (element.classList.contains('circle'))
-            element.style.backgroundColor ='#007bff';
-        else if ( element.classList.contains('line')) {
-            element.style.color ='#007bff';
-            element.style.backgroundColor ='#007bff';
-        }
-        else
-            element.style.color = '#007bff';
-    }
     event.preventDefault();
 }
 
-function changeSecondToThird(){
-    let result = validateSecondBlock();
-    if(result)
-        showThirdBlock();
-    else
-        alert(errorStringSecond);
+function backToLogin(){
+    window.location.href = "/login";
 }
 
-
-function validateSecondBlock(){
+function validateFirstBlock() {
+    let username = document.getElementById('nickname').value;
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
-    let confirmPassword = document.getElementById('confirmPassword').value;
+    let confirmPassword = document.getElementById('correctPassword').value;
 
-    if (email === '' || password === '' || confirmPassword === '') {
-        errorStringSecond = "Please, fill all the fields"
+    if (nickname === '' || email === '' || password === '' || confirmPassword === '') {
+        errorStringFrist = "Please, fill all the fields"
         return false;
     }
     let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    // Verifica se l'email segue il formato desiderato
     if (!emailRegex.test(email)) {
-        errorStringSecond = "Please enter a valid email address";
+        errorStringFrist = "Please enter a valid email address";
         return false;
     }
     const minLength = 8;
     const maxLength = 15;
-
-    // Check for minimum length
     if (password.length < minLength && password.length > maxLength) {
-        errorStringSecond = "Password must follow criteria for length!";
+        errorStringFrist = "Password must follow criteria for length!";
         return false;
     }
     // Use a regular expression to check for at least one number
     const numberRegex = /\d/;
     if (!numberRegex.test(password)) {
-        errorStringSecond = "Password must contain at least one number";
+        errorStringFrist = "Password must contain at least one number";
         return false;
     }
 
-    // Use a regular expression to check for at least one special character
     const specialCharRegex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
     if (!specialCharRegex.test(password)) {
-        errorStringSecond = "Password must contain at least one special character";
+        errorStringFrist = "Password must contain at least one special character";
         return false;
     }
     if (password !== confirmPassword) {
-        errorStringSecond = "The passwords are not equals"
+        errorStringFrist = "The passwords are not equals"
         return false;
     }
     return true;
 }
 
-
-
-function showThirdBlock() {
-    document.getElementById('second').style.display = 'none';
-    document.getElementById('third').style.display = 'block';
-    const activeSegment = document.querySelector('.segment.third');
-    for (const element of activeSegment.querySelectorAll('.circle, .label')) {
-        if (element.classList.contains('circle'))
-            element.style.backgroundColor ='#007bff';
-        else
-            element.style.color ='#007bff';
-    }
+function signUpFirst(){
+    document.getElementById("first").style.display = "block";
+    document.getElementById("second").style.display = "none";
     event.preventDefault();
 }
 
-function backToFirst() {
-    document.getElementById('second').style.display = 'none';
-    document.getElementById('first').style.display = 'block';
-    const activeSegment = document.querySelector('.segment.second');
-
-    for (const element of activeSegment.querySelectorAll('.circle, .label, .line')) {
-        if (element.classList.contains('circle'))
-            element.style.backgroundColor = '#A8A9AD';
-        else if ( element.classList.contains('line')) {
-            element.style.color = '#A8A9AD';
-            element.style.backgroundColor = '#A8A9AD';
-        }
-        else
-            element.style.color = '#A8A9AD';
-    }
+function showSecondBlock() {
+    document.getElementById('first').style.display = 'none';
+    document.getElementById('second').style.display = 'block';
     event.preventDefault();
 }
 
-function send()
-{
-    let result = validateThirdBlock();
-    if (!result)
-        alert(errorStringThird);
-    else {
-        const nickname = document.getElementById('nickname').value;
-        const now = new Date();
-        const item = {
-            nickname: nickname,
-            timestamp: now.getTime(), // Ottiene il timestamp corrente in millisecondi
-        };
-        localStorage.setItem('nicknameData', JSON.stringify(item));
-        document.getElementById("form").submit();
-    }
-}
+function validateSecondBlock(){
+    let city = document.getElementById('city').value;
+    let nation = document.getElementById('nation').value;
+    let address = document.getElementById('address').value;
+    let phoneNumber = document.getElementById('phone').value;
 
-function validateThirdBlock()
-{
-    let nickname = document.getElementById('nickname').value;
-    if (nickname === '') {
-        errorStringThird = "Please, fill nickname fild"
+    if (city === '' || nation === '' || address === '' || phoneNumber === '') {
+        errorStringSecond = "Please, fill all the fields"
         return false;
     }
-    if(nickname.lenght > 15){
-        errorStringThird = "Max length of nickname is 15"
-        return false;}
-    return true;
-}
-function backToSecond() {
-    document.getElementById("second").style.display = "block";
-    document.getElementById("third").style.display = "none";
 
-    const activeSegment = document.querySelector('.segment.third');
-    for (const element of activeSegment.querySelectorAll('.circle, .label')) {
-        if (element.classList.contains('circle'))
-            element.style.backgroundColor ='#A8A9AD';
-        else if ( element.classList.contains('line')) {
-            element.style.color ='#A8A9AD';
-            element.style.backgroundColor ='#A8A9AD';
-        }
-        else
-            element.style.color ='#A8A9AD';
+    if (!(/^\d+$/.test(phoneNumber) || /^\+\d{1,2} \d+$/.test(phoneNumber))){
+        errorStringFrist = 'The field Telephone Number must contains only numbers.';
+        return false;
     }
-    event.preventDefault();
 }
+
+function congrats()
+{
+    document.getElementById("third").style.display = "block";
+    document.getElementById("second").style.display = "none";
+    document.getElementById("signAlternative").style.display = "none";
+    event.preventDefault();
+    const nickname = document.getElementById('nickname').value;
+    const now = new Date();
+    const item = {
+        nickname: nickname,
+        timestamp: now.getTime(),
+    };
+    localStorage.setItem('nicknameData', JSON.stringify(item));
+    document.getElementById("form").submit();
+}
+
