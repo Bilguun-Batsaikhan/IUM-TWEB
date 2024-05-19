@@ -212,4 +212,3 @@ function displayGamesData(gamesData, page, year) {
     lastPage = Math.ceil(totalRows / itemsPerPage);
     document.getElementById('currentPage').innerText = page + "/" + lastPage;
 }
-
