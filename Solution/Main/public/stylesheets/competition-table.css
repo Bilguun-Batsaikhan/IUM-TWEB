@@ -1,6 +1,7 @@
 body {
     background-color: #282c34;
     color: aliceblue;
+    font-family: 'Inter', sans-serif;
 }
 
 .nav-bar {
@@ -44,6 +45,9 @@ body {
     border-collapse: collapse;
     border-spacing: 0;
     margin-left: auto !important;
+    background-color: #323741;
+    padding: 1px;
+    margin-bottom: 20px;
 }
 
 #dateSelect {
@@ -87,8 +91,9 @@ body {
 #graphContainer {
     width: 70%;
     height: 70%;
-    margin: 50px auto;
+    margin: 60px auto !important;
 }
+
 
 .btnC {
     background-color: #3f474f;
@@ -136,7 +141,7 @@ body {
 }
 
 .table.table-dark {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: lighter;
 }
 
@@ -155,4 +160,5 @@ body {
     justify-content: center;
     align-items: center;
     margin-top: 0;
+    margin-bottom: 0 !important;
 }

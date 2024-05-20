@@ -1,3 +1,6 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
 .bg-custom {
     background-image: url('../img/background_photo.webp');
     background-size: cover;
@@ -17,11 +20,14 @@
     align-items: center;
 }
 
-.space{
-    padding-left: 40px;
+
+
+li {
+    list-style-type: none;
 }
 
-.p{
-    font-family: 'Urbanist', sans-serif;
+.p-3 {
+    font-family: 'Inter', sans-serif;
     font-size: 17px;
+    padding: 20px;
 }
