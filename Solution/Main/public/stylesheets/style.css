@@ -270,7 +270,6 @@ img {
 .body {
   display: flex;
   flex-direction: column;
-  font-family: 'Poppins', sans-serif;
   background-color: #ececec;
   background-size: cover;
   min-height: 100vh;
@@ -281,12 +280,6 @@ img {
 }
 
 .box-area {
-  min-height: 80vh;
-  min-width: 85vh;
-}
-
-.box-login
-{
   min-height: 80vh;
   min-width: 85vh;
 }
@@ -457,7 +450,6 @@ img {
 .login-logo:hover {
   cursor: pointer;
 }
-
 
 
 /*https://visme.co/blog/website-color-schemes/*/
