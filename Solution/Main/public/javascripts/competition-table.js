@@ -273,7 +273,7 @@ function handleGraph() {
 
 function handleMatch() {
     document.getElementById('graphContainer').style.display = 'none';
-    document.getElementById('competition-table-body').style.display = 'block';
+    document.getElementById('competition-table-body').style.display = 'table-row-group';
     document.getElementById('tableHead').style.display = 'table-row';
     document.getElementById('pagination').style.display = 'block';
 }

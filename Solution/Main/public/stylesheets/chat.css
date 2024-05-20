@@ -73,3 +73,23 @@ a {
 .font-weight-bold{
     font-weight: bold;
 }
+
+.chat-room {
+    background-color: #FFFFFF;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 50px 0 50px 0;
+    border-radius: 20px;
+}
+
+.main-content {
+    background-image: url("../img/background_photo.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 1px;
+}
+
+#initial_form {
+    margin: 50px auto;
+}
