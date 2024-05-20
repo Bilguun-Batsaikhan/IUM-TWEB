@@ -90,6 +90,10 @@ img {
   background-size: cover;
 }
 
+.main-content .container {
+  margin-left: 0;
+}
+
 /* Tables */
 .table {
   padding: 20px;
@@ -116,15 +120,24 @@ img {
   align-items: center;
 }
 
-.cell img {
+.cell .image-container img {
 
   object-fit: cover;
   border-radius: 50%;
 }
 
+.cell a {
+  width: 80%;
+  border-radius: 20px;
+}
+
+.cell img {
+  border-radius: 20px;
+}
+
 .image-container{
-  width: 90px;
-  height: 90px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   background: transparent !important;
 }
@@ -143,10 +156,6 @@ img {
   text-align: center;
 }
 
-.competition-link-1 {
-  background-color: transparent !important;
-  text-decoration: none !important;
-}
 
 
 /* Border Radius */
