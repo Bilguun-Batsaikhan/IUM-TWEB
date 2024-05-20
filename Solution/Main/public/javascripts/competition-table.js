@@ -6,58 +6,78 @@ let gamesData = null;
 
 let ID;
 document.addEventListener('DOMContentLoaded', async function () {
+    document.getElementById('graphContainer').style.display = 'none';
     // Get the competition name from the query parameters
     const urlParams = new URLSearchParams(window.location.search);
     const competitionName = urlParams.get('competition');
-    console.log('competitionName ' + competitionName);
+    const country = urlParams.get('country');
 
-    const country = urlParams.get('country')
-    console.log('country ' + country);
-    // Fetch the competition data and display it in a table
-    //fetchCompetitionData(competitionName).then(displayCompetitionData);
+    if (!country || !competitionName) {
+        window.location.href = '/error';
+        return;
+    }
 
     try {
         const countries = await sendAxiosQuery('/competition');
         console.log("countries", countries);
     } catch (error) {
         console.error("Error fetching countries:", error);
-        // Handle the error appropriately
     }
 
-    if (!country || !competitionName) {
-        window.location.href = '/error';
-    } else {
-        ID = await fetchCompetitionID('/retrieveCompetitionID', country, competitionName);
-        console.log('ID ' + JSON.stringify(ID, null, 2));
-        gamesData = await fetchGamesTable(ID);
-        // Sort gamesData by date in descending order
-        gamesData.games.result.sort((a, b) => new Date(b.date) - new Date(a.date));
+    let ID = await fetchCompetitionID('/retrieveCompetitionID', country, competitionName);
+    let gamesData = await fetchGamesTable(ID);
 
-        //console.log(JSON.stringify(games, null, 2));
-        displayGamesData(gamesData, currentPage);
-        init(gamesData);
+    gamesData.games.result.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-        const imgElement = document.createElement('img');
-        // console.log("ID: " + ID.competitionID)
-        fetchGraphImage(ID.competitionID)
+    displayGamesData(gamesData, currentPage);
+    init(gamesData);
+
+    const imgElement = document.createElement('img');
+    fetchGraphImage(ID.competitionID)
         .then(imgUrl => {
             imgElement.src = imgUrl;
             document.getElementById('graphContainer').appendChild(imgElement);
         })
         .catch(error => {
-            // Handle the error
             console.error('Error:', error);
         });
-    };
 
     let dateSelect = document.getElementById('dateSelect');
     let uniqueYears = [...new Set(gamesData.games.result.map(game => game.date.substring(0, 4)))];
-    
+
     uniqueYears.forEach(year => {
         let option = document.createElement('option');
         option.value = year;
         option.text = year;
         dateSelect.appendChild(option);
+    });
+
+    // Add event listeners for navigation buttons
+    document.querySelectorAll('.nav-bar button').forEach(button => {
+        button.addEventListener('click', () => {
+            document.querySelectorAll('.nav-bar button').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            switch (button.id) {
+                case 'switchButton':
+                    handleSwitch();
+                    break;
+                case 'tableButton':
+                    handleTable();
+                    break;
+                case 'matchButton':
+                    handleMatch();
+                    break;
+                case 'statisticButton':
+                    handleStatistic();
+                    break;
+                case 'graphButton':
+                    handleGraph();
+                    break;
+                default:
+                    break;
+            }
+        });
     });
 });
 
@@ -185,30 +205,75 @@ function displayGamesData(gamesData, page, year) {
 
     gamesToDisplay.forEach(game => {
         const row = tableBody.insertRow();
+
+        row.insertCell().textContent = new Date(game.date).toLocaleDateString();
+
         // Create anchor for home club
         const homeClubAnchor = document.createElement('a');
         homeClubAnchor.href = '/valutation/club?club_id=' + game.home_club_id;
         homeClubAnchor.textContent = game.home_club_name;
+
+        // Create img element for home club icon
+        const homeClubImg = document.createElement('img');
+        homeClubImg.src = "https://tmssl.akamaized.net/images/wappen/head/" + game.home_club_id + ".png?";
+        homeClubImg.alt = "Club Logo";
+        homeClubImg.className = "club_logo";
+        homeClubImg.style.maxWidth = "25px";
+
+        // Create a div to wrap the anchor and image
+        const homeClubWrapper = document.createElement('div');
+        homeClubWrapper.className = 'club-wrapper';
+        homeClubWrapper.appendChild(homeClubImg);
+        homeClubWrapper.appendChild(homeClubAnchor);
+
+        // Append home club wrapper to cell
+        const homeCell = row.insertCell();
+        homeCell.appendChild(homeClubWrapper);
+
+        // Add other game information
+        row.insertCell().textContent = game.home_club_goals + ' - ' + game.away_club_goals;
 
         // Create anchor for away club
         const awayClubAnchor = document.createElement('a');
         awayClubAnchor.href = '/valutation/club?club_id=' + game.away_club_id;
         awayClubAnchor.textContent = game.away_club_name;
 
-        // Append home club anchor to cell
-        const homeCell = row.insertCell();
-        homeCell.appendChild(homeClubAnchor);
+        // Create img element for away club icon
+        const awayClubImg = document.createElement('img');
+        awayClubImg.src = "https://tmssl.akamaized.net/images/wappen/head/" + game.away_club_id + ".png?";
+        awayClubImg.alt = "Club Logo";
+        awayClubImg.className = "club_logo";
+        awayClubImg.style.maxWidth = "25px";
 
-        // Append away club anchor to cell
+        // Create a div to wrap the anchor and image
+        const awayClubWrapper = document.createElement('div');
+        awayClubWrapper.className = 'club-wrapper';
+        awayClubWrapper.appendChild(awayClubImg);
+        awayClubWrapper.appendChild(awayClubAnchor);
+
+        // Append away club wrapper to cell
         const awayCell = row.insertCell();
-        awayCell.appendChild(awayClubAnchor);
+        awayCell.appendChild(awayClubWrapper);
 
-        // Add other game information
-        row.insertCell().textContent = game.home_club_goals;
-        row.insertCell().textContent = game.away_club_goals;
-        row.insertCell().textContent = new Date(game.date).toLocaleDateString();
+
         row.insertCell().textContent = game.stadium;
     });
+
     lastPage = Math.ceil(totalRows / itemsPerPage);
     document.getElementById('currentPage').innerText = page + "/" + lastPage;
+}
+
+
+function handleGraph() {
+    document.getElementById('graphContainer').style.display = 'block';
+    document.getElementById('competition-table-body').style.display = 'none';
+    document.getElementById('tableHead').style.display = 'none';
+    document.getElementById('pagination').style.display = 'none';
+}
+
+function handleMatch() {
+    document.getElementById('graphContainer').style.display = 'none';
+    document.getElementById('competition-table-body').style.display = 'block';
+    document.getElementById('tableHead').style.display = 'table-row';
+    document.getElementById('pagination').style.display = 'block';
 }
