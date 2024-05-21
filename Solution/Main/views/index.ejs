@@ -6,7 +6,9 @@
   <title>Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- connect to styles.css -->
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@301&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
   <%- include('partials/navbarScripts') %>
     <script src="/javascripts/popular_players.js"></script>
 </head>
@@ -17,7 +19,8 @@
       <div class="container">
         <div class="row">
           <div class="col-3 sideContent">
-            <h1>Sidebar contents goes here</h1>
+            <div class="row"><div class="col-12 sideItem"><h3>Champions League</h3></div></div>
+            <div class="row"><div class="col-12 sideItem"><h3 style="margin-bottom: 50px">Popular Players</h3></div></div>
           </div>
           <div class="col-9 mainContent">
             <div class="row table">

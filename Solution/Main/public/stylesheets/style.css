@@ -82,6 +82,21 @@ img {
 .sideContent {
   height: 100vh;
   background-color: rgba(7, 18, 36, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.sideContent .row {
+  flex: 1;
+  display: flex;
+}
+
+.sideItem {
+  color: #FFFFFF;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .main-content {
@@ -270,10 +285,10 @@ img {
 .body {
   display: flex;
   flex-direction: column;
-  font-family: 'Poppins', sans-serif;
   background-color: #ececec;
   background-size: cover;
   min-height: 100vh;
+  font-family: 'Inter', sans-serif;
 }
 
 .box {
@@ -281,12 +296,6 @@ img {
 }
 
 .box-area {
-  min-height: 80vh;
-  min-width: 85vh;
-}
-
-.box-login
-{
   min-height: 80vh;
   min-width: 85vh;
 }
@@ -309,7 +318,7 @@ img {
 .navbar-nav .nav-item {
   flex: 1;
   border-radius: 5px;
-  font-family: Arial, sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .nav-item {
@@ -346,7 +355,7 @@ img {
   width: 100%;
   background-color: #071224;
   text-align: center;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Inter', sans-serif;
   margin-top: auto;
 }
 .social-icons {
@@ -378,7 +387,7 @@ img {
 
 .navbar {
   z-index: 2;
-  height: 60px;
+  height: 80px;
 }
 
 .navbar-toggler{
@@ -457,7 +466,6 @@ img {
 .login-logo:hover {
   cursor: pointer;
 }
-
 
 
 /*https://visme.co/blog/website-color-schemes/*/

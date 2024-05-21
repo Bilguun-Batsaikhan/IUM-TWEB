@@ -8,20 +8,24 @@
     background-position: center;
 }
 
-.boxFormSignUp{
+.boxFormSignUp {
     margin: auto;
 }
 
-.box-signup{
+.box-signup {
     min-height: 80vh;
-    min-width: 85vh;
+    min-width: 40%;
 }
-.leftArrow{
+.leftArrow {
     height: 20px;
     width: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#boxForSignUp {
+    margin: 20px 0 20px 0;
 }
 
 #facebook
