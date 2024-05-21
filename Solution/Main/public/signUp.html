@@ -4,119 +4,222 @@
     <meta charset="UTF-8">
     <title>SignUp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="stylesheets/style.css" rel="stylesheet">
     <link href="stylesheets/signUp.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400&display=swap" rel="stylesheet">
     <script src="javascripts/signUp.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="javascripts/index.js"></script>
 </head>
 <body onload="init()">
-<div class="container d-flex justify-content-center">
-    <div class="row">
-        <h1 class="text-center"><i>SignUp</i></h1>
-        <div class = "text-center">
-            <div class="segment active" id="firstStep">
-                <div class="circle">1</div>
-                <div class="label">PERSONAL DATA</div>
-                <div class="line"></div>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-bg navbar-dark" role="navigation">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav w-100 justify-content-around">
+                <li class="nav-item active nav-el">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item dropdown nav-el">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Competitions
+                    </a>
+                    <ul class="dropdown-menu" role="listbox" aria-labelledby="navbarDropdown">
+                        <li class="dropdown-submenu" role="menuitem">
+                            <a class="dropdown-item dropdown-toggle" href="#">Competition Type</a>
+                            <ul class="dropdown-menu" id="competitionType">
+                                <!-- Competition Type items here -->
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu" role="menuitem">
+                            <a class="dropdown-item dropdown-toggle" href="#">Competition Country</a>
+                            <ul class="dropdown-menu" id="country">
+                                <!-- Country list items here -->
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item nav-el">
+                    <a class="nav-link" href="/chat">Chat</a>
+                </li>
+                <li class="nav-item nav-el">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <label for="searchInput" style="display: none">SearchBar</label>
+                    <input class="ms-2 form-control me-2 custom-search-bar" type="search" placeholder="Search" aria-label="Search" id="searchInput">
+                    <div id="searchResults" class="dropdown-menu" style="width:100%;">
+                        <!-- Search results here -->
+                    </div>
+                </li>
+                <li class="nav-item nav-el nav-item-center text-center">
+                    <img src="img/icon.png" alt="icon" class="login-logo" style="width: 40px; height: 40px;" onclick="goLogin()">
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+</header>
+<main>
+    <div class="container-fluid d-flex justify-content-center bg-custom" aria-live="polite" role="alert">
+        <div class="row border rounded-5 mt-3 mb-2 bg-white shadow box-signup">
+            <div id ="boxForSignUp">
+                <form action="/signUpComplete" method="post" id="form">
+                    <div id = "first">
+                        <div class="p-3">
+                            <button type="button" class="btn shadow border rounded-4" onclick="backToLogin()" aria-label="Back to login">
+                                <img src="img/left_arrow.png" alt="Left arrow to return to homepage" class="leftArrow">
+                            </button>
+                        </div>
+                        <div class="d-flex flex-column align-items-center boxFormSignUp" >
+                            <p class="text-center mt-2 mb-1 signUpHeader"> Hello! </p>
+                            <p class="text-center signUpHeader"> Register to get started</p>
+                            <div class="mt-3 w-75"  style="max-width: 400px;">
+                                <div class="mb-3">
+                                    <label for="nickname" style ="display: none">Enter your Nickname</label>
+                                    <input type="text" class="form-control form-control-lg" id="nickname" name="nickname" required placeholder="Enter your Nickname" aria-label="Enter your Nickname" style="background-color: #D9D9D9; opacity: 60%">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" style ="display: none">Email</label>
+                                    <input type="text" class="form-control form-control-lg" id="email" name="email" required placeholder="Email" aria-label="Email" style="background-color: #D9D9D9; opacity: 60%">
+                                </div>
+                                <div class="mb-4">
+                                    <label for="password" style ="display: none">Password</label>
+                                    <input type="password" class="form-control form-control-lg" id="password" name="password" required placeholder="Password" aria-label="Password" style="background-color: #D9D9D9; opacity: 60%">
+                                    <div id="password-criteria" class="hidden">
+                                        <ul>
+                                            <li>From 8 until 15 characters</li>
+                                            <li>Must contain at least one number</li>
+                                            <li>Must contain at least one special character (es. !@#$%^&*)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="correctPassword" style ="display: none">Confirm Password</label>
+                                    <input type="password" class="form-control form-control-lg" id="correctPassword" name="correctPassword" required placeholder="Confirm Password" aria-label="Confirm Password" style="background-color: #D9D9D9; opacity: 60%">
+                                </div>
+                                <button class="btn btn-lg btn-primary w-100 fs-7" id="next" value="next" onclick=changeFirstToSecond() aria-label="Next part of Sign" style="background-color: #1E232C; color: #FFFFFF">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id = "second">
+                        <div class="p-3">
+                            <button type="button" class="btn shadow border rounded-4" onclick="signUpFirst()" aria-label="Back to first step">
+                                <img src="img/left_arrow.png" alt="Left arrow to return to homepage" class="leftArrow">
+                            </button>
+                        </div>
+                        <div class="d-flex flex-column align-items-center boxFormSignUp"  >
+                            <p class="text-center mt-2 signUpHeader"> We are almost done </p>
+                            <div class="mt-3 w-75"  style="max-width: 400px;">
+                                <div class="mb-3">
+                                    <label for="city" style ="display: none">City</label>
+                                    <input type="text" class="form-control form-control-lg" id="city" name="city" required placeholder="City" aria-label="City"  style="background-color: #D9D9D9; opacity: 60%">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nation" style ="display: none">Nation</label>
+                                    <input type="text" class="form-control form-control-lg" id="nation" name="nation" required placeholder="Nation" aria-label="Nation" style="background-color: #D9D9D9; opacity: 60%">
+                                </div>
+                                <div class="mb-4">
+                                    <label for="address" style ="display: none">Address</label>
+                                    <input type="text" class="form-control form-control-lg" id="address" name="address" required placeholder="Address" aria-label="Address" style="background-color: #D9D9D9; opacity: 60%">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phone" style ="display: none">Phone number</label>
+                                    <input type="text" class="form-control form-control-lg" id="phone" name="phone" required placeholder="Phone Number"  aria-label="Phone Number"  style="background-color: #D9D9D9; opacity: 60%">
+                                </div>
+                                <button class="btn btn-lg btn-primary w-100 fs-7" id="endSign" value="endSign" onclick=congrats() aria-label="Go to third step" style="background-color: #1E232C; color: #FFFFFF">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id = "third">
+                        <div class ="d-flex flex-column align-items-center">
+                            <p class ="mb-5 signUpHeader mt-5">Thank you for sign up</p>
+                            <img src="img/soccerBall.png" alt="Football ball in movement" id="ball">
+                            <p class="mt-5 custom">Enjoy our service</p>
+                            <button class="btn btn-lg btn-primary w-100 fs-7 w-75 mb-5" id="submit" value="submit" type="submit" style="background-color: #1E232C; color: #FFFFFF; max-width: 400px;">Finish SignUp</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="segment second">
-                <div class="circle">2</div>
-                <div class="label ">CREDENTIALS</div>
-                <div class="line"></div>
+            <div class="col-md-12 mt-3 mb-3 w-75 boxFormSignUp" style="max-width: 400px;" id = "signAlternative">
+                <div class="row">
+                    <div class="col-4">
+                        <hr>
+                    </div>
+                    <div class="col-4 text-center">
+                        <p class="text">Or Sign up with</p>
+                    </div>
+                    <div class="col-4">
+                        <hr>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-4 d-flex justify-content-center">
+                        <button type="button" class="btn shadow border rounded-4" role="button" aria-label="Sign up with Facebook">
+                            <img src="img/facebook.png" id="facebook" alt="Login with Facebook">
+                        </button>
+                    </div>
+                    <div class="col-4 d-flex justify-content-center">
+                        <button type="button" class="btn shadow border rounded-4" role="button" aria-label="Sign up with Google">
+                            <img src="img/google.png" id="google" alt="Login with Google">
+                        </button>
+                    </div>
+                    <div class="col-4 d-flex justify-content-center">
+                        <button type="button" class="btn shadow border rounded-4" role="button" aria-label="Sign up with Apple">
+                            <img src="img/apple.png" id="apple" alt="Login with Apple">
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="segment third">
-                <div class="circle">3</div>
-                <div class="label">NICKNAME</div>
+
+        </div>
+    </div>
+</main>
+<footer class="footer text-white py-4"  role="contentinfo">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3 col-sm-6 py-2">
+                <h5>Team Members</h5>
+                <p>Bilguun Batsaikhan - ID: 12345</p>
+                <p>Alex Agliuzza - ID: 67890</p>
+                <p>Emanuele Machetti - ID: 13579</p>
+            </div>
+            <div class="col-md-3 col-sm-6 py-2">
+                <h5>Useful Links</h5>
+                <a href="#" class="text-white d-block">Home Page</a>
+                <a href="#" class="text-white d-block">About Us</a>
+                <!-- Add more links as needed -->
+            </div>
+            <div class="col-md-3 col-sm-6 py-2">
+                <h5>Contact</h5>
+                <p>Email: example@example.com</p>
+                <p>Phone: 123-456-7890</p>
+            </div>
+            <div class="col-md-3 col-sm-6 py-2">
+                <h5>Social Media</h5>
+                <div class="d-flex justify-content-center">
+                    <a href="#" class="text-white icon-padding">
+                        <img class="social-icons" src="img/Social_Icons/Social_Icons.png" alt="Facebook">
+                    </a>
+                    <a href="#" class="text-white icon-padding">
+                        <img class="social-icons" src="img/Social_Icons/Social_Icons-1.png" alt="Twitter">
+                    </a>
+                    <a href="#" class="text-white icon-padding">
+                        <img class="social-icons" src="img/Social_Icons/Social_Icons-2.png" alt="Instagram">
+                    </a>
+                    <a href="#" class="text-white icon-padding">
+                        <img class="social-icons" src="img/Social_Icons/Social_Icons-3.png" alt="LinkedIn">
+                    </a>
+                </div>
             </div>
         </div>
-        <form action="/signUpComplete" id="form" method="post" class="pt-10">
-            <div class="container first" id="first">
-                <div class="row justify-content-center">
-                    <div class="col-md-6 mb-3">
-                        <label for="name" class="form-label">Name:</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="surname" class="form-label">Surname:</label>
-                        <input type="text" class="form-control" id="surname" name="surname" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="city" class="form-label">City:</label>
-                        <input type="text" class="form-control" id="city" name="city" required placeholder="Example Turin">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="nation" class="form-label">Nation:</label>
-                        <input type="text" class="form-control" id="nation" name="nation" required placeholder="Example Italy">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="address" class="form-label">Address:</label>
-                        <input type="text" class="form-control" id="address" name="address" required placeholder="Example Via Vittorio Amedeo II">
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="number" class="form-label">Number:</label>
-                        <input type="text" class="form-control" id="number" name="number" required placeholder="Example 8">
-                    </div>
-                    <div class="col-md-3"></div>
-                    <div class="col-md-6 mb-3">
-                        <label for="telephone_number" class="form-label">Telephone number:</label>
-                        <input type="tel" class="form-control" id="telephone_number" name="telephone_number" required placeholder="In format +39 484349349, Must contain n number">
-                    </div>
-                    <div class="col-md-6"></div>
-                </div>
-                <hr>
-                <div class="row justify-content-end">
-                    <div class="col-md-6 text-end">
-                        <button type="submit" class="btn btn-primary" id="firstButton">Next</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Second section of the form -->
-            <div class="container second" id="second">
-                <div class="row justify-content-center ">
-                    <div class="col-md-8 mb-3">
-                        <label for="email" class="form-label">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" required placeholder="Es username@gmail.com">
-                    </div>
-                    <div class="col-md-8 mb-3">
-                        <label for="password" class="form-label">Password:</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
-                    </div>
-                    <div class="col-md-8 mb-3">
-                        <label for="confirmPassword" class="form-label">Confirm Password:</label>
-                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-6 text-start">
-                        <button type="submit" class="btn btn-primary" id="secondButtonPrev">Prev</button>
-                    </div>
-                    <div class="col-6 text-end">
-                        <button type="submit" class="btn btn-primary" id="secondButtonNext">Next</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Third section of the form -->
-            <div class="container third" id="third">
-                <div class="row justify-content-center">
-                    <div class="col-md-7 mb-3">
-                        <label for="nickname" class="form-label">Choose your Nickname:</label>
-                        <input type="text" class="form-control" id="nickname" name="nickname" required>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-6 text-start">
-                        <button type="submit" class="btn btn-primary" id="thirdButtonPrev">Prev</button>
-                    </div>
-                    <div class="col-6 text-end">
-                        <button type="submit" class="btn btn-primary" value="submit" id="send">Complete SignUp</button>
-                    </div>
-                </div>
-            </div>
-        </form>
     </div>
-</div>
+</footer>
 </body>
 </html>
+
