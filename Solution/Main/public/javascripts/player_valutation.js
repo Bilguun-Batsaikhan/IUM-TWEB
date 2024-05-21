@@ -1,3 +1,8 @@
+let currentPage = 1;
+const MatchPerPage = 10;
+let totalPages = 0;
+
+
 function init() {
     /* The code for obtaining URL parameters has been adapted from:
      https://www.sitepoint.com/get-url-parameters-with-javascript/
@@ -10,20 +15,40 @@ function init() {
     } else {
         //console.log('player:', parseInt(playerId));
         sendAxiosQuery('/valutation/player', playerId);
+        sendAxiosQuery2('/valutation/getAppearancesByPlayer', playerId);
     }
 }
 
-// Fetch club data for given club ID
 function sendAxiosQuery(url, playerId) {
     axios.post(url, {
         player_id: playerId
     })
         .then(function (dataR) {
-            let playerData = dataR.data;
-            //console.log(playerData);
+            let playerData = dataR.data.playerData;
+            //console.log("playerData: " + JSON.stringify(playerData));
             if (!playerData)
                 window.location.href = '/error';
             fillHTML(playerData);
+        })
+        .catch(function (error) {
+            (JSON.stringify(error));
+        });
+}
+
+function sendAxiosQuery2(url, playerId) {
+    axios.post(url, {
+        player_id: playerId
+    })
+        .then(function (dataR) {
+            let matchData = dataR.data.matchData.result;
+            console.log("MatchData: " + JSON.stringify(matchData));
+            if (!matchData)
+                window.location.href = '/error';
+            statistics(matchData);
+            updateMatchTable(matchData);
+            handlePagination(matchData);
+            totalPages = Math.ceil(matchData.length / MatchPerPage);
+            updatePageNumber();
         })
         .catch(function (error) {
             (JSON.stringify(error));
@@ -44,7 +69,31 @@ function setEurValue(value) {
     }
 }
 
-/* function created using chatGPT */
+function fillHTML(playerData) {
+    //console.log("Test " + JSON.stringify(playerData));
+    const playerImage = document.getElementById('playerImage');
+    playerImage.src = playerData[0].imageUrl;
+    const playerName = document.getElementById('playerName');
+    playerName.textContent = playerData[0].name;
+    const playerNationality = document.getElementById('playerNationality');
+    playerNationality.textContent = playerData[0].countryOfCitizenship;
+    const playerClub = document.getElementById('playerClub');
+    playerClub.textContent = playerData[0].currentClubName;
+    const playerRole = document.getElementById('playerRole');
+    playerRole.textContent = playerData[0].position;
+    const playerAge = document.getElementById('playerAge');
+    playerAge.textContent = playerData[0].dateOfBirth;
+    const playerHeight = document.getElementById('playerHeight');
+    playerHeight.textContent = playerData[0].heightInCm;
+    const playerMarketValue = document.getElementById('playerMarketValue');
+    playerMarketValue.textContent = setEurValue(playerData[0].marketValueInEur);
+    const playerFoot = document.getElementById('playerFoot');
+    playerFoot.textContent = playerData[0].foot;
+    const playerHighestMarketValue = document.getElementById('playerHighestMarketValue');
+    playerHighestMarketValue.textContent = setEurValue(playerData[0].highestMarketValueInEur);
+}
+
+/* functions created using chatGPT */
 function calculateAge(birthDateString) {
     if (!birthDateString || isNaN(Date.parse(birthDateString))) {
         return '';
@@ -59,7 +108,112 @@ function calculateAge(birthDateString) {
     return birthDateString + ' (' + age + ')';
 }
 
-function fillHTML(playerData) {
-    document.getElementById('results').innerHTML = "The result is: " + JSON.stringify(playerData);
+function populateMatchTable(matchData) {
+    var tableBody = document.getElementById('match-table-body');
+    matchData.forEach(function(match) {
+        //var imageUrl = player.imageUrl ? '<img src="' + player.imageUrl + '" alt="Player Image" style="width:50px; height:auto;">' : '';
+        var date = match.date ? match.date : '';
+        const readableDate = formatReadableDate(date);
+        var club = match.game_id ? match.game_id : '';
+        var result = "1 - 1"
+        var goals = match.goals ? match.goals : '0';
+        var assists = match.assists ? match.assists: '0';
+        var row = '<tr>' +
+            '<td>' + readableDate + '</td>' +
+            '<td>' + club + '</td>' +
+            '<td>' + result + '</td>' +
+            '<td>' + goals + '</td>' +
+            '<td>' + assists + '</td>' +
+            '</tr>';
+        tableBody.innerHTML += row;
+    });
 }
+
+function paginateMatch(matchData) {
+    const start = (currentPage - 1) * MatchPerPage;
+    const end = start + MatchPerPage;
+    return matchData.slice(start, end);
+}
+
+function updatePageNumber(){
+    let pageNumber = document.querySelector('#pagination_number');
+    pageNumber.textContent = currentPage + '/' + totalPages;
+}
+
+function handlePagination(matchData) {
+    document.getElementById('prevButton').addEventListener('click', function() {
+        if (currentPage > 1) {
+            currentPage--;
+            updateMatchTable(matchData);
+            updatePageNumber();
+        }
+    });
+
+    document.getElementById('nextButton').addEventListener('click', function() {
+        if (currentPage < Math.ceil(matchData.length / MatchPerPage)) {
+            currentPage++;
+            updateMatchTable(matchData);
+            updatePageNumber();
+        }
+    });
+}
+
+function updateMatchTable(matchData) {
+    var tableBody = document.getElementById('match-table-body');
+    tableBody.innerHTML = '';
+    populateMatchTable(paginateMatch(matchData));
+}
+
+function setEurValue(value) {
+    if (value === '' || value === null) return '';
+    let number = parseInt(value);
+    if (isNaN(number)) return '';
+    if (number >= 1000000) {
+        return (number / 1000000).toFixed(1) + 'm';
+    } else if (number >= 1000) {
+        return (number / 1000).toFixed(1) + 'k';
+    } else {
+        return number.toString();
+    }
+}
+
+function formatReadableDate(isoDate) {
+    const date = new Date(isoDate);
+    const options = { day: 'numeric', month: 'short', year: 'numeric' };
+    const readableDate = date.toLocaleDateString('en-GB', options);
+    return readableDate;
+}
+
+function statistics(matchData){
+    let totalYellowCards = 0;
+    let totalRedCards = 0;
+    let totalGoals = 0;
+    let totalAssists = 0;
+    let totalMinPlayed = 0;
+    let totalGames = 0;
+    matchData.forEach(function(match){
+        totalYellowCards += match.yellow_cards;
+        totalRedCards += match.red_cards;
+        totalGoals += match.goals;
+        totalAssists += match.assists;
+        totalMinPlayed += match.minutes_played;
+        totalGames += 1;
+    });
+    const playerYCards = document.getElementById('playerYCards');
+    playerYCards.textContent = totalYellowCards;
+    const playerRCards = document.getElementById('playerRCards');
+    playerRCards.textContent = totalRedCards;
+    const playerGoals = document.getElementById('playerGoals');
+    playerGoals.textContent = totalGoals;
+    const playerAssists = document.getElementById('playerAssists');
+    playerAssists.textContent = totalAssists;
+    const playerMinutes = document.getElementById('playerMinutes');
+    playerMinutes.textContent = totalMinPlayed;
+    const playerGames = document.getElementById('playerGames');
+    playerGames.textContent = totalGames;
+}
+
+
+
+
 

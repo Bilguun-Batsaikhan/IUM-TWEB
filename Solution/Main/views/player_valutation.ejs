@@ -2,15 +2,85 @@
 <html>
 <head>
     <title>Player valutation</title>
-    <link rel="stylesheet" href="/stylesheets/clubValutation.css">
+    <link rel="stylesheet" href="/stylesheets/player-valutation.css">
     <%- include('partials/navbarScripts') %>
     <script src="/javascripts/player_valutation.js"></script>
 </head>
 <body onload="init()">
 <%- include('partials/navbar') %>
+<div class="main-content">
+    <div class="container player-profile">
+        <div class="row">
+            <div class="col-md-5 text-center">
+                <div class="stats-table-dark mt-2 mb-5">
+                    <img id="playerImage" src="" alt="Player photo" class="pt-5 player-profile img-fluid d-block mx-auto">
 
-<p id="results"></p>
+                    <table class="table table-white">
+                            <h3 id="playerName"></h3>
+                        <hr>
+                        <tbody>
+                        <tr>
+                            <td class="noborder"><strong>Nationality: </strong><span id="playerNationality"></span></td>
+                            <td class="noborder"><strong>Club: </strong><span id="playerClub"></span></td>
+                        </tr>
 
+                        <tr>
+                            <td class="noborder"><strong>Role: </strong><span id="playerRole"></span></td>
+                            <td class="noborder"><strong>Date of birth: </strong><span id="playerAge"></span></td>
+                        </tr>
+                        <tr>
+                            <td class="noborder"><strong>Height: </strong><span id="playerHeight"></span></td>
+                            <td class="noborder"><strong>Market value: </strong><span id="playerMarketValue"></span></td>
+                        </tr>
+                        <tr>
+                            <td class="noborder"><strong>Preferred foot: </strong><span id="playerFoot"></span></td>
+                            <td class="noborder"><strong>Highest market value: </strong><span id="playerHighestMarketValue"></span></td>
+                        </tr>
+                        <tr>
+                            <td class="noborder"><strong>Total goals: </strong><span id="playerGoals"></span></td>
+                            <td class="noborder"><strong>Total assists: </strong><span id="playerAssists"></span></td>
+                        </tr>
+                        <tr>
+                            <td class="noborder"><strong>Total games played: </strong><span id="playerGames"></span></td>
+                            <td class="noborder"><strong>Total minutes played: </strong><span id="playerMinutes"></span></td>
+                        </tr>
+                        <tr>
+                            <td class="noborder"><strong>Total yellow cards: </strong><span id="playerYCards"></span></td>
+                            <td class="noborder"><strong>Total red cards: </strong><span id="playerRCards"></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="row mt-2 mb-5">
+                    <table class="table table-dark stats-table-dark">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Match</th>
+                            <th>Result</th>
+                            <th>Goals</th>
+                            <th>Assists</th>
+                        </tr>
+                        </thead>
+                        <tbody id="match-table-body">
+                        <!-- matchData -->
+                        </tbody>
+                    </table>
+                    <div id="pagination" class="d-flex align-items-center mt-3" role="group" aria-label="Pagination">
+                        <div class="btn-group me-3">
+                            <button id="prevButton" class="btn btn-dark rounded-pill">Prev</button>
+                            <button id="nextButton" class="btn btn-dark rounded-pill ms-2">Next</button>
+                        </div>
+                        <span class="fw-bold">Show results:</span>
+                        <span id="pagination_number" class="ms-2"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <%- include('partials/footer') %>
 </body>
 </html>
