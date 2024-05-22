@@ -8,10 +8,10 @@
 </head>
 <body onload="init()">
 <%- include('partials/navbar') %>
-<p id="results"></p>
-
+<!--<p id="results"></p>-->
+<div class="main-content">
 <h2 class="text-center club_name" id="club_name"></h2>
-<div id="clubDetailsContainer" class="container-fluid mt-5">
+<div id="clubDetailsContainer" class="container-fluid">
     <div class="row">
 
         <div class="col-md-2 text-center">
@@ -19,22 +19,22 @@
         </div>
 
         <div class="col-md-10">
-            <table class="table">
+            <table class="table stats-table-dark">
                 <tbody>
-                <tr class="table-primary">
-                    <td><span class="dark-label">Squad size:</span> <span class="info squad_size" id="squad_size"></span></td>
-                    <td><span class="dark-label">National players:</span> <span class="info national_players" id="national_players"></span></td>
+                <tr>
+                    <td><span>Squad size:</span> <span class="info squad_size" id="squad_size"></span></td>
+                    <td><span>National players:</span> <span class="info national_players" id="national_players"></span></td>
                 </tr>
                 <tr>
-                    <td><span class="dark-label">Foreigners percentage:</span> <span class="info foreigners_age" id="foreigners_age"></span></td>
+                    <td><span>Foreigners percentage:</span> <span class="info foreigners_age" id="foreigners_age"></span></td>
                     <td>
-                        <span class="dark-label">Stadium:</span> <span class="info stadium" id="stadium"></span>
+                        <span>Stadium:</span> <span class="info stadium" id="stadium"></span>
                         (<span class="info stadium_seats" id="stadium_seats"></span> seats)
                     </td>
                 </tr>
-                <tr class="table-primary">
-                    <td><span class="dark-label">Foreigners:</span> <span class="" id="">13</span></td>
-                    <td><span class="dark-label">Current transfer record:</span> <span class="info net_transfer" id="net_transfer"></span></td>
+                <tr>
+                    <td><span>Foreigners:</span> <span class="" id="">13</span></td>
+                    <td><span>Current transfer record:</span> <span class="info net_transfer" id="net_transfer"></span></td>
                 </tr>
                 </tbody>
             </table>
@@ -56,14 +56,15 @@
         <!-- playersData -->
         </tbody>
     </table>
-    <div id="pagination" class="d-flex align-items-center mb-5" role="group" aria-label="Pagination">
+    <div id="pagination" class="d-flex align-items-center pb-5" role="group" aria-label="Pagination">
         <div class="btn-group me-3">
-            <button id="prevButton" class="btn btn-primary rounded-pill">Prev</button>
-            <button id="nextButton" class="btn btn-primary rounded-pill ms-2">Next</button>
+            <button id="prevButton" class="btn btn-dark rounded-pill">Prev</button>
+            <button id="nextButton" class="btn btn-dark rounded-pill ms-2">Next</button>
         </div>
-        <span class="fw-bold">Show results:</span>
-        <span id="pagination_number" class="ms-2"></span>
+        <span class="fw-bold text-white">Show results:</span>
+        <span id="pagination_number" class="ms-2 text-white"></span>
     </div>
+</div>
 </div>
 <%- include('partials/footer') %>
 </body>
