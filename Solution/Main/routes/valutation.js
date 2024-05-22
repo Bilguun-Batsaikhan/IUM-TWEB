@@ -61,5 +61,20 @@ router.route('/getAppearancesByPlayer')
             });
     });
 
+router.route('/getGamesByClub')
+    .post(function (req, res) {
+        const club_id = req.body.club_id;
+        let matchData;
+        axios.post('http://localhost:3001/getGamesByClubId', {club_id: club_id})
+            .then(json => {
+                matchData = json.data;
+                res.json({ matchData });
+            })
+            .catch(err => {
+                console.error('Errore:', err);
+                res.setHeader('Content-Type', 'application/json');
+                res.status(505).json(err);
+            });
+    });
 
 module.exports = router;
