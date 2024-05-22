@@ -10,12 +10,14 @@ function init() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const playerId = urlParams.get('player_id')
+    const club_id =
     if (!playerId || isNaN(playerId) || !/^\d+$/.test(playerId)) {
         window.location.href = '/error';
     } else {
         //console.log('player:', parseInt(playerId));
         sendAxiosQuery('/valutation/player', playerId);
         sendAxiosQuery2('/valutation/getAppearancesByPlayer', playerId);
+        sendAxiosQuery2('/valutation/getGamesByClubId', playerId);
     }
 }
 

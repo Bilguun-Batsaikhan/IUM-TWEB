@@ -30,6 +30,34 @@ function getGamesByCompetitionId(competition_id) {
     });
 }
 
+function getGamesByClubId(club_id) {
+    return new Promise((resolve, reject) => {
+        console.log(club_id);
 
+        Model.find({
+            $or: [
+                { home_club_id: club_id },
+                { away_club_id: club_id }
+            ]
+        })
+            .select({
+                game_id: 1,
+                home_club_name: 1,
+                away_club_name: 1,
+                home_club_goals: 1,
+                away_club_goals: 1,
+                home_club_id: 1,
+                away_club_id: 1
+            })
+            .then(results => {
+                resolve(results);
+            })
+            .catch(error => {
+                console.error('Error fetching games by competition ID:', error);
+                reject(error);
+            });
+    });
+}
 
+module.exports.getGamesByClubId = getGamesByClubId;
 module.exports.getGamesByCompetitionId = getGamesByCompetitionId;
