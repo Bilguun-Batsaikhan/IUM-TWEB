@@ -129,7 +129,8 @@ body {
 }
 
 .table tbody td a {
-    text-decoration: none;
+    color: white;
+    text-decoration: underline;
 }
 
 .table tbody {
@@ -161,4 +162,9 @@ body {
     align-items: center;
     margin-top: 0;
     margin-bottom: 0 !important;
+}
+
+.date {
+    display: flex;
+    justify-content: flex-start;
 }

@@ -66,8 +66,8 @@ async function createDropDownMenu(data, elementID, url) {
         const a = document.createElement('a');
         a.textContent = data;
         a.className = 'dropdown-item dropdown-toggle';
-        //elementID === "competitionType" ? a.href = url + '?competitionType=' + encodeURIComponent(data) : a.href = url;
-        a.href = url;
+        elementID === "competitionType" ? a.href = url + '?competitionType=' + encodeURIComponent(data) : a.href = url;
+        // a.href = url;
         li.appendChild(a);
         dropDownCountry.appendChild(li);
 

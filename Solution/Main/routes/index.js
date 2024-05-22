@@ -123,6 +123,24 @@ router.route('/retrieveCompetitionID')
                 res.status(505).json(err);
             })
     })
+
+// fetch competition ID from SpringBoot by competition name
+router.route('/retrieveCompetitionIDbyName')
+    .post((req, res) => {
+        const competitionName = req.body.name;
+        console.log('Competition Name:', competitionName)
+        axios.post('http://localhost:8082/competitions/competitionIDByName', {competitionName: competitionName})
+            .then(json => {
+                const competitionID = json.data;
+                res.json({competitionID});
+            })
+            .catch(err => {
+                console.error('Error while retrieving competition ID in index router ', err);
+                res.setHeader('Content-Type', 'application/json');
+                res.status(505).json(err);
+            })
+    });
+
 router.route('/getpopularplayers')
     .post((req, res) => {
         axios.post('http://localhost:8082/players/getpopularplayers')

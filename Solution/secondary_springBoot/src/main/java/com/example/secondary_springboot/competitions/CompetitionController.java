@@ -41,5 +41,13 @@ public class CompetitionController {
     String name = body.get("name");
     Optional<String> competitionId = competitionService.findCompetitionIdByCountryAndName(country, name);
         return competitionId.map(s -> new ResponseEntity<>(s, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-}
+    }
+
+    @PostMapping("/competitionIDByName")
+    public ResponseEntity<String> getCompetitionIdByName(@RequestBody Map<String, String> body) {
+        String name = body.get("competitionName");
+        Optional<String> competitionId = competitionService.findCompetitionIdByName(name);
+        return competitionId.map(s -> new ResponseEntity<>(s, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
 }
