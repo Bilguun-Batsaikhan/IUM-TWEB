@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         await createDropDownMenu(countries.countries, "country", "#");
         const competitionType = await sendAxiosIndexQuery('/competitionType');
         console.log("competitionType", competitionType.competitionTypes)
-        await createDropDownMenu(competitionType.competitionTypes, "competitionType", "/competition-table");
+        await createDropDownMenu(competitionType.competitionTypes, "competitionType", "/competition-league");
     } catch (error) {
         console.error("Error fetching data:", error);
     }
@@ -56,7 +56,7 @@ async function sendAxiosIndexQuery(url) {
     }
 }
 
-//fetches countries from SpringBoot then populates the dropdown menu 'country'
+//fetches countries from SpringBoot then populates the dropdown menu 'country' and 'competitionType'
 async function createDropDownMenu(data, elementID, url) {
     const dropDownCountry = document.getElementById(elementID);
     console.log("data", data);
@@ -66,6 +66,7 @@ async function createDropDownMenu(data, elementID, url) {
         const a = document.createElement('a');
         a.textContent = data;
         a.className = 'dropdown-item dropdown-toggle';
+        //elementID === "competitionType" ? a.href = url + '?competitionType=' + encodeURIComponent(data) : a.href = url;
         a.href = url;
         li.appendChild(a);
         dropDownCountry.appendChild(li);
@@ -87,7 +88,7 @@ async function createDropDownMenu(data, elementID, url) {
 
 
 
-//fetches competition names from SpringBoot then populates the dropdown menu 'competition'
+//fetches competition names from SpringBoot then populates the dropdown menu 'competitions -> country -> competitionName
 function fetchCompetitionNames(country, ul, li) {
     return axios.post('/competitionNames', { country: country })
                     .then(function (response) {

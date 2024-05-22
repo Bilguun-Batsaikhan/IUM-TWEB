@@ -12,6 +12,10 @@ router.get('/competition-table', function (req, res, next) {
     res.render('competition-table');
 });
 
+router.get('/competition-league', function (req, res, next) {
+    res.render('competition-league');
+});
+
 /* The nickname should be retrieved from the login page. */
 var nickname = 'Admin';
 /* GET chat page. */
@@ -71,6 +75,7 @@ router.route('/competitionType')
             })
     });
 
+// Competition names by country
 router.route('/competitionNames')
     .post((req, res) => {
         const country = req.body.country;
