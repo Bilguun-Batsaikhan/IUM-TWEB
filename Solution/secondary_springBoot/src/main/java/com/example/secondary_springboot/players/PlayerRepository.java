@@ -8,7 +8,7 @@ import java.util.List;
 @Repository
 public interface PlayerRepository extends JpaRepository<Player, Long> {
 
-    @Query("SELECT p FROM Player p WHERE p.currentClubId = :clubId")
+    @Query("SELECT p FROM Player p WHERE p.currentClubId = :clubId AND p.lastSeason = 2023")
     List<Player> findAllByClubId(@Param("clubId") int clubId);
 
     @Query("SELECT p FROM Player p WHERE p.playerId = :playerId")

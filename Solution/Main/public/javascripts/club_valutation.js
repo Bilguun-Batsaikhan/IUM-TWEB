@@ -44,13 +44,15 @@ function populatePlayersTable(playersData) {
         dateOfBirth = calculateAge(dateOfBirth);
         var countryOfBirth = player.countryOfBirth ? player.countryOfBirth : '';
         var marketValueInEur = player.marketValueInEur ? player.marketValueInEur: '';
+        if (marketValueInEur!='')
         marketValueInEur = setEurValue(marketValueInEur);
+        else marketValueInEur = "unknown";
         var row = '<tr>' +
-            '<td>' + imageUrl + '</td>' +
-            '<td><a href="../valutation/player?player_id=' + player.playerId + '">' + name + '</a></td>' +
-            '<td>' + dateOfBirth + '</td>' +
-            '<td>' + countryOfBirth + '</td>' +
-            '<td>' + marketValueInEur + '</td>' +
+            '<td class="noborder">' + imageUrl + '</td>' +
+            '<td class="noborder"><a href="../valutation/player?player_id=' + player.playerId + '">' + name + '</a></td>' +
+            '<td class="noborder">' + dateOfBirth + '</td>' +
+            '<td class="noborder">' + countryOfBirth + '</td>' +
+            '<td class="noborder">' + marketValueInEur + '</td>' +
             '</tr>';
         tableBody.innerHTML += row;
     });
