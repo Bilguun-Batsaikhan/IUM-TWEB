@@ -10,38 +10,47 @@
 <%- include('partials/navbar') %>
 <!--<p id="results"></p>-->
 <div class="main-content">
-<h2 class="text-center club_name" id="club_name"></h2>
-<div id="clubDetailsContainer" class="container-fluid">
-    <div class="row">
-
-        <div class="col-md-2 text-center">
-            <img src="" alt="Club Logo" class="club_logo" id="club_logo" style="max-width: 125px;">
+    <div id="clubDetailsContainer" class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table stats-table-dark">
+                    <thead>
+                    <tr>
+                        <th colspan="2" class="club_name text-center" id="club_name">Real Madrid Club de Fútbol</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td colspan="2" class="noborder text-center">
+                            <img src="/mnt/data/real.png" alt="Club Logo" class="club_logo" id="club_logo" style="max-width: 125px;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="noborder"><span>Squad size:</span> <span class="info squad_size" id="squad_size">23</span></td>
+                        <td class="noborder"><span>National players:</span> <span class="info national_players" id="national_players">19</span></td>
+                    </tr>
+                    <tr>
+                        <td class="noborder"><span>Foreigners percentage:</span> <span class="info foreigners_age" id="foreigners_age">65.2%</span></td>
+                        <td class="noborder">
+                            <span>Stadium:</span> <span class="info stadium" id="stadium">Santiago Bernabéu</span>
+                            (<span class="info stadium_seats" id="stadium_seats">81044</span> seats)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="noborder"><span>Foreigners:</span> <span class="info" id="foreigners">13</span></td>
+                        <td class="noborder"><span>Current transfer record:</span> <span class="info net_transfer" id="net_transfer">€-122.50m</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <div class="col-md-10">
-            <table class="table stats-table-dark">
-                <tbody>
-                <tr>
-                    <td><span>Squad size:</span> <span class="info squad_size" id="squad_size"></span></td>
-                    <td><span>National players:</span> <span class="info national_players" id="national_players"></span></td>
-                </tr>
-                <tr>
-                    <td><span>Foreigners percentage:</span> <span class="info foreigners_age" id="foreigners_age"></span></td>
-                    <td>
-                        <span>Stadium:</span> <span class="info stadium" id="stadium"></span>
-                        (<span class="info stadium_seats" id="stadium_seats"></span> seats)
-                    </td>
-                </tr>
-                <tr>
-                    <td><span>Foreigners:</span> <span class="" id="">13</span></td>
-                    <td><span>Current transfer record:</span> <span class="info net_transfer" id="net_transfer"></span></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+
+
+
+    <!-- ROW -->
     <p id="players"></p>
-    <p class="mt-5">Players details</p>
+    <p>Players details</p>
     <table class="table">
         <thead>
         <tr>
@@ -56,14 +65,12 @@
         <!-- playersData -->
         </tbody>
     </table>
-    <div id="pagination" class="d-flex align-items-center pb-5" role="group" aria-label="Pagination">
-        <div class="btn-group me-3">
-            <button id="prevButton" class="btn btn-dark rounded-pill">Prev</button>
-            <button id="nextButton" class="btn btn-dark rounded-pill ms-2">Next</button>
-        </div>
-        <span class="fw-bold text-white">Show results:</span>
-        <span id="pagination_number" class="ms-2 text-white"></span>
+    <div id="pagination" class="mb-3 pt-1 pb-1">
+        <button id="prevButton" class="btn btn-dark btnC">Previous</button>
+        <span class="mx-2" style="color: aliceblue;">Page: <span id="pagination_number" class="ms-2 text-white"></span></span>
+        <button id="nextButton" class="btn btn-dark btnC">Next</button>
     </div>
+
 </div>
 </div>
 <%- include('partials/footer') %>

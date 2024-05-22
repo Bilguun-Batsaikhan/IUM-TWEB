@@ -31,3 +31,25 @@ td, th, .list-group-item{
     border:none;
 }
 
+#pagination {
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0;
+    margin-bottom: 0 !important;
+}
+#currentPage {
+    color: aliceblue;
+}
+
+.btnC {
+    background-color: #3f474f;
+    color: #fff;
+    border-radius: 5px;
+    border: solid 2px aliceblue;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px;
+}
