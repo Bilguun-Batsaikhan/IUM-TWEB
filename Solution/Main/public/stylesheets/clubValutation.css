@@ -16,3 +16,33 @@ span {
     color: #000; /* Imposta il colore a nero */
     font-weight: bold; /* Rende il testo più marcato/grassetto */
 }
+
+.stats-table-dark, table.stats-table-dark{
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    color: white !important;
+}
+.table{
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    color: white !important;
+}
+.table-white{
+    background-color: transparent !important;
+    color: white !important;
+}
+.stats-table {
+    border-radius: 10px;
+    padding: 10px;
+    color: white !important;
+    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.6); !important;
+}
+td, th, .list-group-item{
+    background-color: transparent !important;
+    color: white !important;
+}
+
+.noborder{
+    border:none;
+}
+
