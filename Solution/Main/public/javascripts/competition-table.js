@@ -17,14 +17,12 @@ document.addEventListener('DOMContentLoaded', async function () {
         return;
     }
 
-    try {
-        const countries = await sendAxiosQuery('/competition');
-        console.log("countries", countries);
-    } catch (error) {
-        console.error("Error fetching countries:", error);
-    }
 
-    let ID = await fetchCompetitionID('/retrieveCompetitionID', country, competitionName);
+    // let ID = await fetchCompetitionID('/retrieveCompetitionID', country, competitionName);
+    console.log('competitionName:', competitionName)
+    let ID = await fetchCompetitionIDbyName('/retrieveCompetitionIDbyName', competitionName);
+
+    console.log('ID:', ID)
     let gamesData = await fetchGamesTable(ID);
 
     gamesData.games.result.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -62,9 +60,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                 case 'switchButton':
                     handleSwitch();
                     break;
-                case 'tableButton':
-                    handleTable();
-                    break;
+                // case 'tableButton':
+                //     handleTable();
+                //     break;
                 case 'matchButton':
                     handleMatch();
                     break;
@@ -139,6 +137,17 @@ async function fetchCompetitionID(url, country, competitionName) {
     }
 }
 
+//fetch competition ID for given competition name, retrieveCompetitionIDbyName
+async function fetchCompetitionIDbyName(url, competitionName) {
+    try {
+        const response = await axios.post(url, {name: competitionName});
+        return response.data; // assuming the ID is in the response data
+    } catch (error) {
+        console.error("Error fetching competition ID:", error);
+        // Handle the error appropriately
+    }
+}
+
 async function sendAxiosQuery(url) {
     try {
         const response = await axios.post(url);
@@ -151,7 +160,6 @@ async function sendAxiosQuery(url) {
 //request graph image from main server then dynamically create the graph image in html file
 async function fetchGraphImage(competitionId) {
     try {
-        console.log("LALLAL" + competitionId)
       // Make request to Express server using axios
       const response = await axios.get(`/retrieveGraph?competition_id=${competitionId}`, {
         responseType: 'arraybuffer', // Specify the response type as arraybuffer to handle binary data

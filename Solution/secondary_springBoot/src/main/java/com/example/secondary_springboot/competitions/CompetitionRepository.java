@@ -24,4 +24,8 @@ public interface CompetitionRepository extends JpaRepository<Competition, Long> 
     // This method returns a list of all distinct competition types (subType) from the Competition table where the subType is not null
     @Query("SELECT DISTINCT subType FROM Competition WHERE subType IS NOT NULL")
     List<String> findAllDistinctCompetitionTypes();
+
+    // This method returns the competition ID from the Competition table by competition name
+    @Query("SELECT c.competitionId FROM Competition c WHERE c.name = :name")
+    Optional<String> findCompetitionIdByName(@Param("name") String name);
 }
