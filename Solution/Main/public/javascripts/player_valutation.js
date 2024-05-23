@@ -10,14 +10,14 @@ function init() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const playerId = urlParams.get('player_id')
-    const club_id =
+    //const club_id =
     if (!playerId || isNaN(playerId) || !/^\d+$/.test(playerId)) {
         window.location.href = '/error';
     } else {
         //console.log('player:', parseInt(playerId));
         sendAxiosQuery('/valutation/player', playerId);
         sendAxiosQuery2('/valutation/getAppearancesByPlayer', playerId);
-        sendAxiosQuery2('/valutation/getGamesByClubId', playerId);
+        //sendAxiosQuery2('/valutation/getGamesByClubId', playerId);
     }
 }
 
@@ -27,7 +27,7 @@ function sendAxiosQuery(url, playerId) {
     })
         .then(function (dataR) {
             let playerData = dataR.data.playerData;
-            //console.log("playerData: " + JSON.stringify(playerData));
+            console.log("playerData: " + JSON.stringify(playerData));
             if (!playerData)
                 window.location.href = '/error';
             fillHTML(playerData);
@@ -46,16 +46,41 @@ function sendAxiosQuery2(url, playerId) {
             console.log("MatchData: " + JSON.stringify(matchData));
             if (!matchData)
                 window.location.href = '/error';
-            statistics(matchData);
-            updateMatchTable(matchData);
-            handlePagination(matchData);
-            totalPages = Math.ceil(matchData.length / MatchPerPage);
-            updatePageNumber();
+           // console.log("Playessss" + playerId);
+            sendAxiosQuery3('/valutation/getGamesResultsByGameId', playerId, matchData);
+
         })
         .catch(function (error) {
             (JSON.stringify(error));
         });
 }
+
+function sendAxiosQuery3(url, playerClubId, matchData) {
+    console.log("Player " + playerClubId);
+    axios.post(url, {
+        player_club_id: playerClubId,
+        match_data: matchData
+    })
+        .then(function (dataR) {
+            let resultData = dataR.data.resultData.result;
+            console.log("resultData: " + JSON.stringify(resultData));
+            resultData = clearData(resultData);
+            statistics(resultData);
+            updateMatchTable(resultData, playerClubId);
+            handlePagination(resultData);
+            totalPages = Math.ceil(resultData.length / MatchPerPage);
+            updatePageNumber();
+        })
+        .catch(function (error) {
+            console.log(JSON.stringify(error));
+        });
+}
+
+function clearData(resultData) {
+    return resultData.filter(row => row.match_found !== false);
+}
+
+
 
 /* function created using chatGPT */
 function setEurValue(value) {
@@ -110,13 +135,21 @@ function calculateAge(birthDateString) {
     return birthDateString + ' (' + age + ')';
 }
 
-function populateMatchTable(matchData) {
+function populateMatchTable(matchData, playerClubId) {
     var tableBody = document.getElementById('match-table-body');
     matchData.forEach(function(match) {
         //var imageUrl = player.imageUrl ? '<img src="' + player.imageUrl + '" alt="Player Image" style="width:50px; height:auto;">' : '';
         var date = match.date ? match.date : '';
         const readableDate = formatReadableDate(date);
-        var club = match.game_id ? match.game_id : '';
+
+        //var club = match.game_id ? match.game_id : '';
+        var club;
+        if(match.game_id == match.away_club_id)
+            club = match.home_club_name;
+        else club = match.away_club_name;
+        club = club !== undefined ? club : "unknown";
+
+
         var result = "1 - 1"
         var goals = match.goals ? match.goals : '0';
         var assists = match.assists ? match.assists: '0';
@@ -160,10 +193,10 @@ function handlePagination(matchData) {
     });
 }
 
-function updateMatchTable(matchData) {
+function updateMatchTable(matchData, playerClubId) {
     var tableBody = document.getElementById('match-table-body');
     tableBody.innerHTML = '';
-    populateMatchTable(paginateMatch(matchData));
+    populateMatchTable(paginateMatch(matchData), playerClubId);
 }
 
 function setEurValue(value) {

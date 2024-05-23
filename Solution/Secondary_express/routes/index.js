@@ -82,4 +82,21 @@ router.post('/getGamesByClubId', async (req, res) => {
     res.status(500).json({ error: 'Error retrieving club names for bar search', message: error.message });
   }
 });
+
+router.route('/getGamesResultsByGameId')
+    .post(async function (req, res) {
+      try {
+      const player_club_id = req.body.player_club_id;
+      const match_data = req.body.match_data;
+
+
+        const resultData = await gamesController.getGamesResultsByGameId(player_club_id, match_data);
+        res.json({ result: resultData });
+      } catch (err) {
+        console.error('Errore:', err);
+        res.setHeader('Content-Type', 'application/json');
+        res.status(500).json({ error: 'Error retrieving game results', message: err.message });
+      }
+    });
+
 module.exports = router;
