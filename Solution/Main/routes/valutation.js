@@ -77,4 +77,24 @@ router.route('/getGamesByClub')
             });
     });
 
+router.route('/getGamesResultsByGameId')
+    .post(function (req, res) {
+        const player_club_id = req.body.player_club_id;
+        const match_data = req.body.match_data;
+        //console.log('Received player_club_id:', player_club_id);
+        //console.log('Received match_data:', match_data);
+
+        axios.post('http://localhost:3001/getGamesResultsByGameId', {player_club_id: player_club_id,
+        match_data: match_data})
+            .then(json => {
+                resultData = json.data;
+                res.json({ resultData });
+            })
+            .catch(err => {
+                console.error('Errore:', err);
+                res.setHeader('Content-Type', 'application/json');
+                res.status(505).json(err);
+            });
+    });
+
 module.exports = router;
