@@ -17,7 +17,6 @@ function init() {
         //console.log('player:', parseInt(playerId));
         sendAxiosQuery('/valutation/player', playerId);
         sendAxiosQuery2('/valutation/getAppearancesByPlayer', playerId);
-        //sendAxiosQuery2('/valutation/getGamesByClubId', playerId);
     }
 }
 
@@ -106,6 +105,9 @@ function fillHTML(playerData) {
     playerNationality.textContent = playerData[0].countryOfCitizenship;
     const playerClub = document.getElementById('playerClub');
     playerClub.textContent = playerData[0].currentClubName;
+    const playerClubImage = document.getElementById('playerClubImage');
+    playerClubImage.src = "https://tmssl.akamaized.net/images/wappen/head/" + playerData[0].currentClubId + ".png";
+
     const playerRole = document.getElementById('playerRole');
     playerRole.textContent = playerData[0].position;
     const playerAge = document.getElementById('playerAge');
@@ -143,11 +145,13 @@ function populateMatchTable(matchData, playerClubId) {
         const readableDate = formatReadableDate(date);
 
         //var club = match.game_id ? match.game_id : '';
-        var club;
+        /*var club;
         if(match.game_id == match.away_club_id)
             club = match.home_club_name;
         else club = match.away_club_name;
-        club = club !== undefined ? club : "unknown";
+        club = club !== undefined ? club : "unknown";*/
+        var home_club_id = match.home_club_id;
+        var away_club_id = match.away_club_id;
 
 
         var result = "1 - 1"
@@ -155,8 +159,11 @@ function populateMatchTable(matchData, playerClubId) {
         var assists = match.assists ? match.assists: '0';
         var row = '<tr>' +
             '<td>' + readableDate + '</td>' +
-            '<td>' + club + '</td>' +
-            '<td>' + result + '</td>' +
+            //'<td><img src="https://tmssl.akamaized.net/images/wappen/head/' + match.home_club_id + '.png" style="max-width: 25px;"><a href="/valutation/club?club_id=' + match.home_club_id + '">' + match.home_club_name + '</a></td>' +
+            '<td><a href="/valutation/club?club_id=' + match.home_club_id + '"><img src="https://tmssl.akamaized.net/images/wappen/head/' + match.home_club_id + '.png" style="max-width: 25px;"></a></td>' +
+            '<td>' + match.home_club_goals + " - " + match.away_club_goals + '</td>' +
+            //'<td><img src="https://tmssl.akamaized.net/images/wappen/head/' + match.away_club_id + '.png" style="max-width: 25px;"><a href="/valutation/club?club_id=' + match.away_club_id + '">' + match.away_club_name + '</a></td>' +
+            '<td><a href="/valutation/club?club_id=' + match.away_club_id + '"><img src="https://tmssl.akamaized.net/images/wappen/head/' + match.away_club_id + '.png" style="max-width: 25px;"></a></td>' +
             '<td>' + goals + '</td>' +
             '<td>' + assists + '</td>' +
             '</tr>';
