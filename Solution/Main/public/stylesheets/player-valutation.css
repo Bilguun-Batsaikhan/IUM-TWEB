@@ -53,3 +53,7 @@ td, th, .list-group-item{
     cursor: pointer;
     margin: 10px;
 }
+
+a#match-table-body{
+    color: white !important;
+}
