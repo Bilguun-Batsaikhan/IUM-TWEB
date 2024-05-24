@@ -10,14 +10,18 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Get the competition name from the query parameters
     const urlParams = new URLSearchParams(window.location.search);
     const competitionType = urlParams.get('competitionType');
-
-    if (!competitionType) {
+    const competitionName = urlParams.get('competition');
+    if (!competitionType || !competitionName) {
         window.location.href = '/error';
         return;
     }
 
 
-    let ID = await fetchCompetitionID('/retrieveCompetitionID', country, competitionName);
+    // let ID = await fetchCompetitionID('/retrieveCompetitionID', country, competitionName);
+    console.log('competitionName:', competitionName)
+    let ID = await fetchCompetitionIDbyName('/retrieveCompetitionIDbyName', competitionName);
+
+    console.log('ID:', ID)
     let gamesData = await fetchGamesTable(ID);
 
     gamesData.games.result.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -55,17 +59,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                 case 'switchButton':
                     handleSwitch();
                     break;
-                // case 'tableButton':
-                //     handleTable();
-                //     break;
                 case 'matchButton':
                     handleMatch();
                     break;
                 case 'statisticButton':
                     handleStatistic();
-                    break;
-                case 'graphButton':
-                    handleGraph();
                     break;
                 default:
                     break;
@@ -122,9 +120,20 @@ function init(gamesData) {
 }
 
 //fetch competition ID for given country and competition name
-async function fetchCompetitionID(url, country, competitionName) {
+// async function fetchCompetitionID(url, country, competitionName) {
+//     try {
+//         const response = await axios.post(url, {country_name: country, name: competitionName});
+//         return response.data; // assuming the ID is in the response data
+//     } catch (error) {
+//         console.error("Error fetching competition ID:", error);
+//         // Handle the error appropriately
+//     }
+// }
+
+//fetch competition ID for given competition name, retrieveCompetitionIDbyName
+async function fetchCompetitionIDbyName(url, competitionName) {
     try {
-        const response = await axios.post(url, {country_name: country, name: competitionName});
+        const response = await axios.post(url, {name: competitionName});
         return response.data; // assuming the ID is in the response data
     } catch (error) {
         console.error("Error fetching competition ID:", error);
@@ -255,13 +264,6 @@ function displayGamesData(gamesData, page, year) {
     document.getElementById('currentPage').innerText = page + "/" + lastPage;
 }
 
-
-function handleGraph() {
-    document.getElementById('graphContainer').style.display = 'block';
-    document.getElementById('competition-table-body').style.display = 'none';
-    document.getElementById('tableHead').style.display = 'none';
-    document.getElementById('pagination').style.display = 'none';
-}
 
 function handleMatch() {
     document.getElementById('graphContainer').style.display = 'none';

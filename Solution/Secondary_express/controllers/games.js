@@ -3,11 +3,11 @@ const Model = require('../models/games');
 /* it obtains all games of the competition specified by ID */
 function getGamesByCompetitionId(competition_id) {
     return new Promise((resolve, reject) => {
-        console.log(competition_id);
+        //console.log(competition_id);
         // Assuming competition_id is already a string, if not, convert it to a string
         const competitionIdString = typeof competition_id === 'object' ? competition_id.competitionID : competition_id;
 
-        console.log(competitionIdString);
+        //console.log(competitionIdString);
         Model.find({ competition_id: competitionIdString })
             .select({
                 home_club_name: 1,
@@ -21,7 +21,12 @@ function getGamesByCompetitionId(competition_id) {
                 // Add other fields you want to include
             })
             .then(results => {
-                resolve(results);
+                // Filter out documents where home_club_name or away_club_name are null or empty
+                const filteredResults = results.filter(result =>
+                    result.home_club_name && result.home_club_name.trim() !== '' &&
+                    result.away_club_name && result.away_club_name.trim() !== ''
+                );
+                resolve(filteredResults);
             })
             .catch(error => {
                 console.error('Error fetching games by competition ID:', error);
@@ -29,6 +34,7 @@ function getGamesByCompetitionId(competition_id) {
             });
     });
 }
+
 
 function getGamesByClubId(club_id) {
     return new Promise((resolve, reject) => {
