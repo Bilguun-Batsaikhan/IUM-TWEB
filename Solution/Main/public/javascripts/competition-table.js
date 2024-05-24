@@ -127,15 +127,15 @@ function init(gamesData) {
 }
 
 //fetch competition ID for given country and competition name
-async function fetchCompetitionID(url, country, competitionName) {
-    try {
-        const response = await axios.post(url, {country_name: country, name: competitionName});
-        return response.data; // assuming the ID is in the response data
-    } catch (error) {
-        console.error("Error fetching competition ID:", error);
-        // Handle the error appropriately
-    }
-}
+// async function fetchCompetitionID(url, country, competitionName) {
+//     try {
+//         const response = await axios.post(url, {country_name: country, name: competitionName});
+//         return response.data; // assuming the ID is in the response data
+//     } catch (error) {
+//         console.error("Error fetching competition ID:", error);
+//         // Handle the error appropriately
+//     }
+// }
 
 //fetch competition ID for given competition name, retrieveCompetitionIDbyName
 async function fetchCompetitionIDbyName(url, competitionName) {

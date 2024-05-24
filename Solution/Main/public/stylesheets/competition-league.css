@@ -27,7 +27,7 @@ body {
     text-align: center;
 }
 .nav-bar button.active {
-    border-bottom: 3px solid rgba(20, 200, 232, 0.8);
+    border-bottom: 3px solid rgba(232, 0, 0, 0.8);
 }
 .nav-bar select {
     color: white;

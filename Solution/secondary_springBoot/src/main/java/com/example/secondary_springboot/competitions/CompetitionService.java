@@ -30,8 +30,8 @@ public class CompetitionService {
                 "europa_league_qualifying",
                 "uefa_champions_league",
                 "uefa_champions_league_qualifying",
-                "uefa_europa_conference_league_qualifiers",
-                "fifa_club_world_cup"
+                "uefa_europa_conference_league_qualifiers"
+//                "fifa_club_world_cup" it seems this type is empty
         );
 
         List<String> filteredCompetitionTypes = allCompetitionTypes.stream()
@@ -40,14 +40,17 @@ public class CompetitionService {
         System.out.println(filteredCompetitionTypes);
         return filteredCompetitionTypes;
     }
-    // returns a list of all competition names in a given country
-    public List<String> getCompetitionsByCountry(String country) {
-        return competitionRepository.findAllByCountry(country);
+    public List<String> getCompetitionsByCountryAndType(String country, String competitionType) {
+        if (competitionType != null && !competitionType.isEmpty()) {
+            return competitionRepository.findAllByCompetitionType(competitionType);
+        } else {
+            return competitionRepository.findAllByCountry(country);
+        }
     }
 
-    public Optional<String> findCompetitionIdByCountryAndName(String country, String name) {
-        return competitionRepository.findCompetitionIdByCountryAndName(country, name);
-    }
+//    public Optional<String> findCompetitionIdByCountryAndName(String country, String name) {
+//        return competitionRepository.findCompetitionIdByCountryAndName(country, name);
+//    }
 
 
     public Optional<String> findCompetitionIdByName(String name) {

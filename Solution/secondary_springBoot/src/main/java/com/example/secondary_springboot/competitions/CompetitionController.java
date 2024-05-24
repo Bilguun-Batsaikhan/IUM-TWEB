@@ -28,20 +28,21 @@ public class CompetitionController {
         List<String> competitionTypes = competitionService.getAllCompetitionTypes();
         return ResponseEntity.ok(competitionTypes);
     }
-    @PostMapping("/countriesData")
-    public ResponseEntity<List<String>> getCompetitionsByCountry(@RequestBody Map<String, String> body) {
+    @PostMapping("/competitionNameByCountryOrType")
+    public ResponseEntity<List<String>> getCompetitionsByCountryAndType(@RequestBody Map<String, String> body) {
         String country = body.get("country");
-        List<String> competitions = competitionService.getCompetitionsByCountry(country);
+        String competitionType = body.get("competitionType");
+        List<String> competitions = competitionService.getCompetitionsByCountryAndType(country, competitionType);
         return ResponseEntity.ok(competitions);
     }
 
-    @PostMapping("/competitionID")
-    public ResponseEntity<String> getCompetitionId(@RequestBody Map<String, String> body) {
-    String country = body.get("country");
-    String name = body.get("name");
-    Optional<String> competitionId = competitionService.findCompetitionIdByCountryAndName(country, name);
-        return competitionId.map(s -> new ResponseEntity<>(s, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
+//    @PostMapping("/competitionID")
+//    public ResponseEntity<String> getCompetitionId(@RequestBody Map<String, String> body) {
+//    String country = body.get("country");
+//    String name = body.get("name");
+//    Optional<String> competitionId = competitionService.findCompetitionIdByCountryAndName(country, name);
+//        return competitionId.map(s -> new ResponseEntity<>(s, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//    }
 
     @PostMapping("/competitionIDByName")
     public ResponseEntity<String> getCompetitionIdByName(@RequestBody Map<String, String> body) {

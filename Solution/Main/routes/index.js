@@ -78,18 +78,44 @@ router.route('/competitionType')
 // Competition names by country
 router.route('/competitionNames')
     .post((req, res) => {
-        const country = req.body.country;
-        axios.post('http://localhost:8082/competitions/countriesData', {country: country})
-            .then(json => {
-                const countryData = json.data;
-                res.json({countryData});
+        let requestData = req.body;
+
+        let apiUrl = 'http://localhost:8082/competitions/competitionNameByCountryOrType';
+        let requestPayload = {};
+
+        if (requestData.type === "country") {
+            requestPayload = { country: requestData.value };
+        } else if (requestData.type === "competitionType") {
+            requestPayload = { competitionType: requestData.value };
+        }
+        console.log('Request Payload:', requestPayload)
+        axios.post(apiUrl, requestPayload)
+            .then(response => {
+                res.json({ data: response.data });
             })
             .catch(err => {
-                console.error('Error while retrieving competition Names in index router ', err);
+                console.error('Error while retrieving competition names in index router', err);
                 res.setHeader('Content-Type', 'application/json');
                 res.status(505).json(err);
-            })
-    })
+            });
+    });
+
+
+// Competition names by type
+// router.route('/competitionNamesByType')
+//     .post((req, res) => {
+//         const competitionType = req.body.competitionType;
+//         axios.post('http://localhost:8082/competitions/competitionTypesData', {competitionType: competitionType})
+//             .then(json => {
+//                 const competitionTypeData = json.data;
+//                 res.json({competitionTypeData});
+//             })
+//             .catch(err => {
+//                 console.error('Error while retrieving competition Names in index router ', err);
+//                 res.setHeader('Content-Type', 'application/json');
+//                 res.status(505).json(err);
+//             })
+//     })
 
 router.route('/retrieveGames')
     .post((req, res) => {
@@ -108,21 +134,21 @@ router.route('/retrieveGames')
     });
 
 //fetch competition ID from SpringBoot then return it
-router.route('/retrieveCompetitionID')
-    .post((req, res) => {
-        const competitionName = req.body.name;
-        const country_name = req.body.country_name;
-        axios.post('http://localhost:8082/competitions/competitionID', {country: country_name, name: competitionName})
-            .then(json => {
-                const competitionID = json.data;
-                res.json({competitionID});
-            })
-            .catch(err => {
-                console.error('Error while retrieving competition ID in index router ', err);
-                res.setHeader('Content-Type', 'application/json');
-                res.status(505).json(err);
-            })
-    })
+// router.route('/retrieveCompetitionID')
+//     .post((req, res) => {
+//         const competitionName = req.body.name;
+//         const country_name = req.body.country_name;
+//         axios.post('http://localhost:8082/competitions/competitionID', {country: country_name, name: competitionName})
+//             .then(json => {
+//                 const competitionID = json.data;
+//                 res.json({competitionID});
+//             })
+//             .catch(err => {
+//                 console.error('Error while retrieving competition ID in index router ', err);
+//                 res.setHeader('Content-Type', 'application/json');
+//                 res.status(505).json(err);
+//             })
+//     })
 
 // fetch competition ID from SpringBoot by competition name
 router.route('/retrieveCompetitionIDbyName')
