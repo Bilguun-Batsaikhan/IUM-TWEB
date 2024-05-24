@@ -32,7 +32,7 @@ router.post('/competition/games', async (req, res) => {
   }
 });
 
-router.post('/club', async (req, res) => {
+router.post('/clubSearch', async (req, res) => {
   try {
     // Parse the request body
     const clubSearch = req.body.name;

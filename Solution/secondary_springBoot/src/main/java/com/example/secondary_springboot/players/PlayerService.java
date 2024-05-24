@@ -21,7 +21,11 @@ public class PlayerService {
     }
 
     public List<String> searchPlayer(String playerName) {
-        return playerRepository.searchPlayerByName(playerName);
+        List<String> players = playerRepository.searchPlayerByName(playerName);
+        if(players.size() > 10) {
+            players = players.subList(0, 10);
+        }
+        return players;
     }
 
     public List<Player> getPopularPlayers() {
