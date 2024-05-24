@@ -11,7 +11,9 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
     */
 
-    // Funzione che chiama getPopularPlayers
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('keypress', handleSearchKeyPress);
+
     callGetPopularPlayers()
 
     try {
@@ -179,6 +181,15 @@ function callGetPopularPlayers() {
         getPopularPlayers();
     } else {
         //console.error("getPopularPlayers is not defined in this page.");
+    }
+}
+
+function handleSearchKeyPress(event) {
+    if (event.key === 'Enter') {
+        const searchQuery = event.target.value.trim();
+        if (searchQuery) {
+            window.location.href = `/search?search=${encodeURIComponent(searchQuery)}`;
+        }
     }
 }
 
