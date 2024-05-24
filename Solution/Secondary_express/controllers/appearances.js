@@ -6,6 +6,7 @@ function getAppearancesByPlayer(player_id) {
         console.log("Querying for player_id:", player_id); // Log per debug
         Model.find({ player_id: player_id })
             .sort({ date: -1 })
+            .limit(300)
             .then(results => {
                 console.log("Query results:", results); // Log per debug
                 resolve(results);
