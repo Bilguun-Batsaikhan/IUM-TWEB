@@ -67,10 +67,13 @@ function getGamesByClubId(club_id) {
 
 async function getGamesResultsByGameId(player_club_id, match_data) {
     try {
-        // Estrai tutti i game_id dai match_data
+        match_data = match_data.map(match => {
+            const { appearance_id, player_id, player_club_id, player_current_club_id, competition_id, ...filteredMatch } = match;
+            return filteredMatch;
+        });
+
         const gameIds = match_data.map(match => match.game_id);
 
-        // Trova tutte le partite che corrispondono ai game_id
         const games = await Model.find({ game_id: { $in: gameIds } })
             .select({
                 game_id: 1,
@@ -80,17 +83,15 @@ async function getGamesResultsByGameId(player_club_id, match_data) {
                 away_club_goals: 1,
                 home_club_id: 1,
                 away_club_id: 1
-            });
+            })
+           ;
 
-        // Crea una lista di game_id trovati
         const foundGameIds = games.map(game => game.game_id);
 
-        // Mappa i risultati con i dettagli desiderati
         const processedResults = match_data.map(match => {
-            // Verifica se il game_id è presente nella lista dei game_id trovati
+
             const matchFound = foundGameIds.includes(match.game_id);
             if (matchFound) {
-                // Trova il gioco corrispondente
                 const game = games.find(g => g.game_id === match.game_id);
                 return {
                     ...match,
@@ -116,6 +117,7 @@ async function getGamesResultsByGameId(player_club_id, match_data) {
         throw error;
     }
 }
+
 
 
 module.exports.getGamesByClubId = getGamesByClubId;
