@@ -2,14 +2,22 @@
 <html>
 <head>
     <title>Club valutation</title>
-    <link rel="stylesheet" href="/stylesheets/clubValutation.css">
+    <link rel="stylesheet" href="/stylesheets/display-results.css">
     <%- include('partials/navbarScripts') %>
+    <script src="/javascripts/display-results.js"></script>
 </head>
 <body onload="init()">
 <%- include('partials/navbar') %>
 <div class="main-content">
 <%= searchQuery %>
+    <%= playersData %>
+    -------------------------------------------------------------
+    <%= clubsData %>
 </div>
 <%- include('partials/footer') %>
+<script>
+    const playersData = <%- playersData %>;
+    const clubsData = <%- clubsData %>;
+</script>
 </body>
 </html>
