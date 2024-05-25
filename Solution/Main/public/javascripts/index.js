@@ -109,7 +109,7 @@ function fetchCompetitionNames(data, ul, li, elementID) {
         .then(function (response) {
             let responseData = response.data;
             let dataToUse = responseData.data;
-            console.log('dataToUse', dataToUse)
+            // console.log('dataToUse', dataToUse)
             dataToUse.forEach(item => {
                 const li2 = document.createElement('li');
                 const a2 = document.createElement('a');
