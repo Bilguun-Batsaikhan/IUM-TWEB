@@ -4,7 +4,6 @@ let lastPage = 1;
 let itemsPerPage = 10;
 let gamesData = null;
 
-let ID;
 document.addEventListener('DOMContentLoaded', async function () {
     document.getElementById('graphContainer').style.display = 'none';
     // Get the competition name from the query parameters
@@ -17,12 +16,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         return;
     }
 
-
-    // let ID = await fetchCompetitionID('/retrieveCompetitionID', country, competitionName);
-    console.log('competitionName:', competitionName)
     let ID = await fetchCompetitionIDbyName('/retrieveCompetitionIDbyName', competitionName);
-
-    console.log('ID:', ID)
     let gamesData = await fetchGamesTable(ID);
 
     gamesData.games.result.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -60,9 +54,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                 case 'switchButton':
                     handleSwitch();
                     break;
-                // case 'tableButton':
-                //     handleTable();
-                //     break;
                 case 'matchButton':
                     handleMatch();
                     break;
@@ -82,14 +73,14 @@ document.addEventListener('DOMContentLoaded', async function () {
 function init(gamesData) {
     console.log('init()');
     document.getElementById('nextButton').addEventListener('click', () => {
-        if(currentPage < lastPage)
-        currentPage++;
+        if (currentPage < lastPage)
+            currentPage++;
         displayGamesData(gamesData, currentPage, dateSelect.value);
     });
     document.getElementById('prevButton').addEventListener('click', () => {
         if (currentPage > 1) {
             currentPage--;
-            displayGamesData(gamesData,currentPage, dateSelect.value);
+            displayGamesData(gamesData, currentPage, dateSelect.value);
         }
     });
 
@@ -104,21 +95,23 @@ function init(gamesData) {
             itemsPerPage -= 10;
             button.textContent = 'Show More';
             button.id = 'expandButton';
-    
+
             // Update currentPage to stay on the correct page after changing itemsPerPage
             const totalPages = Math.ceil(lastPage / itemsPerPage);
             currentPage = Math.min(currentPage, totalPages);
         }
-    
+
         displayGamesData(gamesData, currentPage, dateSelect.value);
     });
-    
+
 
     let topButton = document.getElementById('topButton');
 
     topButton.addEventListener('click', () => {
-    window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
     });
+
+    let dateSelect = document.getElementById('dateSelect');
 
     dateSelect.addEventListener('change', () => {
         currentPage = 1;
@@ -126,21 +119,10 @@ function init(gamesData) {
     });
 }
 
-//fetch competition ID for given country and competition name
-// async function fetchCompetitionID(url, country, competitionName) {
-//     try {
-//         const response = await axios.post(url, {country_name: country, name: competitionName});
-//         return response.data; // assuming the ID is in the response data
-//     } catch (error) {
-//         console.error("Error fetching competition ID:", error);
-//         // Handle the error appropriately
-//     }
-// }
-
 //fetch competition ID for given competition name, retrieveCompetitionIDbyName
 async function fetchCompetitionIDbyName(url, competitionName) {
     try {
-        const response = await axios.post(url, {name: competitionName});
+        const response = await axios.post(url, { name: competitionName });
         return response.data; // assuming the ID is in the response data
     } catch (error) {
         console.error("Error fetching competition ID:", error);
@@ -148,35 +130,37 @@ async function fetchCompetitionIDbyName(url, competitionName) {
     }
 }
 
-async function sendAxiosQuery(url) {
+async function sendAxiosQueryGet(url) {
     try {
-        const response = await axios.post(url);
+        const response = await axios.get(url); // Use axios.get for fetching data
         return response.data;
     } catch (error) {
+        console.error('Error fetching data:', error);
         throw error;
     }
 }
 
+
 //request graph image from main server then dynamically create the graph image in html file
 async function fetchGraphImage(competitionId) {
     try {
-      // Make request to Express server using axios
-      const response = await axios.get(`/retrieveGraph?competition_id=${competitionId}`, {
-        responseType: 'arraybuffer', // Specify the response type as arraybuffer to handle binary data
-      });
-  
-      // Convert the array buffer to a blob
-      const blob = new Blob([response.data], { type: 'image/png' });
-  
-      // Create a temporary URL for the blob
-      const imgUrl = URL.createObjectURL(blob);
-  
-      return imgUrl;
+        // Make request to Express server using axios
+        const response = await axios.get(`/retrieveGraph?competition_id=${competitionId}`, {
+            responseType: 'arraybuffer', // Specify the response type as arraybuffer to handle binary data
+        });
+
+        // Convert the array buffer to a blob
+        const blob = new Blob([response.data], { type: 'image/png' });
+
+        // Create a temporary URL for the blob
+        const imgUrl = URL.createObjectURL(blob);
+
+        return imgUrl;
     } catch (error) {
-      console.error('Error fetching graph:', error);
-      throw error; // Propagate the error for handling in the calling code
+        console.error('Error fetching graph:', error);
+        throw error; // Propagate the error for handling in the calling code
     }
-  }
+}
 
 //fetch games table data for given competition ID
 async function fetchGamesTable(competition_id) {
@@ -242,28 +226,9 @@ function displayGamesData(gamesData, page, year) {
         row.insertCell().textContent = game.home_club_goals + ' - ' + game.away_club_goals;
 
         // Create anchor for away club
-        const awayClubAnchor = document.createElement('a');
-        awayClubAnchor.href = '/valutation/club?club_id=' + game.away_club_id;
-        awayClubAnchor.textContent = game.away_club_name;
+        const awayClubAnchor = createClubAnchor(game.away_club_id, game.away_club_name);
 
-        // Create img element for away club icon
-        const awayClubImg = document.createElement('img');
-        awayClubImg.src = "https://tmssl.akamaized.net/images/wappen/head/" + game.away_club_id + ".png?";
-        awayClubImg.alt = "Club Logo";
-        awayClubImg.className = "club_logo";
-        awayClubImg.style.maxWidth = "25px";
-
-        // Create a div to wrap the anchor and image
-        const awayClubWrapper = document.createElement('div');
-        awayClubWrapper.className = 'club-wrapper';
-        awayClubWrapper.appendChild(awayClubImg);
-        awayClubWrapper.appendChild(awayClubAnchor);
-
-        // Append away club wrapper to cell
-        const awayCell = row.insertCell();
-        awayCell.appendChild(awayClubWrapper);
-
-
+        row.insertCell().textContent = game.home_club_goals + ' - ' + game.away_club_goals;
         row.insertCell().textContent = game.stadium;
     });
 
@@ -271,6 +236,26 @@ function displayGamesData(gamesData, page, year) {
     document.getElementById('currentPage').innerText = page + "/" + lastPage;
 }
 
+function createClubAnchor(clubId, clubName) {
+    const anchor = document.createElement('a');
+    anchor.href = '/valutation/club?club_id=' + clubId;
+    anchor.textContent = clubName;
+
+    // Create img element for club icon
+    const img = document.createElement('img');
+    img.src = "https://tmssl.akamaized.net/images/wappen/head/" + clubId + ".png?";
+    img.alt = "Club Logo";
+    img.className = "club_logo";
+    img.style.maxWidth = "25px";
+
+    // Create a div to wrap the anchor and image
+    const wrapper = document.createElement('div');
+    wrapper.className = 'club-wrapper';
+    wrapper.appendChild(img);
+    wrapper.appendChild(anchor);
+
+    return wrapper;
+}
 
 function handleGraph() {
     document.getElementById('graphContainer').style.display = 'block';
@@ -283,5 +268,7 @@ function handleMatch() {
     document.getElementById('graphContainer').style.display = 'none';
     document.getElementById('competition-table-body').style.display = 'table-row-group';
     document.getElementById('tableHead').style.display = 'table-row';
-    document.getElementById('pagination').style.display = 'block';
+    document.getElementById('pagination').style.display = 'flex';
 }
+
+
