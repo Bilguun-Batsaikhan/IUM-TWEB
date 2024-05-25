@@ -4,12 +4,29 @@ const axios = require('axios')
 
 router.route('/')
     .get(function (req, res) {
-        //http://localhost:3000/search?search=DATI_IN_INPUT
-        //DATI_IN_INPUT dovrebbe essere il testo della search bar
-        //la search bar di conseguenza dovrebbe avere un navigate to l'indirizzo scritto sopra
         const searchQuery = req.query.search;
-        
-        res.render('displayResults', {searchQuery});
+
+        axios.post('http://localhost:8082/players/getsearchplayer', { player_name: searchQuery })
+            .then(response1 => {
+                const playersData = response1.data;
+
+                return axios.post('http://localhost:3001/clubSearch', { name: searchQuery })
+                    .then(response2 => {
+                        const clubsData = response2.data.result;
+                        console.log("TEST" + JSON.stringify(clubsData));
+                        //res.render('displayResults', { searchQuery, playersData, clubsData: JSON.stringify(clubsData.result, null, 2)});
+                        res.render('displayResults', {
+                            searchQuery,
+                            playersData: JSON.stringify(playersData), // Converti playersData in JSON
+                            clubsData: JSON.stringify(clubsData) // Converti clubsData in JSON
+                        });
+                    });
+            })
+            .catch(err => {
+                console.error('Errore:', err);
+                res.setHeader('Content-Type', 'application/json');
+                res.status(505).json(err);
+            });
     });
 
 module.exports = router;
