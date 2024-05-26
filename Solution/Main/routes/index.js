@@ -16,6 +16,10 @@ router.get('/competition-league', function (req, res, next) {
     res.render('competition-league');
 });
 
+// router.get('/display-results', function (req, res, next) {
+//     res.render('display-results');
+// });
+
 /* The nickname should be retrieved from the login page. */
 var nickname = 'Admin';
 /* GET chat page. */
@@ -88,7 +92,6 @@ router.route('/competitionNames')
         } else if (requestData.type === "competitionType") {
             requestPayload = { competitionType: requestData.value };
         }
-        console.log('Request Payload:', requestPayload)
         axios.post(apiUrl, requestPayload)
             .then(response => {
                 res.json({ data: response.data });

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Club Valuation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <%- include('partials/navbarScripts') %>
+    <script src="/javascripts/search.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@301&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+<%- include('partials/navbar') %>
+<div class="container mt-4 custom-table">
+    <div class="main-content">
+
+        <table class="table">
+            <thead id = "clubHead">
+            <tr class="text-center">
+                <th>Club Name</th>
+                <th>Club Value</th>
+                <!-- Add other necessary columns -->
+            </tr>
+            </thead>
+            <tbody id="clubs-table-container"></tbody>
+        </table>
+
+
+        <table class="table">
+            <thead id = "playerHead">
+            <tr class="text-center">
+                <th>Player Name</th>
+                <th>Player ID</th>
+                <th>Player Image</th>
+            </tr>
+            </thead>
+            <tbody id="players-table-container"></tbody>
+        </table>
+    </div>
+</div>
+
+<%- include('partials/footer') %>
+<link rel="stylesheet" href="/stylesheets/display-results.css">
+<link rel="stylesheet" href="/stylesheets/competition-table.css">
+</body>
+</html>
