@@ -441,7 +441,11 @@ img {
   margin-top: 5px;
   margin-bottom: 10px;
 }
-
+.logout-logo{
+  transition: width 0.3s ease, height 0.3s ease;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
 
 @media (max-width: 767.98px) {
   .custom-search-bar {
@@ -453,9 +457,14 @@ img {
   }
 
   .navbar-collapse.show .nav-item-center .login-logo {
-    width: 60px !important;
-    height: 60px !important;
+    width: 50px !important;
+    height: 50px !important;
     margin: auto !important;
+  }
+  .logout-logo {
+    width: 60px !important;
+    height: 40px !important;
+    margin-top: 5px;
   }
 
   .navbar-nav {
@@ -464,6 +473,10 @@ img {
 }
 
 .login-logo:hover {
+  cursor: pointer;
+}
+
+.logout-logo:hover{
   cursor: pointer;
 }
 

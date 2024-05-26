@@ -2,15 +2,12 @@ let nickname;
 
 document.addEventListener('DOMContentLoaded', async function () {
     hideDiv();
-    //X ALEX1: ho commentato temporaneamente finchè non viene reinserito il pulsante di logout
-    /*
-    const logout = document.getElementById('logoutButton');
+    /*const logout = document.getElementById('logout');
+
     logout.addEventListener('click', function () {
         localStorage.clear();
         hideDiv();
-    });
-    */
-
+    });*/
     const searchInput = document.getElementById('searchInput');
     searchInput.addEventListener('keypress', handleSearchKeyPress);
 
@@ -27,24 +24,30 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 });
 
+
+
+
 function hideDiv() {
     const itemStr = localStorage.getItem('nicknameData');
     const item = JSON.parse(itemStr);
     const now = new Date();
     let time = now.getTime();
 
-    if (!item || (time - item.timestamp) > 220000) {
+    if (!item || (time - item.timestamp) > 10000) {
         localStorage.removeItem('nicknameData');
         console.log("Nickname not found. Hiding elements.");
-        //X ALEX 2: ho commentato momentaneamente finchè non viene rimesso il label per il nickname
-        //document.getElementById('nickNameLabel').classList.add('d-none');
-        //document.getElementById('buttonUser').classList.remove('d-none');
+
+        // Nascondi il logout e mostra il login
+        document.getElementById('logout').style.display = 'none';
+        document.getElementById('login').style.display = 'block';
+
     } else {
         console.log("Nickname found. Displaying elements.");
         console.log(item.nickname);
-        //document.getElementById('buttonUser').classList.add('d-none');
-        //document.getElementById('nickNameLabel').classList.remove('d-none');
-        //document.getElementById('nickNameP').innerHTML = item.nickname;
+
+        // Nascondi il login e mostra il logout
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('logout').style.display = 'block';
     }
 }
 
@@ -163,10 +166,25 @@ function fetchCompetitionNames(data, ul, li, elementID) {
 //                         //console.log('Finished request for ' + competitionType);
 //                     });
 // }
-
+function logout(){
+    document.getElementById('logout').style.display = 'none';
+    document.getElementById('login').style.display = 'block';
+}
 
 function goLogin(){
-    window.location.href = "/login";
+    const itemStr = localStorage.getItem('nicknameData');
+    const item = JSON.parse(itemStr);
+    const now = new Date();
+    let time = now.getTime();
+
+    if (!item || (time - item.timestamp) > 10000) {
+        localStorage.removeItem('nicknameData');
+        console.log("Nickname not found. Hiding elements.");
+        window.location.href = "/login";
+    } else {
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('logout').style.display = 'block';
+    }
 }
 
 
