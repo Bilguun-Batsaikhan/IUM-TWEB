@@ -9,14 +9,14 @@ let chat= io.connect('/chat');
  * it initialises the interface and the expected socket messages
  * plus the associated actions
  */
+
+
 function init() {
-   checkLogin();
+
    // it sets up the interface so that userId and room are selected
    document.getElementById('initial_form').style.display = 'block';
    document.getElementById('chat_interface').style.display = 'none';
-
-   sendAxiosQuery('/chat');
-   initChatSocket();
+    checkLogin();
 }
 
 function checkLogin(){
@@ -33,6 +33,9 @@ function checkLogin(){
          console.log("Welcome " + item.nickname);
          name = item.nickname;
          console.log(item.nickname);
+
+          sendAxiosQuery('/chat');
+          initChatSocket();
       }
 }
 
@@ -77,12 +80,16 @@ function sendChatText() {
  * It connects both chat and news at the same time
  */
 function connectToRoom() {
-   roomNo = document.getElementById('roomNo').value;
+    const roomNoElement = document.getElementById('roomNo');
+    const roomNo = roomNoElement.value;
+
+    if (roomNo === "null")
+        alert("Please select a room before proceeding.");
+    else
+       chat.emit('create or join', roomNoElement, name);
    //name = nickname; not work anymore
    /* chat's nickname for not logged user
    if (!name) name = 'Unknown-' + Math.random();*/
-   chat.emit('create or join', roomNo, name);
-
 }
 
 /**
@@ -150,7 +157,8 @@ function sendAxiosQuery(url){
           }
        })
        .catch(function (error) {
-          alert(JSON.stringify(error));
+           console.error('Error in Axios request:', error);
+           document.getElementById('error').classList.remove('d-none');
        });
 }
 
