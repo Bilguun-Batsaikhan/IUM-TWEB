@@ -56,14 +56,11 @@ document.addEventListener('DOMContentLoaded', async function () {
             button.classList.add('active');
 
             switch (button.id) {
-                case 'switchButton':
-                    handleSwitch();
-                    break;
                 case 'matchButton':
                     handleMatch();
                     break;
-                case 'statisticButton':
-                    handleStatistic();
+                case 'graphButton':
+                    handleGraph();
                     break;
                 default:
                     break;
@@ -264,6 +261,12 @@ function displayGamesData(gamesData, page, year) {
     document.getElementById('currentPage').innerText = page + "/" + lastPage;
 }
 
+function handleGraph() {
+    document.getElementById('graphContainer').style.display = 'block';
+    document.getElementById('competition-table-body').style.display = 'none';
+    document.getElementById('tableHead').style.display = 'none';
+    document.getElementById('pagination').style.display = 'none';
+}
 
 function handleMatch() {
     document.getElementById('graphContainer').style.display = 'none';
