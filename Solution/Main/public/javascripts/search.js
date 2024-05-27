@@ -73,12 +73,21 @@ function renderPlayersTable(playerData) {
         const playerInfo = player.split(',');
         const [name, id, imageUrl] = playerInfo;
 
-        // Create a new row
         const row = tableBody.insertRow();
         row.classList.add('text-center');
 
-        // Insert cells for name, id, and image
-        row.insertCell().textContent = name;
+        // Create a cell for the name
+        const nameCell = row.insertCell();
+
+        // Create an anchor element
+        const nameLink = document.createElement('a');
+        nameLink.href = "/valutation/player?player_id=" + id; // Imposta qui l'URL desiderato
+        nameLink.textContent = name;
+
+        // Append the anchor to the name cell
+        nameCell.appendChild(nameLink);
+
+        // Insert cells for id and image
         row.insertCell().textContent = id;
         const imgCell = row.insertCell();
         const img = document.createElement('img');
@@ -94,12 +103,27 @@ function renderClubsTable(clubData) {
     const tableBody = document.getElementById('clubs-table-container');
     tableBody.innerHTML = '';
     const clubsArray = clubData.clubsData;
+
     clubsArray.forEach(function (club) {
         const row = tableBody.insertRow();
         row.classList.add('text-center');
-        row.insertCell().textContent = club.name;
+
+        const imgCell = row.insertCell(0);
+        const img = document.createElement('img');
+        img.src = "https://tmssl.akamaized.net/images/wappen/head/" + club.club_id + ".png?";
+        img.alt = club.name;
+        img.classList.add('mx-auto', 'd-block');
+        img.style.width = '50px';
+        imgCell.appendChild(img);
+
+        const nameCell = row.insertCell();
+        const nameLink = document.createElement('a');
+        nameLink.href = "/valutation/club?club_id=" + club.club_id;
+        nameLink.textContent = club.name;
+        nameCell.appendChild(nameLink);
         row.insertCell().textContent = club.club_id;
     });
 }
+
 
 
