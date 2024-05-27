@@ -51,15 +51,15 @@ document.addEventListener('DOMContentLoaded', async function () {
             button.classList.add('active');
 
             switch (button.id) {
-                case 'switchButton':
-                    handleSwitch();
-                    break;
+                // case 'switchButton':
+                //     handleSwitch();
+                //     break;
                 case 'matchButton':
                     handleMatch();
                     break;
-                case 'statisticButton':
-                    handleStatistic();
-                    break;
+                // case 'statisticButton':
+                //     handleStatistic();
+                //     break;
                 case 'graphButton':
                     handleGraph();
                     break;
