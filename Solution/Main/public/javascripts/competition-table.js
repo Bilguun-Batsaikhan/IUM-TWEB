@@ -226,9 +226,28 @@ function displayGamesData(gamesData, page, year) {
         row.insertCell().textContent = game.home_club_goals + ' - ' + game.away_club_goals;
 
         // Create anchor for away club
-        const awayClubAnchor = createClubAnchor(game.away_club_id, game.away_club_name);
+        const awayClubAnchor = document.createElement('a');
+        awayClubAnchor.href = '/valutation/club?club_id=' + game.away_club_id;
+        awayClubAnchor.textContent = game.away_club_name;
 
-        row.insertCell().textContent = game.home_club_goals + ' - ' + game.away_club_goals;
+        // Create img element for away club icon
+        const awayClubImg = document.createElement('img');
+        awayClubImg.src = "https://tmssl.akamaized.net/images/wappen/head/" + game.away_club_id + ".png?";
+        awayClubImg.alt = "Club Logo";
+        awayClubImg.className = "club_logo";
+        awayClubImg.style.maxWidth = "25px";
+
+        // Create a div to wrap the anchor and image
+        const awayClubWrapper = document.createElement('div');
+        awayClubWrapper.className = 'club-wrapper';
+        awayClubWrapper.appendChild(awayClubImg);
+        awayClubWrapper.appendChild(awayClubAnchor);
+
+        // Append away club wrapper to cell
+        const awayCell = row.insertCell();
+        awayCell.appendChild(awayClubWrapper);
+
+
         row.insertCell().textContent = game.stadium;
     });
 
