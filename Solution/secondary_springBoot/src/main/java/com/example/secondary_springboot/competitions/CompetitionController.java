@@ -18,16 +18,31 @@ public class CompetitionController {
         this.competitionService = competitionService;
     }
 
+    /**
+     * Returns a ResponseEntity containing a list of all countries of the competitions.
+     * @return ResponseEntity containing a list of all countries of the competitions.
+     */
     @GetMapping("/countries")
     public ResponseEntity<List<String>> getAllCompetitions() {
         List<String> countries = competitionService.getAllCountries();
         return ResponseEntity.ok(countries);
     }
+
+    /**
+     * Returns a ResponseEntity containing a list of all competition types.
+     * @return ResponseEntity containing a list of all competition types.
+     */
     @GetMapping("/competitionTypes")
     public ResponseEntity<List<String>> getAllCompetitionTypes() {
         List<String> competitionTypes = competitionService.getAllCompetitionTypes();
         return ResponseEntity.ok(competitionTypes);
     }
+
+    /**
+     * Returns a ResponseEntity containing a list of competitions based on the specified country and type.
+     * @param body Map containing the country and competition type.
+     * @return ResponseEntity containing a list of competitions.
+     */
     @PostMapping("/competitionNameByCountryOrType")
     public ResponseEntity<List<String>> getCompetitionsByCountryAndType(@RequestBody Map<String, String> body) {
         String country = body.get("country");
@@ -44,6 +59,11 @@ public class CompetitionController {
 //        return competitionId.map(s -> new ResponseEntity<>(s, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 //    }
 
+    /**
+     * Returns a ResponseEntity containing the ID of the competition given its name.
+     * @param body Map containing the competition name.
+     * @return ResponseEntity containing the ID of the competition.
+     */
     @PostMapping("/competitionIDByName")
     public ResponseEntity<String> getCompetitionIdByName(@RequestBody Map<String, String> body) {
         String name = body.get("competitionName");

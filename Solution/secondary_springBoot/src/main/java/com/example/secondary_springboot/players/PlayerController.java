@@ -16,6 +16,11 @@ public class PlayerController {
         this.playerService = playerService;
     }
 
+    /**
+     * Returns a ResponseEntity containing a list of players belonging to the specified club ID.
+     * @param body Map containing the club ID.
+     * @return ResponseEntity containing a list of players.
+     */
     @PostMapping("/getplayersbyclub")
     public ResponseEntity<List<Player>> getPlayersByClubId(@RequestBody Map<String, String> body) {
         int clubId = Integer.parseInt(body.get("club_id"));
@@ -24,6 +29,11 @@ public class PlayerController {
         return ResponseEntity.ok(players);
     }
 
+    /**
+     * Returns a ResponseEntity containing a list of players with the specified player ID.
+     * @param body Map containing the player ID.
+     * @return ResponseEntity containing a list of players.
+     */
     @PostMapping("/getplayerbyid")
     public ResponseEntity<List<Player>> getPlayerById(@RequestBody Map<String, String> body) {
         int playerId = Integer.parseInt(body.get("player_id"));
@@ -31,6 +41,11 @@ public class PlayerController {
         return ResponseEntity.ok(players);
     }
 
+    /**
+     * Returns a ResponseEntity containing a list of player names matching the given search criteria.
+     * @param body Map containing the player name.
+     * @return ResponseEntity containing a list of player names.
+     */
     @PostMapping("/getsearchplayer")
     public ResponseEntity<List<String>> getSearchPlayer(@RequestBody Map<String, String> body){
         String playerName = body.get("player_name");
@@ -38,6 +53,10 @@ public class PlayerController {
         return ResponseEntity.ok(searchPlayers);
     }
 
+    /**
+     * Returns a ResponseEntity containing a list of popular players.
+     * @return ResponseEntity containing a list of popular players.
+     */
     @PostMapping("/getpopularplayers")
     public ResponseEntity<List<Player>> getPopularPlayers(){
         List<Player> players = playerService.getPopularPlayers();

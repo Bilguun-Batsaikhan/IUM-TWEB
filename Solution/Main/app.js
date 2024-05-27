@@ -7,6 +7,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var valutationRouter = require('./routes/valutation');
 var searchRouter = require('./routes/search');
+const swaggerUi = require('swagger-ui-express');
+const openApiDocumentation = require('./openApiDocumentation/documentation.json');
 
 
 var app = express();
@@ -21,7 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('public'));
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocumentation));
 app.use('/valutation', valutationRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
