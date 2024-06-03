@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         const countries = await sendAxiosIndexQuery('/competition');
         await createDropDownMenu(countries.countries, "country", "#");
         const competitionType = await sendAxiosIndexQuery('/competitionType');
-        console.log("competitionType", competitionType.competitionTypes)
+        //console.log("competitionType", competitionType.competitionTypes)
         await createDropDownMenu(competitionType.competitionTypes, "competitionType", "#");
     } catch (error) {
         console.error("Error fetching data:", error);
@@ -35,15 +35,15 @@ function hideDiv() {
 
     if (!item || (time - item.timestamp) > 10000) {
         localStorage.removeItem('nicknameData');
-        console.log("Nickname not found. Hiding elements.");
+        //console.log("Nickname not found. Hiding elements.");
 
         // Nascondi il logout e mostra il login
         document.getElementById('logout').style.display = 'none';
         document.getElementById('login').style.display = 'block';
 
     } else {
-        console.log("Nickname found. Displaying elements.");
-        console.log(item.nickname);
+        //console.log("Nickname found. Displaying elements.");
+        //console.log(item.nickname);
 
         // Nascondi il login e mostra il logout
         document.getElementById('login').style.display = 'none';
@@ -64,7 +64,7 @@ async function sendAxiosIndexQuery(url) {
 //fetches countries from SpringBoot then populates the dropdown menu 'country' and 'competitionType'
 async function createDropDownMenu(data, elementID, url) {
     const dropDownCountry = document.getElementById(elementID);
-    console.log("data", data);
+    //console.log("data", data);
     const promises = data.map(async data => {
         const li = document.createElement('li');
         li.className = 'dropdown-submenu';
@@ -77,7 +77,7 @@ async function createDropDownMenu(data, elementID, url) {
 
         // Only create second dropdown if elementID is 'country'
         // if(elementID === "country") {
-            console.log('Doing the second request to SpringBoot');
+            //console.log('Doing the second request to SpringBoot');
             const ul = document.createElement('ul');
             ul.className = 'dropdown-menu';
             li.appendChild(ul);
@@ -179,7 +179,7 @@ function goLogin(){
 
     if (!item || (time - item.timestamp) > 10000) {
         localStorage.removeItem('nicknameData');
-        console.log("Nickname not found. Hiding elements.");
+        //console.log("Nickname not found. Hiding elements.");
         window.location.href = "/login";
     } else {
         document.getElementById('login').style.display = 'none';

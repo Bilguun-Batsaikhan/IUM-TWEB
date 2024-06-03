@@ -26,7 +26,7 @@ function sendAxiosQuery(url, playerId) {
     })
         .then(function (dataR) {
             let playerData = dataR.data.playerData;
-            console.log("playerData: " + JSON.stringify(playerData));
+            //console.log("playerData: " + JSON.stringify(playerData));
             if (!playerData)
                 window.location.href = '/error';
             fillHTML(playerData);
@@ -42,7 +42,7 @@ function sendAxiosQuery2(url, playerId) {
     })
         .then(function (dataR) {
             let matchData = dataR.data.matchData.result;
-            console.log("MatchData: " + JSON.stringify(matchData));
+            //console.log("MatchData: " + JSON.stringify(matchData));
             if (!matchData)
                 window.location.href = '/error';
            // console.log("Playessss" + playerId);
@@ -55,14 +55,14 @@ function sendAxiosQuery2(url, playerId) {
 }
 
 function sendAxiosQuery3(url, playerClubId, matchData) {
-    console.log("Player " + playerClubId);
+    //console.log("Player " + playerClubId);
     axios.post(url, {
         player_club_id: playerClubId,
         match_data: matchData
     })
         .then(function (dataR) {
             let resultData = dataR.data.resultData.result;
-            console.log("resultData: " + JSON.stringify(resultData));
+            //console.log("resultData: " + JSON.stringify(resultData));
             resultData = clearData(resultData);
             statistics(resultData);
             updateMatchTable(resultData, playerClubId);
@@ -127,10 +127,10 @@ function calculateAge(birthDateString) {
     if (!birthDateString || isNaN(Date.parse(birthDateString))) {
         return '';
     }
-    var today = new Date();
-    var birthDate = new Date(birthDateString);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var monthDifference = today.getMonth() - birthDate.getMonth();
+    let today = new Date();
+    let birthDate = new Date(birthDateString);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let monthDifference = today.getMonth() - birthDate.getMonth();
     if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
         age--;
     }
@@ -138,26 +138,16 @@ function calculateAge(birthDateString) {
 }
 
 function populateMatchTable(matchData, playerClubId) {
-    var tableBody = document.getElementById('match-table-body');
+    let tableBody = document.getElementById('match-table-body');
     matchData.forEach(function(match) {
-        //var imageUrl = player.imageUrl ? '<img src="' + player.imageUrl + '" alt="Player Image" style="width:50px; height:auto;">' : '';
-        var date = match.date ? match.date : '';
+        let date = match.date ? match.date : '';
         const readableDate = formatReadableDate(date);
-
-        //var club = match.game_id ? match.game_id : '';
-        /*var club;
-        if(match.game_id == match.away_club_id)
-            club = match.home_club_name;
-        else club = match.away_club_name;
-        club = club !== undefined ? club : "unknown";*/
-        var home_club_id = match.home_club_id;
-        var away_club_id = match.away_club_id;
-
-
-        var result = "1 - 1"
-        var goals = match.goals ? match.goals : '0';
-        var assists = match.assists ? match.assists: '0';
-        var row = '<tr>' +
+        let home_club_id = match.home_club_id;
+        let away_club_id = match.away_club_id;
+        let result = "1 - 1"
+        let goals = match.goals ? match.goals : '0';
+        let assists = match.assists ? match.assists: '0';
+        let row = '<tr>' +
             '<td>' + readableDate + '</td>' +
             //'<td><img src="https://tmssl.akamaized.net/images/wappen/head/' + match.home_club_id + '.png" style="max-width: 25px;"><a href="/valutation/club?club_id=' + match.home_club_id + '">' + match.home_club_name + '</a></td>' +
             '<td><a href="/valutation/club?club_id=' + match.home_club_id + '"><img src="https://tmssl.akamaized.net/images/wappen/head/' + match.home_club_id + '.png" style="max-width: 25px;"></a></td>' +
@@ -201,7 +191,7 @@ function handlePagination(matchData) {
 }
 
 function updateMatchTable(matchData, playerClubId) {
-    var tableBody = document.getElementById('match-table-body');
+    let tableBody = document.getElementById('match-table-body');
     tableBody.innerHTML = '';
     populateMatchTable(paginateMatch(matchData), playerClubId);
 }
