@@ -3,7 +3,7 @@ const path = require('path');
 var router = express.Router();
 const axios = require('axios')
 
-/* GET home page. */
+// GET: Retrieves the home page.
 router.get('/', function (req, res, next) {
     res.render('index');
 });
@@ -15,26 +15,15 @@ router.get('/competition-table', function (req, res, next) {
 router.get('/competition-league', function (req, res, next) {
     res.render('competition-league');
 });
-
-// router.get('/display-results', function (req, res, next) {
-//     res.render('display-results');
-// });
-
-/* The nickname should be retrieved from the login page. */
-var nickname = 'Admin';
-/* GET chat page. */
+// GET: Retrieves the chat page.
+// POST: Fetches club names to create chat rooms.
 router.route('/chat')
     .get(function (req, res) {
-        if (nickname !== null && typeof nickname !== 'undefined') {
-            try {
-                res.render('chat', {title: 'Chat', nickname});
-            } catch (error) {
-                res.render('error', {error: 'Error rendering chat', message: error.message});
-            }
-        } else res.render('error', {
-            error: 'login required',
-            message: 'To use the chat, it is necessary to be logged in.'
-        });
+        try {
+            res.render('chat');
+        } catch (error) {
+            res.render('error', {error: 'Error rendering chat', message: error.message});
+        }
     })
     .post(function (req, res) {
         axios.post('http://localhost:3001/chat')
@@ -48,7 +37,7 @@ router.route('/chat')
                 res.status(505).json(err);
             });
     });
-//fetch countries
+// POST: Fetches countries for the "Competitions" section of the navbar.
 router.route('/competition')
     .post(function (req, res) {
         axios.get('http://localhost:8082/competitions/countries')
@@ -63,7 +52,7 @@ router.route('/competition')
                 res.status(505).json(err);
             });
     });
-
+// POST: Fetches competition types for the "Competitions" section of the navbar.
 router.route('/competitionType')
     .post((req, res) => {
         const country = req.body.country;
@@ -78,8 +67,7 @@ router.route('/competitionType')
                 res.status(505).json(err);
             })
     });
-
-// Competition names by country
+// POST: Fetches competitions names by country for the "Competitions" section of the navbar.
 router.route('/competitionNames')
     .post((req, res) => {
         let requestData = req.body;
@@ -102,24 +90,6 @@ router.route('/competitionNames')
                 res.status(505).json(err);
             });
     });
-
-
-// Competition names by type
-// router.route('/competitionNamesByType')
-//     .post((req, res) => {
-//         const competitionType = req.body.competitionType;
-//         axios.post('http://localhost:8082/competitions/competitionTypesData', {competitionType: competitionType})
-//             .then(json => {
-//                 const competitionTypeData = json.data;
-//                 res.json({competitionTypeData});
-//             })
-//             .catch(err => {
-//                 console.error('Error while retrieving competition Names in index router ', err);
-//                 res.setHeader('Content-Type', 'application/json');
-//                 res.status(505).json(err);
-//             })
-//     })
-
 router.route('/retrieveGames')
     .post((req, res) => {
         const competition_id = req.body.competition_id;
@@ -135,24 +105,6 @@ router.route('/retrieveGames')
                 res.status(500).json(err);
             })
     });
-
-//fetch competition ID from SpringBoot then return it
-// router.route('/retrieveCompetitionID')
-//     .post((req, res) => {
-//         const competitionName = req.body.name;
-//         const country_name = req.body.country_name;
-//         axios.post('http://localhost:8082/competitions/competitionID', {country: country_name, name: competitionName})
-//             .then(json => {
-//                 const competitionID = json.data;
-//                 res.json({competitionID});
-//             })
-//             .catch(err => {
-//                 console.error('Error while retrieving competition ID in index router ', err);
-//                 res.setHeader('Content-Type', 'application/json');
-//                 res.status(505).json(err);
-//             })
-//     })
-
 // fetch competition ID from SpringBoot by competition name
 router.route('/retrieveCompetitionIDbyName')
     .post((req, res) => {
@@ -169,7 +121,7 @@ router.route('/retrieveCompetitionIDbyName')
                 res.status(505).json(err);
             })
     });
-
+// POST: Fetches popular player names for the homepage.
 router.route('/getpopularplayers')
     .post((req, res) => {
         axios.post('http://localhost:8082/players/getpopularplayers')
@@ -202,20 +154,19 @@ router.route('/retrieveGraph')
             res.status(500).send('Internal Server Error');
         }
     });
-
+// GET: Retrieves the error page.
 router.get('/error', function (req, res, next) {
     res.render('error', {title: 'Page not found'});
 });
-
+// GET: Retrieves the login page.
 router.post('/login', function(req, res, next) {
     res.render('login');
 });
-router.get('/login', function(req, res, next) {
-    res.render('login');
-});
+// GET: Retrieves the about page.
 router.get('/about', function(req, res, next) {
     res.render('about');
 });
+// POST: Redirects to the home page after login.
 router.post('/loginComplete', function(req, res, next) {
     res.render('index');
 });

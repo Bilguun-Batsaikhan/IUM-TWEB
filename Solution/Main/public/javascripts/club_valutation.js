@@ -36,18 +36,18 @@ function sendAxiosQuery(url, clubId) {
 }
 
 function populatePlayersTable(playersData) {
-    var tableBody = document.getElementById('players-table-body');
+    let tableBody = document.getElementById('players-table-body');
     playersData.forEach(function(player) {
-        var imageUrl = player.imageUrl ? '<img src="' + player.imageUrl + '" alt="Player Image" style="width:50px; height:auto;">' : '';
-        var name = player.name ? player.name : '';
-        var dateOfBirth = player.dateOfBirth ? player.dateOfBirth : '';
+        let imageUrl = player.imageUrl ? '<img src="' + player.imageUrl + '" alt="Player Image" style="width:50px; height:auto;">' : '';
+        let name = player.name ? player.name : '';
+        let dateOfBirth = player.dateOfBirth ? player.dateOfBirth : '';
         dateOfBirth = calculateAge(dateOfBirth);
-        var countryOfBirth = player.countryOfBirth ? player.countryOfBirth : '';
-        var marketValueInEur = player.marketValueInEur ? player.marketValueInEur: '';
+        let countryOfBirth = player.countryOfBirth ? player.countryOfBirth : '';
+        let marketValueInEur = player.marketValueInEur ? player.marketValueInEur: '';
         if (marketValueInEur!='')
         marketValueInEur = setEurValue(marketValueInEur);
         else marketValueInEur = "unknown";
-        var row = '<tr>' +
+        let row = '<tr>' +
             '<td class="noborder">' + imageUrl + '</td>' +
             '<td class="noborder"><a href="../valutation/player?player_id=' + player.playerId + '">' + name + '</a></td>' +
             '<td class="noborder">' + dateOfBirth + '</td>' +
@@ -77,10 +77,10 @@ function calculateAge(birthDateString) {
     if (!birthDateString || isNaN(Date.parse(birthDateString))) {
         return '';
     }
-    var today = new Date();
-    var birthDate = new Date(birthDateString);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var monthDifference = today.getMonth() - birthDate.getMonth();
+    let today = new Date();
+    let birthDate = new Date(birthDateString);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let monthDifference = today.getMonth() - birthDate.getMonth();
     if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
         age--;
     }
@@ -117,7 +117,7 @@ function handlePagination(playersData) {
 }
 
 function updatePlayersTable(playersData) {
-    var tableBody = document.getElementById('players-table-body');
+    let tableBody = document.getElementById('players-table-body');
     tableBody.innerHTML = '';
     populatePlayersTable(paginatePlayers(playersData));
 }
@@ -134,28 +134,25 @@ function fillHTML(clubData, playersData) {
     const clubName = clubData.name;
     clubNameElement.textContent = clubName;
     // it set image URL
-    var imgElement = document.querySelector('#club_logo');
+    let imgElement = document.querySelector('#club_logo');
     imgElement.src = "https://tmssl.akamaized.net/images/wappen/head/" + clubData.club_id + ".png?";
     // it set club country
-    var clubNetTransferElement = document.querySelector('#net_transfer');
+    let clubNetTransferElement = document.querySelector('#net_transfer');
     clubNetTransferElement.textContent = clubData.net_transfer_record;
     // it set squad size
-    var clubSizeElement = document.querySelector('#squad_size');
+    let clubSizeElement = document.querySelector('#squad_size');
     clubSizeElement.textContent = clubData.squad_size;
 
-    //var clubAvgAgeElement = document.querySelector('#average_age');
-    //clubAvgAgeElement.textContent = clubData.average_age;
-
-    var clubForeignersElement = document.querySelector('#foreigners_age');
+    let clubForeignersElement = document.querySelector('#foreigners_age');
     clubForeignersElement.textContent = clubData.foreigners_percentage;
 
-    var clubNationalPlayersElement = document.querySelector('#national_players');
+    let clubNationalPlayersElement = document.querySelector('#national_players');
     clubNationalPlayersElement.textContent = clubData.national_team_players;
 
-    var clubStadiumElement = document.querySelector('#stadium');
+    let clubStadiumElement = document.querySelector('#stadium');
     clubStadiumElement.textContent = clubData.stadium_name;
 
-    var clubStadiumSeatsElement = document.querySelector('#stadium_seats');
+    let clubStadiumSeatsElement = document.querySelector('#stadium_seats');
     clubStadiumSeatsElement.textContent = clubData.stadium_seats;
 
     //document.getElementById('players').innerHTML = "The result is: " + JSON.stringify(playersData);

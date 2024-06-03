@@ -26,7 +26,6 @@ app.use(express.static('public'));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocumentation));
 app.use('/valutation', valutationRouter);
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/search', searchRouter);
 
 

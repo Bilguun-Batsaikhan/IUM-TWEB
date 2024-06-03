@@ -2,21 +2,10 @@ let name = null;
 let roomNo = null;
 let chat= io.connect('/chat');
 
-
-
-/**
- * called by <body onload>
- * it initialises the interface and the expected socket messages
- * plus the associated actions
- */
-
-
 function init() {
-
-   // it sets up the interface so that userId and room are selected
    document.getElementById('initial_form').style.display = 'block';
    document.getElementById('chat_interface').style.display = 'none';
-    checkLogin();
+   checkLogin();
 }
 
 function checkLogin(){
@@ -80,16 +69,12 @@ function sendChatText() {
  * It connects both chat and news at the same time
  */
 function connectToRoom() {
-    const roomNoElement = document.getElementById('roomNo');
-    const roomNo = roomNoElement.value;
+    roomNo = document.getElementById('roomNo').value;
 
     if (roomNo === "null")
         alert("Please select a room before proceeding.");
     else
-       chat.emit('create or join', roomNoElement, name);
-   //name = nickname; not work anymore
-   /* chat's nickname for not logged user
-   if (!name) name = 'Unknown-' + Math.random();*/
+       chat.emit('create or join', roomNo, name);
 }
 
 /**

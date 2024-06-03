@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 const axios = require('axios')
 
+// GET: Retrieves the club page.
+// POST: Fetches club data by club ID for the club page.
 router.route('/club')
     .get(function (req, res) {
         res.render('club_valutation');
@@ -25,7 +27,8 @@ router.route('/club')
                 res.status(505).json(err);
             });
     });
-
+// GET: Retrieves the player page.
+// POST: Fetches player data by player ID for the player page.
 router.route('/player')
     .get(function (req, res) {
         res.render('player_valutation');
@@ -44,7 +47,7 @@ router.route('/player')
                 res.status(505).json(err);
             });
     });
-
+// POST: Fetches appearances data by player ID for the club page.
 router.route('/getAppearancesByPlayer')
     .post(function (req, res) {
         const playerId = req.body.player_id;
@@ -60,7 +63,7 @@ router.route('/getAppearancesByPlayer')
                 res.status(505).json(err);
             });
     });
-
+// POST: Fetches games data by club ID for the club page.
 router.route('/getGamesByClub')
     .post(function (req, res) {
         const club_id = req.body.club_id;
@@ -76,14 +79,11 @@ router.route('/getGamesByClub')
                 res.status(505).json(err);
             });
     });
-
+// POST: Fetches games score by player ID for the club page.
 router.route('/getGamesResultsByGameId')
     .post(function (req, res) {
         const player_club_id = req.body.player_club_id;
         const match_data = req.body.match_data;
-        //console.log('Received player_club_id:', player_club_id);
-        //console.log('Received match_data:', match_data);
-
         axios.post('http://localhost:3001/getGamesResultsByGameId', {player_club_id: player_club_id,
         match_data: match_data})
             .then(json => {
