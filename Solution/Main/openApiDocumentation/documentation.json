@@ -291,6 +291,21 @@
     "/retrieveCompetitionIDbyName": {
       "post": {
         "summary": "Fetch competition ID by name",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "competitionName": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": ["name"]
+        },
         "responses": {
           "200": {
             "description": "Competition ID",
@@ -357,50 +372,6 @@
           },
           "500": {
             "description": "Error while retrieving popular players",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/retrieveGraph": {
-      "get": {
-        "summary": "Fetch graph by competition ID",
-        "parameters": [
-          {
-            "name": "competition_id",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            },
-            "description": "ID of the competition"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Graph image",
-            "content": {
-              "image/png": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Error while retrieving graph",
             "content": {
               "application/json": {
                 "schema": {
@@ -525,34 +496,6 @@
               "text/html": {
                 "schema": {
                   "type": "string"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/users": {
-      "get": {
-        "summary": "Returns a list of users",
-        "responses": {
-          "200": {
-            "description": "A list of users",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer"
-                      },
-                      "name": {
-                        "type": "string"
-                      }
-                    }
-                  }
                 }
               }
             }
