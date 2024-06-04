@@ -19,11 +19,7 @@ router.get('/competition-league', function (req, res, next) {
 // POST: Fetches club names to create chat rooms.
 router.route('/chat')
     .get(function (req, res) {
-        try {
             res.render('chat');
-        } catch (error) {
-            res.render('error', {error: 'Error rendering chat', message: error.message});
-        }
     })
     .post(function (req, res) {
         axios.post('http://localhost:3001/chat')
@@ -169,6 +165,9 @@ router.get('/about', function(req, res, next) {
 // POST: Redirects to the home page after login.
 router.post('/loginComplete', function(req, res, next) {
     res.render('index');
+});
+router.get('/login', function(req, res, next) {
+    res.render('login');
 });
 router.post('/signUp', function(req, res, next) {
     res.render('signUp');
