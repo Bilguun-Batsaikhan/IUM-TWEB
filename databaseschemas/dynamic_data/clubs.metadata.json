@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"},{"v":{"$numberInt":"2"},"key":{"club_id":{"$numberInt":"1"}},"name":"club_id_1","background":true,"unique":true}],"uuid":"643e5de77a7346fca57e160ccb48393f","collectionName":"clubs","type":"collection"}
